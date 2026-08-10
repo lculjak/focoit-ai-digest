@@ -56,7 +56,9 @@ Acceptance
 
 ## FAD-003 — Enable Copilot inference for the workflow (owner-only)
 
-Status: Open — **owner action** (Kiro must not enter secrets or change org settings).
+Status: ✅ Done (2026-08-10) — Copilot Pro verified active on the personal account.
+`copilot-requests: write` on the built-in `GITHUB_TOKEN` is sufficient; no PAT was ever
+set, nothing to clean up.
 
 Priority: High
 
@@ -148,3 +150,4 @@ Acceptance
 |---------|------|--------|
 | 1.0 | 2026-08-10 | Initial backlog seeded from the draft spec (§10 setup + §11 acceptance); FAD-001 adoption scaffold done |
 | 1.1 | 2026-08-10 | FAD-002 done: workflow compiled clean; FAD-003 updated to reflect June 2026 PAT-free auth change |
+| 1.2 | 2026-08-10 | FAD-003 done: Copilot Pro verified active (personal account, Path B) |
