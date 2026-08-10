@@ -1,18 +1,19 @@
 ---
 on:
-  schedule:
-    - cron: '0 11 * * MON'   # Mondays 11:00 UTC (~08:00 ART) — fresh for the week
-  workflow_dispatch:          # manual re-run from the Actions tab
+  schedule: weekly on monday around 11:00    # ~11:00 UTC Mondays (~08:00 ART) — fresh for the week
+  workflow_dispatch:                          # manual re-run from the Actions tab
 
 permissions:
   contents: read
   pull-requests: read
+  copilot-requests: write     # bills inference to the org; no PAT required (gh-aw >= June 2026)
 
-engine: copilot               # requires COPILOT_GITHUB_TOKEN (fine-grained PAT; Copilot Requests: read)
+engine: copilot               # uses built-in GITHUB_TOKEN + copilot-requests: write
 
-# Cost controls (tune after first runs)
+# Cost controls (tune after first runs — FAD-007)
+# max-ai-credits default is 1000; 500 is a conservative first-run cap for a read-heavy digest workflow
 timeout-minutes: 20
-max-ai-credits: 60
+max-ai-credits: 500
 
 # Firewall allowlist — the agent can reach ONLY these
 network:
@@ -20,9 +21,9 @@ network:
     - defaults
     # Azure / Microsoft
     - "azure.microsoft.com"
+    - "azurecomcdn.azureedge.net"
     - "techcommunity.microsoft.com"
     - "devblogs.microsoft.com"
-    - "azurecomcdn.azureedge.net"
     # GitHub / Copilot developer platform
     - "github.blog"
     - "github.githubassets.com"
@@ -33,6 +34,7 @@ network:
     - "techcrunch.com"
     - "www.technologyreview.com"
     - "arstechnica.com"
+    - "feeds.arstechnica.com"
     - "www.theverge.com"
     - "venturebeat.com"
     - "news.ycombinator.com"
@@ -41,7 +43,7 @@ safe-outputs:
   create-pull-request:
     title-prefix: "[digest] "
     labels: [digest, automated]
-    base: main
+    base-branch: main
     draft: false
     max: 1
 ---
@@ -58,26 +60,31 @@ consumer-AI newsfeed.
 Read the RSS/Atom feeds below for entries published in the **last 14 days**. For each,
 capture: title, URL, source, publication date, plain-text excerpt.
 
-Feeds:
-- Azure updates / Azure blog        (azure.microsoft.com)
-- Microsoft Tech Community — AI/Azure (techcommunity.microsoft.com)
-- Microsoft DevBlogs                 (devblogs.microsoft.com)
-- GitHub Blog / Changelog            (github.blog)
-- Anthropic news                     (www.anthropic.com)
-- OpenAI blog                        (openai.com)
-- TechCrunch AI                      (techcrunch.com)
-- MIT Technology Review              (www.technologyreview.com)
-- Ars Technica                       (arstechnica.com)
-- The Verge                          (www.theverge.com)
-- VentureBeat AI                     (venturebeat.com)
-- Hacker News (front page)           (news.ycombinator.com)
+Feeds (fetch these URLs directly):
+- Azure Blog          — `https://azure.microsoft.com/en-us/blog/feed/`
+- Azure Updates       — `https://azurecomcdn.azureedge.net/en-us/updates/feed/`
+  *(if that feed returns an error, fall back to scraping `https://azure.microsoft.com/en-us/updates/` and note the fallback in the PR body)*
+- Microsoft Tech Community — AI/Azure
+                      — `https://techcommunity.microsoft.com/plugins/custom/microsoft/o365/custom-blog-rss?tid=ai`
+  *(if that URL returns an error, fall back to `https://techcommunity.microsoft.com/category/azure` and note the fallback)*
+- Microsoft DevBlogs  — `https://devblogs.microsoft.com/feed/`
+- GitHub Blog         — `https://github.blog/feed/`
+- Anthropic news      — `https://www.anthropic.com/news`
+  *(no official RSS; fetch the page and parse article links/dates manually)*
+- OpenAI news         — `https://openai.com/news/rss/`
+- TechCrunch AI       — `https://techcrunch.com/category/artificial-intelligence/feed/`
+- MIT Technology Review — `https://www.technologyreview.com/feed/`
+- Ars Technica        — `https://feeds.arstechnica.com/arstechnica/technology-lab`
+- The Verge AI        — `https://www.theverge.com/ai-artificial-intelligence/rss/index.xml`
+- VentureBeat AI      — `https://venturebeat.com/category/ai/feed/`
+- Hacker News (front) — `https://news.ycombinator.com/rss`
 
 Deduplicate stories that appear across feeds; prefer the primary/official source URL.
 
 ## 2. Curate — HYBRID allocation (hard rules)
 Select **exactly 15** stories:
 - **>= 8** from the **Azure/Microsoft + GitHub/Copilot developer-platform** sources
-  combined (the first four feeds), when that many qualifying entries exist.
+  combined (the first five feeds), when that many qualifying entries exist.
 - **<= 3** stories from any single other source.
 - Rank each **High / Medium / Low** by *impact on a solution architect shipping on Azure*.
 - Tag each with 2–5 tags from this controlled taxonomy:
@@ -111,5 +118,6 @@ One self-contained HTML5 file. No framework, no CDN, no build step. Include:
 ## 5. Preflight (self-check before output)
 Verify: exactly 15 stories; all URLs unique and reachable-looking; allocation rules met;
 highlights block uses only allowed sources; every card has all required fields. If a rule
-cannot be met (e.g. too few Azure/MS entries this week), relax the >=8 floor to the max
-available and note it in the PR body.
+cannot be met (e.g. too few Azure/MS entries this week, or a feed was unreachable),
+relax the >=8 floor to the max available, **document which feeds failed and why**, and
+note it in the PR body.

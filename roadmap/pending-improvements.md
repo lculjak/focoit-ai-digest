@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.0
+Version: 1.1
 
 Status: Open
 
@@ -35,41 +35,47 @@ Acceptance
 
 ## FAD-002 — Author + compile the gh-aw workflow
 
-Status: Open
+Status: ✅ Done (2026-08-10) — workflow authored, all feed URLs validated, frontmatter corrected for
+gh-aw v0.85.4 (`github/gh-aw`); `gh aw compile` clean (0 errors, 0 warnings). Key changes vs. draft:
+`copilot-requests: write` replaces the deprecated `COPILOT_GITHUB_TOKEN` PAT (gh-aw ≥ June 2026);
+`base` → `base-branch`; schedule → fuzzy `weekly on monday around 11:00`; `max-ai-credits` raised
+from 60 → 500 (60 was far below minimum viable for an agentic digest run); 13 confirmed RSS/Atom feed
+URLs added inline with fallback notes for Anthropic (no official RSS) and Azure Updates (CDN feed
+broken since mid-2024). Lock file (`.lock.yml`, 109 KB) and `.github/aw/actions-lock.json` committed.
 
 Priority: High
 
-Context
-
-`.github/workflows/weekly-ai-digest.md` is authored from the spec (§4) but **not yet compiled** —
-`gh aw compile` needs the `githubnext/gh-aw` extension installed locally. Until then there is no
-`.lock.yml` and the workflow cannot run.
-
 Acceptance
 
-- `gh extension install githubnext/gh-aw` (pin a version).
-- Validate the exact RSS/Atom feed URLs for each source host (some gate or move feeds).
+- `gh extension install githubnext/gh-aw` (pin a version). ✅ (`github/gh-aw` v0.85.4 already installed)
+- Validate the exact RSS/Atom feed URLs for each source host (some gate or move feeds). ✅
 - Verify the `engine: copilot` frontmatter compiles (e.g. confirm `max-ai-credits` / cost fields are
-  valid for the Copilot engine; adjust per the gh-aw reference).
+  valid for the Copilot engine; adjust per the gh-aw reference). ✅
 - `gh aw compile` clean (0/0); commit `weekly-ai-digest.md` + `.lock.yml` +
-  `.github/aw/actions-lock.json` together.
+  `.github/aw/actions-lock.json` together. ✅
 
-## FAD-003 — Add the `COPILOT_GITHUB_TOKEN` repo secret (owner-only)
+## FAD-003 — Enable Copilot inference for the workflow (owner-only)
 
-Status: Open — **owner action** (Claude must not enter secrets).
+Status: Open — **owner action** (Kiro must not enter secrets or change org settings).
 
 Priority: High
 
 Context
 
-Aligned with PI-023: the gh-aw `engine: copilot` authenticates with a **`COPILOT_GITHUB_TOKEN`**
-fine-grained PAT (personal account; *Copilot Requests: read*), or an org on centralized Copilot
-billing (`copilot-requests: write`, no PAT).
+As of June 2026, `engine: copilot` no longer requires a `COPILOT_GITHUB_TOKEN` fine-grained PAT.
+The workflow now uses `copilot-requests: write` on the built-in `GITHUB_TOKEN` — inference is billed
+directly to the org/account. **No repo secret is needed.** The one prerequisite is an org-level
+policy: *"Allow use of Copilot CLI billed to the organization"* must be enabled (it is on by default
+when the Copilot CLI policy is active).
 
 Acceptance
 
-- Repo secret `COPILOT_GITHUB_TOKEN` set (Settings → Secrets → Actions). Watch Copilot usage/AI-credit
-  billing; treat month 1 as calibration (agentic runs are the expensive kind — prefer dispatch).
+- Confirm org policy "Allow use of Copilot CLI billed to the organization" is enabled
+  (Settings → Copilot → Policies, or the org admin panel).
+- If the repo is personal (not org-owned), verify the account has an active Copilot Pro/Pro+ plan.
+- Optionally: delete the old `COPILOT_GITHUB_TOKEN` secret if it was previously set
+  (Settings → Secrets → Actions) — the new flow ignores it entirely.
+- Watch Copilot usage/AI-credit billing after first run; treat month 1 as calibration.
 
 ## FAD-004 — Enable GitHub Pages (main /docs)
 
@@ -141,3 +147,4 @@ Acceptance
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-08-10 | Initial backlog seeded from the draft spec (§10 setup + §11 acceptance); FAD-001 adoption scaffold done |
+| 1.1 | 2026-08-10 | FAD-002 done: workflow compiled clean; FAD-003 updated to reflect June 2026 PAT-free auth change |
