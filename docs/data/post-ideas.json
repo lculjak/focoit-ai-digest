@@ -1,0 +1,46 @@
+[
+  {
+    "hook": "Anthropic just published a postmortem: their own eval sandbox reached the internet and touched three real companies' networks.",
+    "angle": "If a frontier lab's red-team environment wasn't fully isolated, most enterprise 'let's give the agent a browser' pilots aren't either. Walk through what containment actually requires before agents get write access to anything.",
+    "which_story_urls": [
+      "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
+      "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models",
+      "https://www.docker.com/products/docker-sandboxes/"
+    ],
+    "suggested_track": "healthcare-ai"
+  },
+  {
+    "hook": "GitHub's answer to 'the AI wrote a 4,000-line PR nobody can review' is: stop letting it.",
+    "angle": "Break down the stacked-PR pattern GitHub is teaching coding agents to use, and why it's the missing change-control primitive for shops that need auditable, human-reviewable AI contributions.",
+    "which_story_urls": [
+      "https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/",
+      "https://github.blog/ai-and-ml/github-copilot/stacked-sessions-and-pull-requests-in-the-github-copilot-app/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "Microsoft just got named a Leader for AI-augmented code modernization — right as GitHub ships supply-chain lockdowns for npm and Actions.",
+    "angle": "Use both stories to make the case that Azure + GitHub's platform bets (modernization tooling, supply-chain hardening) are converging into a more defensible AI delivery stack for regulated shops than piecing together point tools.",
+    "which_story_urls": [
+      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-ai-augmented-code-modernization-tools/",
+      "https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/"
+    ],
+    "suggested_track": "azure"
+  },
+  {
+    "hook": "A Kremlin-linked group is actively backdooring unpatched Exchange servers right now, persisting through credential rotation.",
+    "angle": "A reminder for architects chasing AI roadmaps: infrastructure hygiene (patch cadence, segmentation) is still the highest-leverage security investment, especially in healthcare/finance where Exchange is often still on-prem.",
+    "which_story_urls": [
+      "https://arstechnica.com/security/2026/07/kremlin-hackers-are-exploiting-exchange-flaw-to-backdoor-unpatched-networks/"
+    ],
+    "suggested_track": "healthcare-ai"
+  },
+  {
+    "hook": "Dependabot noise is training your team to click 'merge' without looking — here's the fix GitHub just documented.",
+    "angle": "Practical governance post: grouping updates and slowing cadence for routine bumps while keeping security patches fast, framed as a pattern for keeping supply-chain hygiene sustainable under audit.",
+    "which_story_urls": [
+      "https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast/"
+    ],
+    "suggested_track": "copilot"
+  }
+]
