@@ -22,8 +22,8 @@ repo is classified at. Adapted from the AI Engineering Playbook's
 
 `focoit-ai-digest` is a **public** repository. It contains only Focoit's own content (a curated AI
 news digest) and open configuration — **no client, customer, or proprietary code, and no secrets in
-the tree.** The one secret it uses (`ANTHROPIC_API_KEY`) lives in **GitHub Actions repo secrets**,
-never in a file.
+the tree.** The one secret it uses (`COPILOT_GITHUB_TOKEN`, a fine-grained PAT) lives in **GitHub
+Actions repo secrets**, never in a file.
 
 Consequence: the **full hybrid flow is allowed**, including hosted agents and hosted **agentic CI**
 (see below). The confidentiality rule below still binds should that ever change.
@@ -54,9 +54,10 @@ This repo's whole point is an **agentic CI workflow**: `.github/workflows/weekly
 compiles (via `gh aw compile`) to `weekly-ai-digest.lock.yml` and runs AI **inside GitHub Actions**
 on a weekly schedule, publishing through a human-gated pull request (`safe-outputs`).
 
-- **Engine: `claude`** (`ANTHROPIC_API_KEY` repo secret) — note this differs from the playbook's
-  PI-023 note, which described the **Copilot** engine. Same confidentiality principle: hosted
-  agentic CI sends repo content to the engine, so it is **non-sensitive repos only** — which this is.
+- **Engine: `copilot`** — aligned with the playbook's PI-023 pattern (Copilot as a CI engine). Auth
+  is a **`COPILOT_GITHUB_TOKEN` fine-grained PAT** (personal account; *Copilot Requests: read*), or an
+  org on centralized billing (`copilot-requests: write`, no PAT). Hosted agentic CI sends repo content
+  to the engine, so it is **non-sensitive repos only** — which this is.
 - **Gate for workflow changes:** `gh aw compile` with **0 errors / 0 warnings** (the deterministic
   guardian does not validate a workflow). Commit the `.md` source **+** the generated `.lock.yml`
   **+** `.github/aw/actions-lock.json` together. On staleness across gh-aw versions, **delete and
@@ -73,4 +74,4 @@ on a weekly schedule, publishing through a human-gated pull request (`safe-outpu
 
 | Version | Date | Change |
 |---------|------|--------|
-| 1.0 | 2026-08-10 | Initial policy for focoit-ai-digest — classified non-sensitive/personal; adapted from the playbook; records the gh-aw (engine: claude) agentic-CI posture |
+| 1.0 | 2026-08-10 | Initial policy for focoit-ai-digest — classified non-sensitive/personal; adapted from the playbook; records the gh-aw (engine: copilot, COPILOT_GITHUB_TOKEN) agentic-CI posture, aligned with PI-023 |

@@ -8,7 +8,7 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 
-# Local env / secrets — NEVER commit; ANTHROPIC_API_KEY lives in repo Actions secrets
+# Local env / secrets — NEVER commit; COPILOT_GITHUB_TOKEN lives in repo Actions secrets
 .env
 .env.*
 *.local

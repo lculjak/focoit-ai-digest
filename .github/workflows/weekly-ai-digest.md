@@ -8,7 +8,7 @@ permissions:
   contents: read
   pull-requests: read
 
-engine: claude                # requires ANTHROPIC_API_KEY repo secret
+engine: copilot               # requires COPILOT_GITHUB_TOKEN (fine-grained PAT; Copilot Requests: read)
 
 # Cost controls (tune after first runs)
 timeout-minutes: 20

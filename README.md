@@ -5,7 +5,7 @@ A self-updating, self-contained **static site** that curates ~15 AI/cloud storie
 each matters to a solution architect in regulated industries, and publishes via a **human-gated pull
 request**. As a byproduct it emits 3–5 LinkedIn post angles.
 
-Built on **GitHub Agentic Workflows (`gh-aw`, `engine: claude`)** and hosted on **GitHub Pages**.
+Built on **GitHub Agentic Workflows (`gh-aw`, `engine: copilot`)** and hosted on **GitHub Pages**.
 
 ## How it works
 
@@ -41,7 +41,9 @@ manual dispatch           network allow-list)      │              ▼
 
 ## Run it
 
-1. Add repo secret `ANTHROPIC_API_KEY` (Settings → Secrets → Actions).
+1. Add repo secret `COPILOT_GITHUB_TOKEN` — a fine-grained PAT with *Copilot Requests: read*
+   (Settings → Secrets → Actions). Org alternative: centralized Copilot billing with
+   `copilot-requests: write`, no PAT.
 2. Install the gh-aw extension (pin a version): `gh extension install githubnext/gh-aw`.
 3. Compile the workflow: `gh aw compile` → commit the `.md` **and** the generated `.lock.yml`.
 4. Enable Pages: **Settings → Pages → Deploy from branch → `main` / `docs`**.

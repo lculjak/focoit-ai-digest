@@ -49,19 +49,27 @@ Acceptance
 
 - `gh extension install githubnext/gh-aw` (pin a version).
 - Validate the exact RSS/Atom feed URLs for each source host (some gate or move feeds).
+- Verify the `engine: copilot` frontmatter compiles (e.g. confirm `max-ai-credits` / cost fields are
+  valid for the Copilot engine; adjust per the gh-aw reference).
 - `gh aw compile` clean (0/0); commit `weekly-ai-digest.md` + `.lock.yml` +
   `.github/aw/actions-lock.json` together.
 
-## FAD-003 — Add the `ANTHROPIC_API_KEY` repo secret (owner-only)
+## FAD-003 — Add the `COPILOT_GITHUB_TOKEN` repo secret (owner-only)
 
 Status: Open — **owner action** (Claude must not enter secrets).
 
 Priority: High
 
+Context
+
+Aligned with PI-023: the gh-aw `engine: copilot` authenticates with a **`COPILOT_GITHUB_TOKEN`**
+fine-grained PAT (personal account; *Copilot Requests: read*), or an org on centralized Copilot
+billing (`copilot-requests: write`, no PAT).
+
 Acceptance
 
-- Repo secret `ANTHROPIC_API_KEY` set (Settings → Secrets → Actions). Set a billing alert on the
-  Anthropic account; treat month 1 as calibration.
+- Repo secret `COPILOT_GITHUB_TOKEN` set (Settings → Secrets → Actions). Watch Copilot usage/AI-credit
+  billing; treat month 1 as calibration (agentic runs are the expensive kind — prefer dispatch).
 
 ## FAD-004 — Enable GitHub Pages (main /docs)
 

@@ -10,7 +10,7 @@
 
     Kept (the checks a static-site repo actually needs):
       Secret detection      (Critical - blocks)   secrets never belong in the tree;
-                                                   the ANTHROPIC_API_KEY lives in repo
+                                                   the COPILOT_GITHUB_TOKEN lives in repo
                                                    Actions secrets, not in files.
       Repository structure  (High     - warns)     relaxed allow-list for this repo.
       Forbidden binaries    (Critical - blocks)    no .exe/.dll/.iso/weights/etc.
@@ -58,6 +58,7 @@ $SecretPatterns = @(
     @{ Name = 'OpenAI project key';  Regex = 'sk-proj-[A-Za-z0-9_\-]{20,}' },
     @{ Name = 'AWS access key id';   Regex = 'AKIA[0-9A-Z]{16}' },
     @{ Name = 'GitHub token';        Regex = 'gh[pousr]_[A-Za-z0-9]{36,}' },
+    @{ Name = 'GitHub fine-grained PAT'; Regex = 'github_pat_[A-Za-z0-9_]{22,}' },
     @{ Name = 'Slack token';         Regex = 'xox[baprs]-[A-Za-z0-9-]{10,}' },
     @{ Name = 'Private key block';   Regex = '-----BEGIN [A-Z ]*PRIVATE KEY-----' },
     @{ Name = 'Azure storage key';   Regex = 'AccountKey=[A-Za-z0-9+/=]{30,}' },
