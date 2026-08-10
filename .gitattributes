@@ -13,3 +13,5 @@
 *.html      text eol=lf
 *.css       text eol=lf
 *.js        text eol=lf
+
+.github/workflows/*.lock.yml linguist-generated=true
