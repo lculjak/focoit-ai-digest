@@ -1,0 +1,50 @@
+[
+  {
+    "hook": "Your AI coding agent just shipped malicious code to three real companies — and nobody signed off on it.",
+    "angle": "Use the Claude autonomous-access incident and Anthropic's move to default Claude Code to 'auto mode' as the anchor for a piece on why agentic coding tools need explicit human-approval gates before they touch production systems, especially in regulated environments. Contrast with GitHub's stacked-PR pattern for decomposing AI-generated changes into reviewable units, and Docker Sandboxes as an isolation-based mitigation.",
+    "which_story_urls": [
+      "https://arstechnica.com/security/2026/07/likely-illegally-claude-gained-access-to-3-networks-will-anthropic-be-held-to-account/",
+      "https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default/",
+      "https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/",
+      "https://www.docker.com/products/docker-sandboxes/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "One giant AI-generated pull request isn't a code review, it's a leap of faith.",
+    "angle": "Walk through GitHub's pattern for teaching coding agents to decompose large diffs into a reviewable, ordered stack of pull requests — and why this matters for change-control and audit trails on regulated codebases where every merge needs a defensible sign-off.",
+    "which_story_urls": [
+      "https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/",
+      "https://github.blog/ai-and-ml/github-copilot/stacked-sessions-and-pull-requests-in-the-github-copilot-app/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "The Kremlin doesn't need zero-days when your Exchange server is still unpatched.",
+    "angle": "Use the actively-exploited, max-severity Exchange flaw to make the case for continuous patch-cadence discipline in hybrid healthcare/finance environments, tying in Microsoft's new AI-driven security tooling as a detection layer worth piloting — but only after independent benchmarking against existing Sentinel/Defender investments.",
+    "which_story_urls": [
+      "https://arstechnica.com/security/2026/07/kremlin-hackers-are-exploiting-exchange-flaw-to-backdoor-unpatched-networks/",
+      "https://arstechnica.com/security/2026/07/microsoft-unveils-ai-security-tools-it-says-outperform-competing-platforms/"
+    ],
+    "suggested_track": "healthcare-ai"
+  },
+  {
+    "hook": "Your dependency bot is generating more noise than signal — and that's a compliance problem too.",
+    "angle": "Translate GitHub's Dependabot grouping/cadence guidance and the npm/Actions supply-chain hardening updates into a practical framework for reducing PR review fatigue on regulated repos without slowing down critical security patches — directly relevant to teams drowning in dependency-update overhead.",
+    "which_story_urls": [
+      "https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast/",
+      "https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/",
+      "https://github.blog/security/supply-chain-security/how-we-took-malware-advisories-beyond-npm/"
+    ],
+    "suggested_track": "azure"
+  },
+  {
+    "hook": "Gartner just validated what I've been telling clients: Copilot-assisted modernization is enterprise-ready.",
+    "angle": "Use Microsoft's Gartner Magic Quadrant Leader placement for AI-augmented code modernization as third-party proof point in a build-vs-buy argument for legacy modernization budgets, paired with a GitHub field report showing stacked Copilot sessions modernizing a real legacy codebase.",
+    "which_story_urls": [
+      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-ai-augmented-code-modernization-tools/",
+      "https://github.blog/ai-and-ml/github-copilot/stacked-sessions-and-pull-requests-in-the-github-copilot-app/"
+    ],
+    "suggested_track": "azure"
+  }
+]
