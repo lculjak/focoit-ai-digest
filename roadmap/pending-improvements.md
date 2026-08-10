@@ -81,7 +81,9 @@ Acceptance
 
 ## FAD-004 — Enable GitHub Pages (main /docs)
 
-Status: Open
+Status: ✅ Done (2026-08-10) — Pages enabled: branch `main` / folder `/docs`.
+Site URL: https://lculjak.github.io/focoit-ai-digest/
+Merging any digest PR now auto-deploys the site with no manual steps.
 
 Priority: High
 
@@ -151,3 +153,4 @@ Acceptance
 | 1.0 | 2026-08-10 | Initial backlog seeded from the draft spec (§10 setup + §11 acceptance); FAD-001 adoption scaffold done |
 | 1.1 | 2026-08-10 | FAD-002 done: workflow compiled clean; FAD-003 updated to reflect June 2026 PAT-free auth change |
 | 1.2 | 2026-08-10 | FAD-003 done: Copilot Pro verified active (personal account, Path B) |
+| 1.3 | 2026-08-10 | FAD-004 done: GitHub Pages enabled at https://lculjak.github.io/focoit-ai-digest/ |
