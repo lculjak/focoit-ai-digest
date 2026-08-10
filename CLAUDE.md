@@ -11,9 +11,10 @@ self-contained HTML5 file.
 
 ## Confidentiality tier — NON-SENSITIVE / PERSONAL
 
-Public repo, Focoit's own content, no client/proprietary code, no secrets in the tree
-(`COPILOT_GITHUB_TOKEN`, a fine-grained PAT, lives in Actions secrets). The full hybrid flow — including hosted agentic CI —
-is allowed. See [policies/model-execution-policy.md](policies/model-execution-policy.md).
+Public repo, Focoit's own content, no client/proprietary code, no secrets in the tree.
+Copilot inference is billed via `copilot-requests: write` on the built-in `GITHUB_TOKEN` — no PAT
+required (gh-aw ≥ June 2026). The full hybrid flow — including hosted agentic CI — is allowed.
+See [policies/model-execution-policy.md](policies/model-execution-policy.md).
 
 ## Commands / gates
 
@@ -41,9 +42,9 @@ is allowed. See [policies/model-execution-policy.md](policies/model-execution-po
 
 Four-tier flow (this repo is non-sensitive, so all tiers are available):
 
-1. **Plan (Claude)** — only for complex/architectural items (the workflow design, curation logic,
+1. **Plan (Kiro)** — only for complex/architectural items (the workflow design, curation logic,
    safety review). Skip for routine one-file edits.
-2. **Execute (Cline FREE / Aider, or Copilot Pro)** — routine HTML/CSS/JS/docs/JSON edits.
+2. **Execute (Kiro)** — routine HTML/CSS/JS/docs/JSON edits and multi-step implementation work.
 3. **Review (Copilot Pro)** — independent, advisory. Prefer a **local pre-commit** review pass so
    fixes land in the same commit; the online PR auto-reviewer is an optional second opinion.
 4. **Deterministic final check** — `validate-repository.ps1 -All` + `git diff` scope check → commit
@@ -54,10 +55,22 @@ Routing detail: [policies/ai-routing-policy.md](policies/ai-routing-policy.md).
 - **Backlog:** [roadmap/pending-improvements.md](roadmap/pending-improvements.md) — one item (or a
   tight slice) per commit, with a Status + Revision trail.
 - **As-run prompt provenance:** save the prompts you actually sent (executor / reviewer / revision)
-  to `roadmap/prompts/<item-id>.md` — or a folder for multi-artifact items — marked frozen / not
-  maintained. Audit trail (item → prompts → commit), distinct from any reusable template.
+  to `roadmap/prompts/FAD-<id>/` using the folder layout below. Audit trail (item → prompts →
+  commit), distinct from any reusable template.
+
+```
+roadmap/prompts/FAD-<id>/
+  plan.md          design notes + frozen outcome (provenance; NEVER pasted into a tool)
+  01-executor.md   ONLY the executor prompt — paste into Kiro
+  02-reviewer.md   ONLY the reviewer prompt — paste into Copilot Pro
+  03-revision.md   revision prompt (only if the review flags issues)
+  responses/
+    01-executor.md   Kiro's completion summary
+    02-reviewer.md   Copilot's PASS/FAIL report
+    03-revision.md   revision summary (if a cycle happens)
+```
 
 ## Git
 
 - Branch off `main` for non-trivial work; commit only when asked; push only when asked.
-- End commit messages with: `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`
+- End commit messages with: `Co-Authored-By: Kiro <noreply@kiro.dev>`
