@@ -1,0 +1,15 @@
+# Normalize line endings on checkin.
+* text=auto
+
+# Pin shell hooks + scripts to LF so they run on Linux CI regardless of the
+# committer's platform (a lesson the source playbook learned the hard way:
+# CRLF in a shell hook breaks the runner).
+.githooks/* text eol=lf
+*.sh        text eol=lf
+
+# The gh-aw generated lock file and site data are text; keep them diffable.
+*.lock.yml  text eol=lf
+*.json      text eol=lf
+*.html      text eol=lf
+*.css       text eol=lf
+*.js        text eol=lf

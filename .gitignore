@@ -1,0 +1,17 @@
+# Claude Code local settings (never committed)
+.claude/settings.local.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/*
+!.vscode/extensions.json
+
+# Local env / secrets — NEVER commit; ANTHROPIC_API_KEY lives in repo Actions secrets
+.env
+.env.*
+*.local
+
+# Node (only if a tool is added later; the site itself has no build step)
+node_modules/
