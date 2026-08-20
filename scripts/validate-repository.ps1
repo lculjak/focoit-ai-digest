@@ -22,7 +22,9 @@
         (the playbook doc schema; would flag README, the site, and the gh-aw .md source).
 
 .PARAMETER All
-    Scan every tracked file instead of only the staged change set.
+    Scan the whole working tree instead of only the staged change set: every tracked file, plus
+    untracked files that .gitignore does not exclude. Combined with -Strict this reproduces CI
+    (guardian.yml runs -All -Strict).
 
 .PARAMETER Strict
     Treat warnings as blocking failures (non-zero exit). Used by CI.
@@ -80,11 +82,14 @@ if (-not $repoRoot) { Write-Error 'Not inside a git repository.'; exit 2 }
 Set-Location $repoRoot
 
 if ($All) {
-    $files = & git ls-files
+    # "All" = everything that would land in a commit: tracked files PLUS untracked files that
+    # .gitignore does not exclude. Scanning only `git ls-files` makes freshly scaffolded work
+    # invisible to a local run while CI still fails on it once committed.
+    $files = @(& git ls-files) + @(& git ls-files --others --exclude-standard)
 } else {
     $files = & git diff --cached --name-only --diff-filter=ACM
 }
-$files = $files | Where-Object { $_ -and $_.Trim() }
+$files = $files | Where-Object { $_ -and $_.Trim() } | Sort-Object -Unique
 
 if (-not $files) {
     Write-Host '[guardian] No files to validate.' -ForegroundColor DarkGray
