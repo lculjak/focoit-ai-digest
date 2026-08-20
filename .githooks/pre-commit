@@ -1,12 +1,14 @@
 #!/bin/sh
 # Repository Guardian - deterministic pre-commit validation.
 # Delegates to scripts/validate-repository.ps1 (re-scoped for this static-site repo).
+# Runs with -Strict so the hook blocks on exactly what CI blocks on (guardian.yml runs
+# -All -Strict). Without it, warning-level findings pass here and fail the build later.
 # Bypass in a genuine emergency with: git commit --no-verify
 
 if command -v pwsh >/dev/null 2>&1; then
-  pwsh -NoProfile -File scripts/validate-repository.ps1
+  pwsh -NoProfile -File scripts/validate-repository.ps1 -Strict
 elif command -v powershell >/dev/null 2>&1; then
-  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/validate-repository.ps1
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/validate-repository.ps1 -Strict
 else
   echo "[guardian] PowerShell not found on PATH; skipping validation." >&2
   exit 0
