@@ -1,45 +1,42 @@
 [
   {
-    "hook": "Anthropic just published a postmortem: their own eval sandbox reached the internet and touched three real companies' networks.",
-    "angle": "If a frontier lab's red-team environment wasn't fully isolated, most enterprise 'let's give the agent a browser' pilots aren't either. Walk through what containment actually requires before agents get write access to anything.",
+    "hook": "Your agent's cost model is a design decision, not an afterthought.",
+    "angle": "Break down the four cost levers Microsoft Foundry exposes for agent optimization (caching, routing, batching, model right-sizing) and connect them to a real Azure architecture decision: when to build custom routing vs. lean on the managed layer.",
     "which_story_urls": [
-      "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
-      "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models",
-      "https://www.docker.com/products/docker-sandboxes/"
-    ],
-    "suggested_track": "healthcare-ai"
-  },
-  {
-    "hook": "GitHub's answer to 'the AI wrote a 4,000-line PR nobody can review' is: stop letting it.",
-    "angle": "Break down the stacked-PR pattern GitHub is teaching coding agents to use, and why it's the missing change-control primitive for shops that need auditable, human-reviewable AI contributions.",
-    "which_story_urls": [
-      "https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/",
-      "https://github.blog/ai-and-ml/github-copilot/stacked-sessions-and-pull-requests-in-the-github-copilot-app/"
-    ],
-    "suggested_track": "copilot"
-  },
-  {
-    "hook": "Microsoft just got named a Leader for AI-augmented code modernization — right as GitHub ships supply-chain lockdowns for npm and Actions.",
-    "angle": "Use both stories to make the case that Azure + GitHub's platform bets (modernization tooling, supply-chain hardening) are converging into a more defensible AI delivery stack for regulated shops than piecing together point tools.",
-    "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-ai-augmented-code-modernization-tools/",
-      "https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/"
+      "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-four-ways-to-lower-the-cost/"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "A Kremlin-linked group is actively backdooring unpatched Exchange servers right now, persisting through credential rotation.",
-    "angle": "A reminder for architects chasing AI roadmaps: infrastructure hygiene (patch cadence, segmentation) is still the highest-leverage security investment, especially in healthcare/finance where Exchange is often still on-prem.",
+    "hook": "The Hugging Face incident is the agent-autonomy failure mode every architect should study before it's their production system.",
+    "angle": "Use OpenAI's own postmortem plus the Ars Technica reporting on unowned code installs to argue for hard blast-radius limits and human approval gates before granting coding agents write access to external systems.",
     "which_story_urls": [
-      "https://arstechnica.com/security/2026/07/kremlin-hackers-are-exploiting-exchange-flaw-to-backdoor-unpatched-networks/"
+      "https://openai.com/index/hugging-face-incident-and-the-road-ahead",
+      "https://arstechnica.com/security/2026/08/how-openai-let-a-mob-of-llm-agents-game-a-test-and-ransack-hugging-face/"
+    ],
+    "suggested_track": "azure"
+  },
+  {
+    "hook": "Automating Dependabot triage with Copilot is a low-risk way to prove agentic workflows to a skeptical security team.",
+    "angle": "Walk through how a human-in-the-loop Copilot triage flow for dependency updates satisfies compliance checkboxes while demonstrating measurable time savings — a template for introducing agents into regulated dev pipelines.",
+    "which_story_urls": [
+      "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-automate-dependabot-pull-request-triage/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "Zero Data Retention isn't a compliance rubber stamp — it's one clause in a much longer conversation.",
+    "angle": "Explain what Zero Data Retention actually covers (and doesn't) for frontier models, and why architects in healthcare/finance still need their own PHI/PII data-flow mapping before treating a vendor's ZDR offer as sufficient.",
+    "which_story_urls": [
+      "https://openai.com/index/zero-data-retention-frontier-models"
     ],
     "suggested_track": "healthcare-ai"
   },
   {
-    "hook": "Dependabot noise is training your team to click 'merge' without looking — here's the fix GitHub just documented.",
-    "angle": "Practical governance post: grouping updates and slowing cadence for routine bumps while keeping security patches fast, framed as a pattern for keeping supply-chain hygiene sustainable under audit.",
+    "hook": "Microsoft Copilot's prompt-injection disclosure is a wake-up call, not a one-off bug.",
+    "angle": "Use the disclosed Copilot jailbreak to walk through how architects should red-team their own Copilot/agent deployments for hidden system-input exposure before an external researcher does it publicly.",
     "which_story_urls": [
-      "https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast/"
+      "https://arstechnica.com/security/2026/08/microsoft-copilot-reveals-secret-input-that-allowed-it-to-be-hacked/"
     ],
     "suggested_track": "copilot"
   }
