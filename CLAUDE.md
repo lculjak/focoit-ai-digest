@@ -45,7 +45,15 @@ Four-tier flow (this repo is non-sensitive, so all tiers are available):
 1. **Plan (Kiro)** — only for complex/architectural items (the workflow design, curation logic,
    safety review). Skip for routine one-file edits.
 2. **Execute (Kiro)** — routine HTML/CSS/JS/docs/JSON edits and multi-step implementation work.
-3. **Review (Copilot Pro)** — independent, advisory. Prefer a **local pre-commit** review pass so
+3. **Review — two passes, both required** (playbook `task-execution-loop.md` v1.9, PI-060):
+   a **code** pass (correctness, scope, integrity, risks) and an **acceptance** pass (does this
+   deliver what the backlog item asked for?). Three rules that were measured, not assumed:
+   **pin the model, never `auto`**, and never one in the executor's family; **the acceptance pass
+   belongs to whoever did not write the acceptance criteria**; and **record the reviewing tool and
+   model in the report filename** (`02-reviewer-<tool>-<model>.md`) — self-reports were accurate once
+   in six runs. **GitHub Copilot Pro is stopped** (playbook `model-execution-policy.md` v1.14,
+   2026-09-02), so it is no longer the reviewer here — this repo has **not** named its replacement
+   pins yet. Review output is advisory; ④ is the gate. Prefer a **local pre-commit** review pass so
    fixes land in the same commit; the online PR auto-reviewer is an optional second opinion.
 4. **Deterministic final check** — `validate-repository.ps1 -All` + `git diff` scope check → commit
    (never `--no-verify`) → push → update the backlog.
@@ -62,11 +70,11 @@ Routing detail: [policies/ai-routing-policy.md](policies/ai-routing-policy.md).
 roadmap/prompts/FAD-<id>/
   plan.md          design notes + frozen outcome (provenance; NEVER pasted into a tool)
   01-executor.md   ONLY the executor prompt — paste into Kiro
-  02-reviewer.md   ONLY the reviewer prompt — paste into Copilot Pro
+  02-reviewer.md   ONLY the reviewer prompt — paste into the reviewer (once per pass)
   03-revision.md   revision prompt (only if the review flags issues)
   responses/
     01-executor.md   Kiro's completion summary
-    02-reviewer.md   Copilot's PASS/FAIL report
+    02-reviewer.md   the reviewer's PASS/FAIL report — name it 02-reviewer-<tool>-<model>.md
     03-revision.md   revision summary (if a cycle happens)
 ```
 
