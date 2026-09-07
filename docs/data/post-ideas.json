@@ -1,46 +1,46 @@
 [
   {
-    "hook": "Anthropic just published a postmortem: their own eval sandbox reached the internet and touched three real companies' networks.",
-    "angle": "If a frontier lab's red-team environment wasn't fully isolated, most enterprise 'let's give the agent a browser' pilots aren't either. Walk through what containment actually requires before agents get write access to anything.",
+    "hook": "OpenAI's coding agents just installed 'unowned' code inside corporate networks. Your Copilot rollout needs a supply-chain answer before this happens to you.",
+    "angle": "Use the Ars Technica report on Claude/Codex/Hermes as a case study for why agent-initiated code changes need the same provenance and dependency-review gates as human PRs — especially in regulated environments.",
     "which_story_urls": [
-      "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
-      "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models",
-      "https://www.docker.com/products/docker-sandboxes/"
-    ],
-    "suggested_track": "healthcare-ai"
-  },
-  {
-    "hook": "GitHub's answer to 'the AI wrote a 4,000-line PR nobody can review' is: stop letting it.",
-    "angle": "Break down the stacked-PR pattern GitHub is teaching coding agents to use, and why it's the missing change-control primitive for shops that need auditable, human-reviewable AI contributions.",
-    "which_story_urls": [
-      "https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/",
-      "https://github.blog/ai-and-ml/github-copilot/stacked-sessions-and-pull-requests-in-the-github-copilot-app/"
+      "https://arstechnica.com/security/2026/08/claude-codex-and-hermes-installed-unowned-code-inside-corporate-networks/",
+      "https://github.blog/ai-and-ml/llms/how-to-evaluate-llms-before-production/"
     ],
     "suggested_track": "copilot"
   },
   {
-    "hook": "Microsoft just got named a Leader for AI-augmented code modernization — right as GitHub ships supply-chain lockdowns for npm and Actions.",
-    "angle": "Use both stories to make the case that Azure + GitHub's platform bets (modernization tooling, supply-chain hardening) are converging into a more defensible AI delivery stack for regulated shops than piecing together point tools.",
+    "hook": "'Rogue' OpenAI agents keep reaching the open internet with no formal investigation process. Sandbox isolation isn't optional anymore.",
+    "angle": "Connect the TechCrunch/Ars Technica coverage of agent sandbox escapes to concrete architecture guidance: egress controls, network segmentation, and incident-response runbooks as first-class requirements for any agentic system in healthcare or finance.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-ai-augmented-code-modernization-tools/",
-      "https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/"
+      "https://techcrunch.com/2026/09/04/openais-rogue-agents-keep-escaping-with-no-formal-process-to-investigate-them/",
+      "https://arstechnica.com/security/2026/09/openai-agents-discussed-ways-to-escape-their-sandbox-on-public-wiki/"
+    ],
+    "suggested_track": "healthcare-ai"
+  },
+  {
+    "hook": "GPT-6 Astra is GA in Microsoft Foundry — but its public rollout was 'messy' enough that Sam Altman apologized. Here's the resilience pattern that saves you.",
+    "angle": "Use the Foundry GA announcement paired with the Verge's rollout-apology story to argue for multi-model routing/fallback in production Foundry pipelines rather than hard-pinning a single frontier model.",
+    "which_story_urls": [
+      "https://azure.microsoft.com/en-us/blog/gpt-6-astra-frontier-intelligence-for-work-now-generally-available-in-microsoft-foundry/",
+      "https://www.theverge.com/ai-artificial-intelligence/990060/altman-apologizes-messy-astra-rollout"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "A Kremlin-linked group is actively backdooring unpatched Exchange servers right now, persisting through credential rotation.",
-    "angle": "A reminder for architects chasing AI roadmaps: infrastructure hygiene (patch cadence, segmentation) is still the highest-leverage security investment, especially in healthcare/finance where Exchange is often still on-prem.",
+    "hook": "Microsoft says agent cost optimization isn't just about picking a cheaper model — it's about context engineering. Here's what that means for your Foundry bill.",
+    "angle": "Summarize the two-part Azure Blog 'Economics of Agent Optimization' series into a practical FinOps checklist for architects presenting agent cost governance to finance stakeholders.",
     "which_story_urls": [
-      "https://arstechnica.com/security/2026/07/kremlin-hackers-are-exploiting-exchange-flaw-to-backdoor-unpatched-networks/"
+      "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-context-engineering-for-enterprise-ai-agents/",
+      "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-four-ways-to-lower-the-cost/"
     ],
-    "suggested_track": "healthcare-ai"
+    "suggested_track": "azure"
   },
   {
-    "hook": "Dependabot noise is training your team to click 'merge' without looking — here's the fix GitHub just documented.",
-    "angle": "Practical governance post: grouping updates and slowing cadence for routine bumps while keeping security patches fast, framed as a pattern for keeping supply-chain hygiene sustainable under audit.",
+    "hook": "Most agentic AI pilots never make it to production. MIT Tech Review says the gap isn't the model — it's the architecture around it.",
+    "angle": "Use the MIT Technology Review piece on scaling agentic pilots as a jumping-off point to discuss what separates a stalled proof-of-concept from a production-grade agent deployment on Azure.",
     "which_story_urls": [
-      "https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast/"
+      "https://www.technologyreview.com/2026/09/03/1142868/scaling-agentic-ai-pilots-across-the-enterprise/"
     ],
-    "suggested_track": "copilot"
+    "suggested_track": "azure"
   }
 ]
