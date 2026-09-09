@@ -1,47 +1,43 @@
 [
   {
-    "hook": "Two AI assistants got popped this week for completely different reasons — Copilot leaked a secret parameter, Grok fell for an encrypted prompt-injection trick.",
-    "angle": "Use both incidents to argue that 'the vendor secures the model' is not a security strategy — walk through what independent threat modeling and egress controls should look like for any LLM integration handling sensitive data.",
+    "hook": "Your agent's cost model is a design decision, not an afterthought.",
+    "angle": "Break down the four cost levers Microsoft Foundry exposes for agent optimization (caching, routing, batching, model right-sizing) and connect them to a real Azure architecture decision: when to build custom routing vs. lean on the managed layer.",
     "which_story_urls": [
-      "https://arstechnica.com/security/2026/08/microsoft-copilot-reveals-secret-input-that-allowed-it-to-be-hacked/",
-      "https://arstechnica.com/security/2026/08/grok-exfiltrates-user-data-when-malicious-instructions-are-encrypted/"
+      "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-four-ways-to-lower-the-cost/"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "OpenAI just reaffirmed Zero Data Retention while a new study found frontier labs still won't say how they'd contain a rogue model.",
-    "angle": "Contrast vendor data-handling promises with the containment gap — practical guidance for healthcare/finance architects on what to demand contractually versus what to build themselves (sandboxing, kill-switches, network isolation).",
+    "hook": "The Hugging Face incident is the agent-autonomy failure mode every architect should study before it's their production system.",
+    "angle": "Use OpenAI's own postmortem plus the Ars Technica reporting on unowned code installs to argue for hard blast-radius limits and human approval gates before granting coding agents write access to external systems.",
     "which_story_urls": [
-      "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
-      "https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/"
+      "https://openai.com/index/hugging-face-incident-and-the-road-ahead",
+      "https://arstechnica.com/security/2026/08/how-openai-let-a-mob-of-llm-agents-game-a-test-and-ransack-hugging-face/"
+    ],
+    "suggested_track": "azure"
+  },
+  {
+    "hook": "Automating Dependabot triage with Copilot is a low-risk way to prove agentic workflows to a skeptical security team.",
+    "angle": "Walk through how a human-in-the-loop Copilot triage flow for dependency updates satisfies compliance checkboxes while demonstrating measurable time savings — a template for introducing agents into regulated dev pipelines.",
+    "which_story_urls": [
+      "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-automate-dependabot-pull-request-triage/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "Zero Data Retention isn't a compliance rubber stamp — it's one clause in a much longer conversation.",
+    "angle": "Explain what Zero Data Retention actually covers (and doesn't) for frontier models, and why architects in healthcare/finance still need their own PHI/PII data-flow mapping before treating a vendor's ZDR offer as sufficient.",
+    "which_story_urls": [
+      "https://openai.com/index/zero-data-retention-frontier-models"
     ],
     "suggested_track": "healthcare-ai"
   },
   {
-    "hook": "GitHub's new 'canvases' make agentic workflows visible and steerable mid-run — which is exactly the control regulated teams have been missing.",
-    "angle": "Break down how visible, steerable agent execution (plus GitHub's agent apps wiring into existing delivery workflows) gives architects a concrete pattern for human-in-the-loop governance instead of black-box automation.",
+    "hook": "Microsoft Copilot's prompt-injection disclosure is a wake-up call, not a one-off bug.",
+    "angle": "Use the disclosed Copilot jailbreak to walk through how architects should red-team their own Copilot/agent deployments for hidden system-input exposure before an external researcher does it publicly.",
     "which_story_urls": [
-      "https://github.blog/ai-and-ml/github-copilot/how-canvases-make-agentic-workflows-visible-steerable-and-cost-efficient/",
-      "https://github.blog/ai-and-ml/github-copilot/how-to-bring-your-software-delivery-workflow-into-github-with-agent-apps/"
+      "https://arstechnica.com/security/2026/08/microsoft-copilot-reveals-secret-input-that-allowed-it-to-be-hacked/"
     ],
     "suggested_track": "copilot"
-  },
-  {
-    "hook": "GitHub studied 50 open source projects and confirmed what maintainers already feared: most contributions are AI-first now, and review processes haven't caught up.",
-    "angle": "Translate the maintainer-side lessons into an internal dependency-risk checklist — what to ask about a library's AI-contribution and review practices before pulling it into a regulated codebase.",
-    "which_story_urls": [
-      "https://github.blog/open-source/maintainers/what-50-open-source-projects-taught-us-about-security-in-the-ai-era/",
-      "https://github.blog/open-source/maintainers/your-contributors-are-ai-first-now-is-your-project/"
-    ],
-    "suggested_track": "copilot"
-  },
-  {
-    "hook": "Microsoft just published an ROI framework for agent pilots — right as Gartner named Azure a Leader for cloud-native application platforms.",
-    "angle": "Combine the two to make the case that Azure's platform investments (container/app runtime + agent economics tooling) are converging into a more measurable, defensible path from pilot to production than ad hoc agent experiments.",
-    "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-from-pilots-to-measurable-returns/",
-      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-cloud-native-application-platforms/"
-    ],
-    "suggested_track": "azure"
   }
 ]
