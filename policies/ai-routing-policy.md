@@ -1,10 +1,10 @@
 # AI Routing Policy — focoit-ai-digest
 
-Version: 1.0
+Version: 1.1
 
 Status: Active
 
-Date: 2026-08-10
+Date: 2026-09-02
 
 > Subordinate to [model-execution-policy.md](model-execution-policy.md): first choose the execution
 > **tier** and honor the **confidentiality rule**, then apply the task routing below. This repo is
@@ -16,12 +16,18 @@ Date: 2026-08-10
 Which AI engine to use for each task type in this repo. Goals: prefer local/hosted-cheap tiers for
 routine work; reserve Claude for high-value reasoning; keep quality high.
 
+> **Scope note (playbook v1.2, PI-042):** routing decides *which model*, which measurement puts at
+> about **16%** of actual cost. The larger share — **~84%** — is cache mechanics driven by **context
+> size**. This is the **smaller lever**; the playbook's `cost-discipline-policy.md` holds the larger
+> one. That doc is deliberately **not mirrored here** (this repo has no measured session data), so
+> the pointer is to the playbook, not to a local file.
+
 ---
 
 # Decision matrix (this repo's tasks)
 
-| Task | Local / Copilot / Cline | Claude |
-|------|-------------------------|--------|
+| Task | Local / DeepSeek / Cline | Claude |
+|------|--------------------------|--------|
 | HTML/CSS/JS tweaks to the site template | ✅ | |
 | Small refactors of the generated page structure | ✅ | |
 | Docs / README / Markdown | ✅ | |
@@ -60,3 +66,4 @@ routine work; reserve Claude for high-value reasoning; keep quality high.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-08-10 | Initial routing policy for focoit-ai-digest — task matrix retargeted to a static-site + agentic-CI repo |
+| 1.1 | 2026-09-02 | Propagated playbook routing-policy **v1.2** (PI-042) and the **Tier-2 restructure** (`model-execution-policy.md` v1.13–v1.14, PI-069). Adds the **scope note**: routing is ~**16%** of measured cost and context size is the rest, so this is the *smaller* lever — pointed at the playbook's `cost-discipline-policy.md`, which the registry deliberately does **not** mirror here. Matrix column **`Local / Copilot / Cline` → `Local / DeepSeek / Cline`**: **Copilot Pro is stopped**. Task rows, the local-first bias and this repo's quality checklist are **unchanged**. **Draft propagated by `/propagate-policy`; left uncommitted for the repo owner.** |
