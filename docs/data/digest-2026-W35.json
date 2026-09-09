@@ -1,0 +1,215 @@
+[
+  {
+    "title": "Microsoft named a Leader in the 2026 Gartner® Magic Quadrant™ for Cloud-Native Application Platforms",
+    "url": "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-cloud-native-application-platforms/",
+    "source": "Azure Blog",
+    "date": "2026-08-17",
+    "tldr": "Gartner positioned Microsoft as a Leader for Azure's cloud-native application platform, citing container orchestration, Kubernetes tooling, and integrated AI-ready runtime services.",
+    "why": "Third-party validation strengthens the build-vs-buy case for standardizing on AKS/Azure Container Apps as the runtime layer for AI workloads, a useful reference when justifying platform consolidation to procurement in regulated shops.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "governance"
+    ]
+  },
+  {
+    "title": "The Economics of Agent Optimization: From pilots to measurable returns",
+    "url": "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-from-pilots-to-measurable-returns/",
+    "source": "Azure Blog",
+    "date": "2026-08-12",
+    "tldr": "Microsoft outlines a framework for measuring ROI on agentic AI deployments, moving beyond pilot metrics to production cost/return tracking.",
+    "why": "Gives architects a concrete vocabulary and metrics model for justifying agent investment to finance stakeholders — directly useful when building the business case for moving pilots into production in cost-sensitive regulated environments.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "agents",
+      "mlops",
+      "governance"
+    ]
+  },
+  {
+    "title": "How canvases make agentic workflows visible, steerable, and cost-efficient",
+    "url": "https://github.blog/ai-and-ml/github-copilot/how-canvases-make-agentic-workflows-visible-steerable-and-cost-efficient/",
+    "source": "GitHub Blog",
+    "date": "2026-08-17",
+    "tldr": "GitHub describes 'canvases,' a visual interface for observing and steering multi-step Copilot agent workflows in real time, including cost tracking.",
+    "why": "Observability and mid-run steering are prerequisites for trusting agents with production tasks — this pattern gives architects a concrete UX reference for building auditable human-in-the-loop controls into agentic pipelines.",
+    "importance": "Medium",
+    "tags": [
+      "copilot",
+      "agents",
+      "dev-tools",
+      "mlops"
+    ]
+  },
+  {
+    "title": "How to bring your software delivery workflow into GitHub with agent apps",
+    "url": "https://github.blog/ai-and-ml/github-copilot/how-to-bring-your-software-delivery-workflow-into-github-with-agent-apps/",
+    "source": "GitHub Blog",
+    "date": "2026-08-14",
+    "tldr": "GitHub explains how 'agent apps' let teams wire existing software delivery workflows (planning, review, deployment) directly into Copilot-driven automation.",
+    "why": "A practical integration pattern for architects trying to fold AI agents into existing CI/CD and change-management processes rather than bolting on separate tooling — relevant for maintaining a single auditable delivery pipeline.",
+    "importance": "Medium",
+    "tags": [
+      "copilot",
+      "dev-tools",
+      "agents"
+    ]
+  },
+  {
+    "title": "What 50 open source projects taught us about security in the AI era",
+    "url": "https://github.blog/open-source/maintainers/what-50-open-source-projects-taught-us-about-security-in-the-ai-era/",
+    "source": "GitHub Blog",
+    "date": "2026-08-13",
+    "tldr": "GitHub synthesizes security lessons from 50 open source projects navigating AI-assisted contributions, covering dependency risk, review load, and malicious-code detection.",
+    "why": "Distills real-world evidence on where AI-assisted contribution introduces security risk — a directly citable source when building governance guardrails for AI-generated code in regulated codebases.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "open-source",
+      "governance",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "Your contributors are AI-first now. Is your project?",
+    "url": "https://github.blog/open-source/maintainers/your-contributors-are-ai-first-now-is-your-project/",
+    "source": "GitHub Blog",
+    "date": "2026-08-12",
+    "tldr": "GitHub argues most open source contributions now involve AI assistance and outlines how maintainers should adapt review and contribution processes accordingly.",
+    "why": "Signals a structural shift architects should plan for: upstream dependencies increasingly carry AI-assisted commits, which raises provenance and review-quality questions worth baking into vendor/dependency risk assessments.",
+    "importance": "Medium",
+    "tags": [
+      "open-source",
+      "governance",
+      "agents"
+    ]
+  },
+  {
+    "title": "From coder to orchestrator: How agents shift the role of a developer",
+    "url": "https://github.blog/developer-skills/career-growth/from-coder-to-orchestrator-how-agents-shift-the-role-of-a-developer/",
+    "source": "GitHub Blog",
+    "date": "2026-08-11",
+    "tldr": "GitHub explores how agentic coding tools are shifting developer responsibilities from writing code to orchestrating, reviewing, and steering AI agents.",
+    "why": "Useful framing for staffing and skills planning as teams adopt agentic workflows — architects advising on team structure can use this to set expectations for review-heavy, orchestration-centric engineering roles.",
+    "importance": "Low",
+    "tags": [
+      "copilot",
+      "agents",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "The August 17 outage, and the work ahead",
+    "url": "https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/",
+    "source": "GitHub Blog",
+    "date": "2026-08-20",
+    "tldr": "GitHub's postmortem on its August 17 platform outage, detailing root cause and remediation commitments.",
+    "why": "GitHub availability is now core infrastructure for AI-assisted delivery pipelines; understanding the failure mode and remediation plan matters for architects assessing resilience/SLA risk of building critical workflows on top of GitHub.",
+    "importance": "Medium",
+    "tags": [
+      "governance",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "Microsoft Copilot reveals secret input that allowed it to be hacked",
+    "url": "https://arstechnica.com/security/2026/08/microsoft-copilot-reveals-secret-input-that-allowed-it-to-be-hacked/",
+    "source": "Ars Technica",
+    "date": "2026-08-18",
+    "tldr": "Researchers found a hidden parameter in Microsoft Copilot that attackers could exploit to steal user credentials via a crafted link.",
+    "why": "A concrete reminder that AI assistant integrations expand the attack surface in ways that aren't obvious from documented APIs — worth a fresh look at threat models for any Copilot deployment handling sensitive sessions.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "copilot",
+      "governance"
+    ]
+  },
+  {
+    "title": "Grok exfiltrates user data when malicious instructions are encrypted",
+    "url": "https://arstechnica.com/security/2026/08/grok-exfiltrates-user-data-when-malicious-instructions-are-encrypted/",
+    "source": "Ars Technica",
+    "date": "2026-08-20",
+    "tldr": "A technique called Cryptographic Context Injection bypasses Grok's safety guardrails by encrypting malicious instructions, causing data exfiltration.",
+    "why": "Another data point showing prompt-injection defenses remain brittle against encoding tricks — architects granting any LLM tool access to sensitive data should treat guardrail bypass as a when-not-if risk in threat modeling.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "foundation-models",
+      "governance"
+    ]
+  },
+  {
+    "title": "Offering Zero Data Retention for frontier models",
+    "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+    "source": "OpenAI",
+    "date": "2026-08-19",
+    "tldr": "OpenAI reaffirms Zero Data Retention for eligible API customers and previews Private Safety Processing intended to preserve safety monitoring without retaining customer data.",
+    "why": "Data retention posture is often the deciding factor in whether a regulated organization can use a frontier model API at all — this is a directly relevant data point for vendor risk assessments in healthcare/finance deployments.",
+    "importance": "High",
+    "tags": [
+      "ai-platform",
+      "governance",
+      "regulated-industry",
+      "security"
+    ]
+  },
+  {
+    "title": "Frontier AI labs still won't say how they'd contain a rogue model",
+    "url": "https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/",
+    "source": "TechCrunch AI",
+    "date": "2026-08-22",
+    "tldr": "A new study finds leading AI labs have little publicly documented containment planning for models that behave unexpectedly or adversarially.",
+    "why": "Absent vendor containment guarantees, architects deploying frontier models in production should assume they own containment (sandboxing, kill-switches, network isolation) rather than relying on upstream safety claims.",
+    "importance": "Medium",
+    "tags": [
+      "foundation-models",
+      "governance",
+      "security",
+      "agents"
+    ]
+  },
+  {
+    "title": "What Is a Harness?",
+    "url": "https://earendil.com/posts/what-is-a-harness/",
+    "source": "Hacker News",
+    "date": "2026-08-23",
+    "tldr": "An engineer's breakdown of what an 'agent harness' actually is — the scaffolding of tools, prompts, and control loops around a model that determines real-world agent behavior.",
+    "why": "A clear mental model for a term architects will hear constantly; useful for evaluating whether a vendor's 'agent' offering is really a disciplined harness or just a thin prompt wrapper before betting production workflows on it.",
+    "importance": "Low",
+    "tags": [
+      "agents",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "My agent.md to improve LLM-assisted code quality",
+    "url": "https://fabiensanglard.net/agent.md/index.html",
+    "source": "Hacker News",
+    "date": "2026-08-23",
+    "tldr": "A developer shares a detailed agent.md configuration file used to steer coding-agent behavior toward higher-quality, more consistent output.",
+    "why": "A practical, reusable template for the kind of agent-instruction governance architects should be standardizing across teams to keep AI-assisted code consistent and reviewable at scale.",
+    "importance": "Low",
+    "tags": [
+      "dev-tools",
+      "agents",
+      "copilot"
+    ]
+  },
+  {
+    "title": "How Claude's text watermark works",
+    "url": "https://www.anthropic.com/news/claude-text-watermark",
+    "source": "Anthropic",
+    "date": "2026-08-14",
+    "tldr": "Anthropic details the technical design of a watermarking scheme for identifying text generated by Claude models.",
+    "why": "Provenance/watermarking capability is increasingly relevant to compliance and content-authenticity requirements in regulated industries — worth tracking as a control architects may need to depend on or audit.",
+    "importance": "Low",
+    "tags": [
+      "foundation-models",
+      "governance",
+      "ai-platform"
+    ]
+  }
+]
