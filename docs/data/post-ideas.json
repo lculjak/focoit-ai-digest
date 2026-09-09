@@ -1,46 +1,47 @@
 [
   {
-    "hook": "Anthropic just published a postmortem: their own eval sandbox reached the internet and touched three real companies' networks.",
-    "angle": "If a frontier lab's red-team environment wasn't fully isolated, most enterprise 'let's give the agent a browser' pilots aren't either. Walk through what containment actually requires before agents get write access to anything.",
+    "hook": "Two AI assistants got popped this week for completely different reasons — Copilot leaked a secret parameter, Grok fell for an encrypted prompt-injection trick.",
+    "angle": "Use both incidents to argue that 'the vendor secures the model' is not a security strategy — walk through what independent threat modeling and egress controls should look like for any LLM integration handling sensitive data.",
     "which_story_urls": [
-      "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
-      "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models",
-      "https://www.docker.com/products/docker-sandboxes/"
-    ],
-    "suggested_track": "healthcare-ai"
-  },
-  {
-    "hook": "GitHub's answer to 'the AI wrote a 4,000-line PR nobody can review' is: stop letting it.",
-    "angle": "Break down the stacked-PR pattern GitHub is teaching coding agents to use, and why it's the missing change-control primitive for shops that need auditable, human-reviewable AI contributions.",
-    "which_story_urls": [
-      "https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/",
-      "https://github.blog/ai-and-ml/github-copilot/stacked-sessions-and-pull-requests-in-the-github-copilot-app/"
-    ],
-    "suggested_track": "copilot"
-  },
-  {
-    "hook": "Microsoft just got named a Leader for AI-augmented code modernization — right as GitHub ships supply-chain lockdowns for npm and Actions.",
-    "angle": "Use both stories to make the case that Azure + GitHub's platform bets (modernization tooling, supply-chain hardening) are converging into a more defensible AI delivery stack for regulated shops than piecing together point tools.",
-    "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-ai-augmented-code-modernization-tools/",
-      "https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/"
+      "https://arstechnica.com/security/2026/08/microsoft-copilot-reveals-secret-input-that-allowed-it-to-be-hacked/",
+      "https://arstechnica.com/security/2026/08/grok-exfiltrates-user-data-when-malicious-instructions-are-encrypted/"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "A Kremlin-linked group is actively backdooring unpatched Exchange servers right now, persisting through credential rotation.",
-    "angle": "A reminder for architects chasing AI roadmaps: infrastructure hygiene (patch cadence, segmentation) is still the highest-leverage security investment, especially in healthcare/finance where Exchange is often still on-prem.",
+    "hook": "OpenAI just reaffirmed Zero Data Retention while a new study found frontier labs still won't say how they'd contain a rogue model.",
+    "angle": "Contrast vendor data-handling promises with the containment gap — practical guidance for healthcare/finance architects on what to demand contractually versus what to build themselves (sandboxing, kill-switches, network isolation).",
     "which_story_urls": [
-      "https://arstechnica.com/security/2026/07/kremlin-hackers-are-exploiting-exchange-flaw-to-backdoor-unpatched-networks/"
+      "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+      "https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/"
     ],
     "suggested_track": "healthcare-ai"
   },
   {
-    "hook": "Dependabot noise is training your team to click 'merge' without looking — here's the fix GitHub just documented.",
-    "angle": "Practical governance post: grouping updates and slowing cadence for routine bumps while keeping security patches fast, framed as a pattern for keeping supply-chain hygiene sustainable under audit.",
+    "hook": "GitHub's new 'canvases' make agentic workflows visible and steerable mid-run — which is exactly the control regulated teams have been missing.",
+    "angle": "Break down how visible, steerable agent execution (plus GitHub's agent apps wiring into existing delivery workflows) gives architects a concrete pattern for human-in-the-loop governance instead of black-box automation.",
     "which_story_urls": [
-      "https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast/"
+      "https://github.blog/ai-and-ml/github-copilot/how-canvases-make-agentic-workflows-visible-steerable-and-cost-efficient/",
+      "https://github.blog/ai-and-ml/github-copilot/how-to-bring-your-software-delivery-workflow-into-github-with-agent-apps/"
     ],
     "suggested_track": "copilot"
+  },
+  {
+    "hook": "GitHub studied 50 open source projects and confirmed what maintainers already feared: most contributions are AI-first now, and review processes haven't caught up.",
+    "angle": "Translate the maintainer-side lessons into an internal dependency-risk checklist — what to ask about a library's AI-contribution and review practices before pulling it into a regulated codebase.",
+    "which_story_urls": [
+      "https://github.blog/open-source/maintainers/what-50-open-source-projects-taught-us-about-security-in-the-ai-era/",
+      "https://github.blog/open-source/maintainers/your-contributors-are-ai-first-now-is-your-project/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "Microsoft just published an ROI framework for agent pilots — right as Gartner named Azure a Leader for cloud-native application platforms.",
+    "angle": "Combine the two to make the case that Azure's platform investments (container/app runtime + agent economics tooling) are converging into a more measurable, defensible path from pilot to production than ad hoc agent experiments.",
+    "which_story_urls": [
+      "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-from-pilots-to-measurable-returns/",
+      "https://azure.microsoft.com/en-us/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-cloud-native-application-platforms/"
+    ],
+    "suggested_track": "azure"
   }
 ]
