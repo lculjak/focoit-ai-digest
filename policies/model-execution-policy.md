@@ -1,12 +1,12 @@
 # Model Execution & Confidentiality Policy — focoit-ai-digest
 
-Version: 1.4
+Version: 1.5
 
 Status: Active
 
 Owner: Leonardo Culjak
 
-Date: 2026-08-10
+Date: 2026-09-29
 
 ---
 
@@ -88,6 +88,12 @@ upstream in the playbook policy v1.7.
 > whole day of 70 requests** — and `GET /user/balance` **lags by minutes**, so a reading taken straight
 > after a run is not evidence of its cost. **Take cost figures from the DeepSeek dashboard's per-request
 > export**; keep the balance endpoint for a pre-flight funding check only.
+>
+> **The export's model column is also the only admissible model identity** (playbook PI-109,
+> 2026-09-29). The session record *labels* a request and the result JSON *echoes* it. **On this
+> account, requests for `deepseek-v4-flash` have billed as `deepseek-flash` since 2026-09-10**, while the
+> session record said `deepseek-v4-flash` for some of them. When a pin or a label is in doubt, the export
+> settles it.
 
 Per-task routing within these tiers: [ai-routing-policy.md](ai-routing-policy.md).
 
@@ -124,3 +130,4 @@ on a weekly schedule, publishing through a human-gated pull request (`safe-outpu
 | 1.2 | 2026-09-02 | Propagated playbook **v1.9–v1.14** (PI-067 / PI-069). **Tier 2 restructured:** **GitHub Copilot Pro is stopped**, so the tier has **no flat-rate option**; **DeepSeek API in Claude Code is primary** (metered, prepaid, **runs unattended**) and **Cline FREE is second** (**VS Code only**, needs a human) — the metered route deliberately outranks the free one because **operator time dominates a ~$0.011 task**. Adds the **paid-floor-is-an-assumption** note: Max is under budget pressure, **quote metered-equivalent cost and never $0 without naming the assumption**, and **with Copilot gone there is no free hosted route outside VS Code**. DeepSeek scoped **demo/dev, non-sensitive**, with **PRC jurisdiction recorded as a fact**. **This repo's confidentiality rule, tier boundaries and agentic-CI section are unchanged.** Tier 3 already carried v1.9–v1.10's *Usage Credits OFF* |
 | 1.3 | 2026-09-03 | **Propagated playbook v1.16 (PI-073) — the "runs unattended" claim this file already carried was false on a Max-signed-in machine.** Claude Code tags the request `provider: firstParty` even against a third-party `ANTHROPIC_BASE_URL`, attaches the **subscription OAuth token**, and **ignores both `ANTHROPIC_AUTH_TOKEN` and `ANTHROPIC_API_KEY`**; DeepSeek 401s; Claude Code retries **ten times** and the run dies to the caller's timeout — **presenting as a hang rather than an error**, which points the diagnosis at the vendor instead of the harness. **The failing configuration is the normal one**: every machine running Tier 3 is signed in to Claude Code Max. Fixed by an **isolated `CLAUDE_CONFIG_DIR`**, recorded here as **state rather than a flag**. **The caveat is propagated; the full setup procedure is not** — this file is a condensed mirror and the procedure stays in the playbook, so there is one copy to keep true. **Cost carried in the same pass:** `total_cost_usd` on this route is Anthropic pricing applied to DeepSeek tokens (**$2.04 self-reported for one run against $0.29 for a 70-request day**) and `user/balance` **lags by minutes**, so the **dashboard's per-request export** is the authority. Diagnosed in Jobflow (**JF-053**), raised upstream as **PI-073**, propagated here. **Correction to the record while propagating:** the playbook's PI-071/PI-072 described this mirror as sitting on **1.1** — it was not; the 2026-09-02 pass had already brought it current, and the gap was one version, not fifteen |
 | 1.4 | 2026-09-11 | **Tier 3's tool was cancelled, and the harness is not a tier (playbook PI-085, `model-execution-policy.md` v1.19).** **Claude Code Max was cancelled 2026-09-11**; Tier 3 is **`kimi-k3` via opencode Go**, and **Claude Code Pro is the *harness* every tier runs inside — not the Tier-3 model** — with its inference **deliberately unspent**. **Floor $30** (Pro $20 + Go $10) plus DeepSeek metered. The *"under budget pressure and a candidate for removal"* clause is **superseded**: **it was removed**, so it is a record rather than a prediction. **The `CLAUDE_CONFIG_DIR` precondition is generalised** — it said *"signed in to Claude Code **Max**"*, and **the trap is identical on Pro** (measured upstream: **191.3 s** against a documented ~181 s exhaustion), so a load-bearing precondition would otherwise have described a subscription nobody holds. **Cline corrected**: ~~$0~~ **metered Cline Credits**, **manual and exceptional**, not a free fallback. **Two limits carried rather than hidden:** **capability is unmeasured** (the Go models are verified to *answer*, none is scored) and **all model seats are PRC-jurisdiction**, binding the moment client work returns. **No confidentiality rule, gate or tier boundary changes.** |
+| 1.5 | 2026-09-29 | **Propagated playbook v1.25 (PI-109) — the export names the model, not only the cost.** The playbook's billing export for 2026-08-31 → 09-29 shows **every flash-family request since 2026-09-10 billed as `deepseek-flash`**, including requests for the pinned `deepseek-v4-flash`, while the session record labelled some of them `deepseek-v4-flash`. **One paragraph added under this file's existing *take cost figures from the export* rule:** the export's model column is the only admissible model identity, and it settles a doubted pin. **No tier, route or confidentiality decision changed.** |
