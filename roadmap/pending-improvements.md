@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.6
+Version: 1.7
 
 Status: Open
 
@@ -183,7 +183,10 @@ Acceptance
 
 ## FAD-008 — Phase 2: surface on focoit.com (link first)
 
-Status: In progress (2026-09-30) — **slice 1: `digest.focoit.com` on GitHub Pages.** Chosen over
+Status: In progress (2026-09-30) — **slice 1: `digest.focoit.com` on GitHub Pages — live.** Steps 1–6
+observed 2026-09-30 (domain verified, DNS, merge, HTTPS enforced, 200 + redirects, focoit.com nav
+link); **only the CNAME-survives-a-weekly-run check remains** —
+[evidence](prompts/FAD-008/responses/01-executor.md). Chosen over
 serving it at `focoit.com/digest/`: that site's CSP (`script-src 'self'`, `style-src 'self'`) blocks
 this page's inline `<script>`/`<style>`, so it would load blank without either a per-route
 `'unsafe-inline'` or externalising the template's JS/CSS — deferred until curation is proven.
@@ -217,3 +220,4 @@ Acceptance
 | 1.4 | 2026-09-09 | **FAD-004's ✅ Done was false for a month, and the site was never live.** Measured against the Pages API: `build_type` was **`workflow`** — waiting on a deploy workflow that does not exist in `.github/workflows/` — and `source.path` was **`/`**, not `/docs`. **Zero builds ever**; `/`, `/docs/`, `/index.html` and `/docs/index.html` all **404**. Two independent faults, either enough alone. **What it cost:** the ✅ made the unmerged digest PRs look like the only thing between a run and a published page, when **merging them would have published nothing** — three sat open from 2026-08-24 while this backlog said publishing was finished. **Fixed:** `legacy` + `main` `/docs`, with the build triggered **before** any merge so *"does Pages work"* stayed separable from *"do the merges work"* — **built 43s, site 200**. W35/W36/W37 then merged oldest-first with conflict resolution on `docs/index.html` and `post-ideas.json` (each rewrites both); second build 39s, serving **W37**, archives `W33/W35/W36/W37` intact. **W34 stays missing on purpose** — its 2026-08-17 run failed on the Copilot CLI path bug PR #5 fixed, and the workflow reads the last 14 days, so a backfill would file current stories under a W34 label. **A new acceptance line added: load the URL and get a 200** — the original criterion described a settings screen, and a settings screen is not a served page. **Also corrected in passing: this file's own header said `Version: 1.1` while its revision history ended at `1.3`** — the same defect in miniature, a record disagreeing with itself because nobody re-read it |
 | 1.5 | 2026-09-30 | **FAD-005 done, with the dates it was actually met.** Run + PR #2 reviewed PASS 2026-08-10 and merged 2026-08-20, but that merge **deployed nothing** (FAD-004's broken Pages), so *"merging deploys"* was first met **2026-09-09** (W35–W37). **Mobile was never in the original review** — verified 2026-09-30 on the live URL at 375 px rather than inferred from the PASS. FAD-007 gets its first **AIC baseline** (125.7 + 12.4 overhead, ~25% of cap), marked as one data point, not a trend |
 | 1.6 | 2026-09-30 | **FAD-008 started: `digest.focoit.com` on GitHub Pages** (`docs/CNAME`), chosen over `focoit.com/digest/` because that site's CSP blocks this page's inline script/style. Acceptance rewritten around what must be **observed**: domain verified, HTTPS 200, old URL redirects, and `CNAME` surviving the next weekly run. Records the ordering trap — the `github.io` URL redirects the moment the CNAME is live, so DNS precedes the merge |
+| 1.7 | 2026-09-30 | FAD-008 slice 1 **live**: steps 1–6 observed and recorded in `prompts/FAD-008/responses/01-executor.md` — domain verified, DNS grey-cloud, PR #16 merged after DNS, HTTPS enforced (via API), `digest.focoit.com` 200 with both old URLs 301-ing to it, and the focoit.com nav link live (`focoitwebsite#31`). Stays **in progress** until the CNAME is seen surviving a weekly digest merge |
