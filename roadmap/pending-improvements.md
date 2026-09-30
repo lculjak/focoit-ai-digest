@@ -1,10 +1,10 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.4
+Version: 1.5
 
 Status: Open
 
-Date: 2026-09-09
+Date: 2026-09-30
 
 ---
 
@@ -131,7 +131,15 @@ acceptance line above: the old one described a settings screen.
 
 ## FAD-005 — First run: dispatch → review `[digest]` PR → merge
 
-Status: Open
+Status: ✅ Done (2026-09-30) — criteria met on **different dates**, recorded as such. **Run + PR:**
+first dispatch produced PR #2 (`[digest]` 2026-W33, labels `digest` + `automated`, exactly the three
+expected `docs/` files); reviewer **PASS** 2026-08-10
+([response](prompts/FAD-005/responses/02-reviewer.md)); merged 2026-08-20. **Deploy-on-merge was
+*not* met by that merge** — Pages was misconfigured (see FAD-004) and it published nothing. First
+met **2026-09-09**, when W35/W36/W37 merged onto working Pages and the site served W37 with no manual
+HTML editing. **Mobile** was not in the 2026-08-10 review; checked 2026-09-30 on the live URL at
+375 px: **200**, no horizontal scroll, 15 outbound cards, Azure/Microsoft + GitHub source chips
+selected by default (by design, per the workflow spec), so the counter reads *10 of 15* on load.
 
 Priority: Medium
 
@@ -162,7 +170,9 @@ Acceptance
 
 ## FAD-007 — Observe + tune (2–3 runs)
 
-Status: Open
+Status: Open — **one baseline recorded**: W33 used **125.7 AIC (+12.4 overhead)** against the 500 cap
+(~25%) ([FAD-005 review](prompts/FAD-005/responses/02-reviewer.md)). One run is not a trend — no
+tuning decision yet.
 
 Priority: Low
 
@@ -193,3 +203,4 @@ Acceptance
 | 1.2 | 2026-08-10 | FAD-003 done: Copilot Pro verified active (personal account, Path B) |
 | 1.3 | 2026-08-10 | FAD-004 done: GitHub Pages enabled at https://lculjak.github.io/focoit-ai-digest/ |
 | 1.4 | 2026-09-09 | **FAD-004's ✅ Done was false for a month, and the site was never live.** Measured against the Pages API: `build_type` was **`workflow`** — waiting on a deploy workflow that does not exist in `.github/workflows/` — and `source.path` was **`/`**, not `/docs`. **Zero builds ever**; `/`, `/docs/`, `/index.html` and `/docs/index.html` all **404**. Two independent faults, either enough alone. **What it cost:** the ✅ made the unmerged digest PRs look like the only thing between a run and a published page, when **merging them would have published nothing** — three sat open from 2026-08-24 while this backlog said publishing was finished. **Fixed:** `legacy` + `main` `/docs`, with the build triggered **before** any merge so *"does Pages work"* stayed separable from *"do the merges work"* — **built 43s, site 200**. W35/W36/W37 then merged oldest-first with conflict resolution on `docs/index.html` and `post-ideas.json` (each rewrites both); second build 39s, serving **W37**, archives `W33/W35/W36/W37` intact. **W34 stays missing on purpose** — its 2026-08-17 run failed on the Copilot CLI path bug PR #5 fixed, and the workflow reads the last 14 days, so a backfill would file current stories under a W34 label. **A new acceptance line added: load the URL and get a 200** — the original criterion described a settings screen, and a settings screen is not a served page. **Also corrected in passing: this file's own header said `Version: 1.1` while its revision history ended at `1.3`** — the same defect in miniature, a record disagreeing with itself because nobody re-read it |
+| 1.5 | 2026-09-30 | **FAD-005 done, with the dates it was actually met.** Run + PR #2 reviewed PASS 2026-08-10 and merged 2026-08-20, but that merge **deployed nothing** (FAD-004's broken Pages), so *"merging deploys"* was first met **2026-09-09** (W35–W37). **Mobile was never in the original review** — verified 2026-09-30 on the live URL at 375 px rather than inferred from the PASS. FAD-007 gets its first **AIC baseline** (125.7 + 12.4 overhead, ~25% of cap), marked as one data point, not a trend |
