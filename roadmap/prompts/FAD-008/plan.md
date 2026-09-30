@@ -46,4 +46,6 @@ Out of scope: any change to `focoitwebsite` other than the link; `/digest/` on f
 
 ## Outcome
 
-Status: In progress — PR #16 open, awaiting owner steps 1–2 before merge.
+Status: In progress — **steps 1–6 done 2026-09-30** (PR #16 merged 23:24 UTC after DNS; HTTPS
+enforced; `focoitwebsite#31` link live 23:32). **Step 7 pending:** CNAME survives the next weekly run.
+Evidence: [responses/01-executor.md](responses/01-executor.md).
