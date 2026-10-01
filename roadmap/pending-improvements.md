@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.7
+Version: 1.8
 
 Status: Open
 
@@ -207,6 +207,37 @@ Acceptance
 - Add a "Weekly AI Digest" link on focoit.com → `https://digest.focoit.com/`. Do **not** wire
   cross-repo automation into `focoitwebsite` yet.
 
+## FAD-009 — Render story text as text, not HTML (`innerHTML`)
+
+Status: Open — **fix written and tested 2026-09-30, blocked on the workflow recompile.** The
+[spec](prompts/FAD-009/plan.md) holds the exact diffs, the test, the blockers and the unblock options.
+
+Priority: Low
+
+Context
+
+`docs/index.html` inserts the agent-written `tldr` and `why` with `innerHTML`, and sets `href` from
+`url` unchecked. Those fields come from external feeds, so feed-supplied markup would run on
+`digest.focoit.com` (`<img onerror>`, `javascript:` links). Exposure is low (static page, no
+login/cookies/forms, every digest human-reviewed), but the guarantee should not depend on a reviewer.
+
+The page fix is small. The blocker is shipping the matching **workflow instruction**, without which
+Monday's run regenerates the page and can bring it back:
+
+- **B1:** a clean recompile with the pinned v0.85.4 reverts **PR #5's hand patch**
+  (`/usr/local/bin/copilot` → `copilot`), the bug that failed the W34 run. Re-applying it by hand was
+  blocked as a CI bypass, so it is an owner decision.
+- **B2:** gh-aw is not pinned locally. It was installed at v0.86.2, and `--pin v0.85.4` upgraded it
+  to **v0.89.21** instead. Each newer compiler rewrites hundreds of lock lines.
+
+Acceptance
+
+- Story fields rendered with `textContent`/`append()`; links set only for `http(s)` URLs.
+- Workflow instructions + preflight require it; lock recompiled and committed with the `.md`;
+  `gh aw compile` 0/0; the harness still calls PATH-resolved `copilot`; a **`workflow_dispatch` run
+  succeeds**.
+- The next weekly page has no `innerHTML` on story fields (observed, not assumed).
+
 ---
 
 # Revision History
@@ -221,3 +252,4 @@ Acceptance
 | 1.5 | 2026-09-30 | **FAD-005 done, with the dates it was actually met.** Run + PR #2 reviewed PASS 2026-08-10 and merged 2026-08-20, but that merge **deployed nothing** (FAD-004's broken Pages), so *"merging deploys"* was first met **2026-09-09** (W35–W37). **Mobile was never in the original review** — verified 2026-09-30 on the live URL at 375 px rather than inferred from the PASS. FAD-007 gets its first **AIC baseline** (125.7 + 12.4 overhead, ~25% of cap), marked as one data point, not a trend |
 | 1.6 | 2026-09-30 | **FAD-008 started: `digest.focoit.com` on GitHub Pages** (`docs/CNAME`), chosen over `focoit.com/digest/` because that site's CSP blocks this page's inline script/style. Acceptance rewritten around what must be **observed**: domain verified, HTTPS 200, old URL redirects, and `CNAME` surviving the next weekly run. Records the ordering trap — the `github.io` URL redirects the moment the CNAME is live, so DNS precedes the merge |
 | 1.7 | 2026-09-30 | FAD-008 slice 1 **live**: steps 1–6 observed and recorded in `prompts/FAD-008/responses/01-executor.md` — domain verified, DNS grey-cloud, PR #16 merged after DNS, HTTPS enforced (via API), `digest.focoit.com` 200 with both old URLs 301-ing to it, and the focoit.com nav link live (`focoitwebsite#31`). Stays **in progress** until the CNAME is seen surviving a weekly digest merge |
+| 1.8 | 2026-09-30 | **FAD-009 added (Low): story text rendered through `innerHTML`.** Fix written and tested (injected `<img onerror>` stays inert, `javascript:` links get no `href`), not shipped: the matching workflow instruction needs a recompile, and a clean v0.85.4 compile **reverts PR #5's hand patch** to the Copilot CLI path, the W34 failure. Also records that gh-aw is **not actually pinned** on the dev machine (installed v0.86.2; `--pin v0.85.4` upgraded it to v0.89.21). Diffs, test and unblock options in `prompts/FAD-009/plan.md` |
