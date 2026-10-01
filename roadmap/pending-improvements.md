@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.8
+Version: 1.9
 
 Status: Open
 
@@ -211,6 +211,8 @@ Acceptance
 
 Status: Open — **fix written and tested 2026-09-30, blocked on the workflow recompile.** The
 [spec](prompts/FAD-009/plan.md) holds the exact diffs, the test, the blockers and the unblock options.
+**Unblock path chosen: option B, via [FAD-010](#fad-010).** Once the upgrade is proven, this becomes
+an ordinary prompt change.
 
 Priority: Low
 
@@ -238,6 +240,32 @@ Acceptance
   succeeds**.
 - The next weekly page has no `innerHTML` on story fields (observed, not assumed).
 
+## FAD-010 — Upgrade gh-aw v0.85.4 → v0.89.21; retire the PR #5 hand patch
+
+Status: Open — **next item.** Specified 2026-09-30; [spec](prompts/FAD-010/plan.md).
+
+Priority: Medium — every workflow change is blocked until this lands (FAD-009 first).
+
+Context
+
+The committed lock carries PR #5's hand patch (`/usr/local/bin/copilot` → `copilot`, the W34
+failure), and a v0.85.4 recompile reverts it. A throwaway **v0.89.21** compile (2026-09-30, 0/0)
+calls `${RUNNER_TEMP}/gh-aw/bin/copilot` instead, with `/usr/local/bin/copilot` appearing **0**
+times. The local pin doesn't hold anyway: gh-aw self-upgraded to v0.89.21 when asked to pin v0.85.4.
+The upgrade also moves Copilot CLI 1.0.78 → 1.0.87, the MCP gateway v0.4.8 → v0.4.25 and the GitHub
+MCP server v1.8.0 → v1.12.2, and adds two OTLP secrets to the manifest (expected optional; check).
+About 920 lock lines change. **The new path is unproven until a run uses it.**
+
+Acceptance
+
+- Lock compiled by v0.89.21, `gh aw compile` 0/0; `.md` (unchanged) + `.lock.yml` +
+  `actions-lock.json` committed together; gate PASS; no hand patch left in the lock.
+- A **`workflow_dispatch` run from the branch succeeds before merge**: the agent finds `copilot`, the
+  detection step passes, and a `[digest]` PR opens with the three expected files. Not on a Monday
+  (the scheduled run uses `main`'s lock). Record its AIC for FAD-007.
+- After merge, the **next scheduled Monday run** succeeds (observed, not assumed).
+- Rollback is a revert: the old lock still has the patch.
+
 ---
 
 # Revision History
@@ -253,3 +281,4 @@ Acceptance
 | 1.6 | 2026-09-30 | **FAD-008 started: `digest.focoit.com` on GitHub Pages** (`docs/CNAME`), chosen over `focoit.com/digest/` because that site's CSP blocks this page's inline script/style. Acceptance rewritten around what must be **observed**: domain verified, HTTPS 200, old URL redirects, and `CNAME` surviving the next weekly run. Records the ordering trap — the `github.io` URL redirects the moment the CNAME is live, so DNS precedes the merge |
 | 1.7 | 2026-09-30 | FAD-008 slice 1 **live**: steps 1–6 observed and recorded in `prompts/FAD-008/responses/01-executor.md` — domain verified, DNS grey-cloud, PR #16 merged after DNS, HTTPS enforced (via API), `digest.focoit.com` 200 with both old URLs 301-ing to it, and the focoit.com nav link live (`focoitwebsite#31`). Stays **in progress** until the CNAME is seen surviving a weekly digest merge |
 | 1.8 | 2026-09-30 | **FAD-009 added (Low): story text rendered through `innerHTML`.** Fix written and tested (injected `<img onerror>` stays inert, `javascript:` links get no `href`), not shipped: the matching workflow instruction needs a recompile, and a clean v0.85.4 compile **reverts PR #5's hand patch** to the Copilot CLI path, the W34 failure. Also records that gh-aw is **not actually pinned** on the dev machine (installed v0.86.2; `--pin v0.85.4` upgraded it to v0.89.21). Diffs, test and unblock options in `prompts/FAD-009/plan.md` |
+| 1.9 | 2026-09-30 | **FAD-010 added (Medium, next): upgrade gh-aw to v0.89.21 and retire PR #5's hand patch.** A throwaway v0.89.21 compile emits `${RUNNER_TEMP}/gh-aw/bin/copilot`, with zero `/usr/local/bin/copilot`, so the W34 path bug looks fixed by the compiler, but that is **unproven until a dispatch run uses it**, which is the gating acceptance line. FAD-009's unblock path set to option B via FAD-010 |
