@@ -91,7 +91,11 @@ if ($All) {
     # invisible to a local run while CI still fails on it once committed.
     $files = @(& git ls-files) + @(& git ls-files --others --exclude-standard)
 } else {
-    $files = & git diff --cached --name-only --diff-filter=ACM
+    # R and T are as load-bearing as A, C and M (playbook PI-088, propagated by PI-104). Under ACM a
+    # staged RENAME produced an EMPTY set, so `git mv` + an edit reported "No files to validate" -
+    # gitleaks never ran either - while CI's -All run would block the same tree. With --name-only a
+    # rename prints its NEW path, which is the one worth scanning. D stays out: nothing to validate.
+    $files = & git diff --cached --name-only --diff-filter=ACMRT
 }
 $files = $files | Where-Object { $_ -and $_.Trim() } | Sort-Object -Unique
 

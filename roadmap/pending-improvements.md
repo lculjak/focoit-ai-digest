@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.10
+Version: 1.11
 
 Status: Open
 
@@ -282,6 +282,17 @@ a census of the tree found 0 matches for it and for the rest of the set. Evidenc
 playbook (`roadmap/prompts/PI-104/`). Left as found: this gate's `-match` is case-insensitive where
 the playbook's is `-cmatch` — still 0 matches either way.
 
+## FAD-012 — A `git mv` walked past the pre-commit gate
+
+Status: ✅ Done (2026-10-02) — propagated from the playbook's **PI-088**, via PI-104.
+
+Priority: High
+
+The staged set was built with `--diff-filter=ACM`, and a rename is `R`, so a staged `git mv` + edit
+gave an **empty** set: *"No files to validate"*, exit 0, and gitleaks never ran. **Observed before:**
+`README.md` renamed (`R098`) with a planted key appended → exit 0, gitleaks present. **After
+(`ACMRT`):** the same rename blocks as `SECRET` naming the pattern.
+
 ---
 
 # Revision History
@@ -299,3 +310,4 @@ the playbook's is `-cmatch` — still 0 matches either way.
 | 1.8 | 2026-09-30 | **FAD-009 added (Low): story text rendered through `innerHTML`.** Fix written and tested (injected `<img onerror>` stays inert, `javascript:` links get no `href`), not shipped: the matching workflow instruction needs a recompile, and a clean v0.85.4 compile **reverts PR #5's hand patch** to the Copilot CLI path, the W34 failure. Also records that gh-aw is **not actually pinned** on the dev machine (installed v0.86.2; `--pin v0.85.4` upgraded it to v0.89.21). Diffs, test and unblock options in `prompts/FAD-009/plan.md` |
 | 1.9 | 2026-09-30 | **FAD-010 added (Medium, next): upgrade gh-aw to v0.89.21 and retire PR #5's hand patch.** A throwaway v0.89.21 compile emits `${RUNNER_TEMP}/gh-aw/bin/copilot`, with zero `/usr/local/bin/copilot`, so the W34 path bug looks fixed by the compiler, but that is **unproven until a dispatch run uses it**, which is the gating acceptance line. FAD-009's unblock path set to option B via FAD-010 |
 | 1.10 | 2026-10-02 | **FAD-011 added and done: the secret patterns now run alongside gitleaks**, not only in its absence, plus the `sk-<32>` shape. Observed blocking with gitleaks 8.30.1 present; before the fix the same plants passed. Propagated from playbook PI-104 |
+| 1.11 | 2026-10-02 | **FAD-012 added and done: the staged set now includes renames** (`ACM` → `ACMRT`). Before, a `git mv` carrying a planted key reported *"No files to validate"* and exited 0; after, it blocks. Playbook PI-088, propagated by PI-104 |
