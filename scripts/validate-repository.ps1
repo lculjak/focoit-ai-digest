@@ -49,7 +49,7 @@ $ReservedRootFiles = @(
     'CLAUDE.md','CNAME','.gitignore','.gitattributes'
 )
 $ForbiddenExt = @('.exe','.dll','.iso','.gguf','.bin')
-# Text extensions eligible for the fallback secret scan (includes the static-site types).
+# Text extensions eligible for the structured secret scan (includes the static-site types).
 $TextExt = @('.md','.yml','.yaml','.json','.ps1','.sh','.py','.txt','.html','.css','.js','.cfg','.ini','')
 $MaxBytes = 10MB
 
@@ -61,7 +61,11 @@ $SecretPatterns = @(
     @{ Name = 'AWS access key id';   Regex = 'AKIA[0-9A-Z]{16}' },
     @{ Name = 'GitHub token';        Regex = 'gh[pousr]_[A-Za-z0-9]{36,}' },
     @{ Name = 'GitHub fine-grained PAT'; Regex = 'github_pat_[A-Za-z0-9_]{22,}' },
-    @{ Name = 'Slack token';         Regex = 'xox[baprs]-[A-Za-z0-9-]{10,}' },
+    # OpenAI classic + DeepSeek (the playbook loop's executor route) both key as sk-<alnum>, no internal
+    # hyphen - so this does NOT overlap sk-ant-/sk-proj- above, and the {32,} floor keeps it off short
+    # sk- strings that are not keys (playbook PI-097, propagated by PI-104).
+    @{ Name = 'OpenAI/DeepSeek sk key'; Regex = 'sk-[A-Za-z0-9]{32,}' },
+    @{ Name = 'Slack token';        Regex = 'xox[baprs]-[A-Za-z0-9-]{10,}' },
     @{ Name = 'Private key block';   Regex = '-----BEGIN [A-Z ]*PRIVATE KEY-----' },
     @{ Name = 'Azure storage key';   Regex = 'AccountKey=[A-Za-z0-9+/=]{30,}' },
     @{ Name = 'Google API key';      Regex = 'AIza[0-9A-Za-z_\-]{35}' }
@@ -87,7 +91,11 @@ if ($All) {
     # invisible to a local run while CI still fails on it once committed.
     $files = @(& git ls-files) + @(& git ls-files --others --exclude-standard)
 } else {
-    $files = & git diff --cached --name-only --diff-filter=ACM
+    # R and T are as load-bearing as A, C and M (playbook PI-088, propagated by PI-104). Under ACM a
+    # staged RENAME produced an EMPTY set, so `git mv` + an edit reported "No files to validate" -
+    # gitleaks never ran either - while CI's -All run would block the same tree. With --name-only a
+    # rename prints its NEW path, which is the one worth scanning. D stays out: nothing to validate.
+    $files = & git diff --cached --name-only --diff-filter=ACMRT
 }
 $files = $files | Where-Object { $_ -and $_.Trim() } | Sort-Object -Unique
 
@@ -130,9 +138,13 @@ foreach ($file in $files) {
         Add-Finding 'High' $true 'SIZE' $file "File is ${mb} MB, over the 10 MB limit (needs explicit approval)."
     }
 
-    # Fallback secret scan on reasonably sized text files (only when gitleaks is absent)
+    # Structured secret scan on reasonably sized text files. Runs ALWAYS - alongside gitleaks when it is
+    # present, alone when it is not. It used to be conditional on `-not $gitleaks`, which meant it never
+    # ran on a developer machine (where gitleaks is installed and a key gets pasted), only in CI's
+    # guardian job. gitleaks 8.30.1's default rules match none of sk-ant-, sk-<32 alnum> or
+    # github_pat_<42>, so those shapes went unscanned locally (playbook PI-097, propagated by PI-104).
     $isText = ($TextExt -contains $ext)
-    if ($isText -and $item.Length -le $MaxBytes -and -not $gitleaks) {
+    if ($isText -and $item.Length -le $MaxBytes) {
         $content = Get-Content -LiteralPath $file -Raw -Force -ErrorAction SilentlyContinue
         if ($content) {
             foreach ($p in $SecretPatterns) {
@@ -154,7 +166,7 @@ if ($gitleaks) {
         Add-Finding 'Critical' $true 'SECRET' '(gitleaks)' 'gitleaks reported potential secrets - run "gitleaks git --verbose" for detail.'
     }
 } else {
-    Write-Host '[guardian] gitleaks not found - using built-in pattern fallback (install gitleaks for full coverage).' -ForegroundColor DarkYellow
+    Write-Host '[guardian] gitleaks not found - the structured pattern scan still runs (install gitleaks for history + broader rules).' -ForegroundColor DarkYellow
 }
 
 # --- Report -----------------------------------------------------------------
