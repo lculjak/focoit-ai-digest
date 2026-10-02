@@ -1,10 +1,10 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.9
+Version: 1.10
 
 Status: Open
 
-Date: 2026-09-30
+Date: 2026-10-02
 
 ---
 
@@ -266,6 +266,22 @@ Acceptance
 - After merge, the **next scheduled Monday run** succeeds (observed, not assumed).
 - Rollback is a revert: the old lock still has the patch.
 
+## FAD-011 — The secret patterns stood down wherever gitleaks was installed
+
+Status: ✅ Done (2026-10-02) — propagated from the playbook's **PI-104** (the insight, not the file).
+
+Priority: High
+
+The structured secret patterns ran only when gitleaks was **absent** (`-not $gitleaks`), so on the dev
+machine — gitleaks installed, and where a key gets pasted — they never ran; only CI's `guardian` job
+(no gitleaks) used them. gitleaks 8.30.1's default rules match none of `sk-ant-…`, `sk-<32 alnum>` or
+`github_pat_…`. **Observed before the fix, gitleaks present:** all three planted shapes staged → exit 0.
+**After:** each blocks as `SECRET` naming the pattern, gitleaks still present; clean `-All -Strict`
+unchanged (PASS). Also adds `sk-[A-Za-z0-9]{32,}` (DeepSeek / OpenAI classic), which this set lacked;
+a census of the tree found 0 matches for it and for the rest of the set. Evidence lives in the
+playbook (`roadmap/prompts/PI-104/`). Left as found: this gate's `-match` is case-insensitive where
+the playbook's is `-cmatch` — still 0 matches either way.
+
 ---
 
 # Revision History
@@ -282,3 +298,4 @@ Acceptance
 | 1.7 | 2026-09-30 | FAD-008 slice 1 **live**: steps 1–6 observed and recorded in `prompts/FAD-008/responses/01-executor.md` — domain verified, DNS grey-cloud, PR #16 merged after DNS, HTTPS enforced (via API), `digest.focoit.com` 200 with both old URLs 301-ing to it, and the focoit.com nav link live (`focoitwebsite#31`). Stays **in progress** until the CNAME is seen surviving a weekly digest merge |
 | 1.8 | 2026-09-30 | **FAD-009 added (Low): story text rendered through `innerHTML`.** Fix written and tested (injected `<img onerror>` stays inert, `javascript:` links get no `href`), not shipped: the matching workflow instruction needs a recompile, and a clean v0.85.4 compile **reverts PR #5's hand patch** to the Copilot CLI path, the W34 failure. Also records that gh-aw is **not actually pinned** on the dev machine (installed v0.86.2; `--pin v0.85.4` upgraded it to v0.89.21). Diffs, test and unblock options in `prompts/FAD-009/plan.md` |
 | 1.9 | 2026-09-30 | **FAD-010 added (Medium, next): upgrade gh-aw to v0.89.21 and retire PR #5's hand patch.** A throwaway v0.89.21 compile emits `${RUNNER_TEMP}/gh-aw/bin/copilot`, with zero `/usr/local/bin/copilot`, so the W34 path bug looks fixed by the compiler, but that is **unproven until a dispatch run uses it**, which is the gating acceptance line. FAD-009's unblock path set to option B via FAD-010 |
+| 1.10 | 2026-10-02 | **FAD-011 added and done: the secret patterns now run alongside gitleaks**, not only in its absence, plus the `sk-<32>` shape. Observed blocking with gitleaks 8.30.1 present; before the fix the same plants passed. Propagated from playbook PI-104 |
