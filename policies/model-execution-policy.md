@@ -1,12 +1,12 @@
 # Model Execution & Confidentiality Policy — focoit-ai-digest
 
-Version: 1.6
+Version: 1.7
 
 Status: Active
 
 Owner: Leonardo Culjak
 
-Date: 2026-09-29
+Date: 2026-10-05
 
 ---
 
@@ -105,10 +105,15 @@ This repo's whole point is an **agentic CI workflow**: `.github/workflows/weekly
 compiles (via `gh aw compile`) to `weekly-ai-digest.lock.yml` and runs AI **inside GitHub Actions**
 on a weekly schedule, publishing through a human-gated pull request (`safe-outputs`).
 
-- **Engine: `copilot`** — aligned with the playbook's PI-023 pattern (Copilot as a CI engine). Auth
-  is a **`COPILOT_GITHUB_TOKEN` fine-grained PAT** (personal account; *Copilot Requests: read*), or an
-  org on centralized billing (`copilot-requests: write`, no PAT). Hosted agentic CI sends repo content
-  to the engine, so it is **non-sensitive repos only** — which this is.
+- **Engine: `copilot` harness, inference BYOK to DeepSeek** (since 2026-10-05, FAD-010). The Copilot
+  CLI still runs the agent (PI-023 pattern), but **GitHub Copilot inference is not used**: after
+  Copilot Pro was stopped (v1.2), every request to it returned **HTTP 403**, and the weekly run failed
+  from 2026-09-14 on. Inference now goes to **`api.deepseek.com`** (Anthropic-compatible endpoint,
+  model pinned to **`deepseek-v4-flash`**, never `auto`) with a **dedicated repo secret
+  `DEEPSEEK_API_KEY`**, used by nothing else so it can be revoked alone. This is the Tier-2 route,
+  metered and prepaid, and **the DeepSeek billing export is the record of cost and model** (PI-109).
+  Hosted agentic CI sends repo content and **fetched feed content** to the provider, so it is
+  **non-sensitive repos only** — which this is; **PRC jurisdiction** applies (recorded in Tier 2).
 - **Gate for workflow changes:** `gh aw compile` with **0 errors / 0 warnings** (the deterministic
   guardian does not validate a workflow). Commit the `.md` source **+** the generated `.lock.yml`
   **+** `.github/aw/actions-lock.json` together. On staleness across gh-aw versions, **delete and
@@ -132,3 +137,4 @@ on a weekly schedule, publishing through a human-gated pull request (`safe-outpu
 | 1.4 | 2026-09-11 | **Tier 3's tool was cancelled, and the harness is not a tier (playbook PI-085, `model-execution-policy.md` v1.19).** **Claude Code Max was cancelled 2026-09-11**; Tier 3 is **`kimi-k3` via opencode Go**, and **Claude Code Pro is the *harness* every tier runs inside — not the Tier-3 model** — with its inference **deliberately unspent**. **Floor $30** (Pro $20 + Go $10) plus DeepSeek metered. The *"under budget pressure and a candidate for removal"* clause is **superseded**: **it was removed**, so it is a record rather than a prediction. **The `CLAUDE_CONFIG_DIR` precondition is generalised** — it said *"signed in to Claude Code **Max**"*, and **the trap is identical on Pro** (measured upstream: **191.3 s** against a documented ~181 s exhaustion), so a load-bearing precondition would otherwise have described a subscription nobody holds. **Cline corrected**: ~~$0~~ **metered Cline Credits**, **manual and exceptional**, not a free fallback. **Two limits carried rather than hidden:** **capability is unmeasured** (the Go models are verified to *answer*, none is scored) and **all model seats are PRC-jurisdiction**, binding the moment client work returns. **No confidentiality rule, gate or tier boundary changes.** |
 | 1.5 | 2026-09-29 | **Propagated playbook v1.25 (PI-109) — the export names the model, not only the cost.** The playbook's billing export for 2026-08-31 → 09-29 shows **every flash-family request since 2026-09-10 billed as `deepseek-flash`**, including requests for the pinned `deepseek-v4-flash`, while the session record labelled some of them `deepseek-v4-flash`. **One paragraph added under this file's existing *take cost figures from the export* rule:** the export's model column is the only admissible model identity, and it settles a doubted pin. **No tier, route or confidentiality decision changed.** |
 | 1.6 | 2026-10-04 | **Propagated playbook PI-087 + PI-120 (`model-execution-policy.md` v1.30, `specs/model-registry.md`).** Model ids now come from the playbook's **model registry**: this file names **seat ①** and links it. Pins are **mirrored, not re-decided**, so the next model change needs no edit here. **Struck in place:** *"inference deliberately unspent … holds by construction"* (false since PI-087: ③a is Claude; the rule now holds because ② is not Claude), *"capability is not … none is scored"*, and *"all model seats are PRC-jurisdiction vendors"*. The PI-109 billing note keeps its ids (dated evidence). No confidentiality rule changed |
+| 1.7 | 2026-10-05 | **Agentic CI inference moved from GitHub Copilot to DeepSeek (BYOK), FAD-010.** The weekly digest had failed since 2026-09-14: once Copilot Pro was stopped (v1.2), Copilot inference returned **HTTP 403** to the workflow (first visible as `400 Model "auto" has no AI credits pricing`, because the 403 also hid the model catalog). The Copilot CLI harness stays; inference goes to `api.deepseek.com` (Anthropic-compatible), model pinned to `deepseek-v4-flash`, key in a **dedicated** repo secret `DEEPSEEK_API_KEY`, approved through gh-aw's safe-update review. Brings the agentic-CI section in line with the Tier-2 decision already recorded here; **no confidentiality rule or tier boundary changes** |
