@@ -1,0 +1,220 @@
+[
+  {
+    "title": "Ship agents faster with expanded model choice, voice agents, and continuous optimization",
+    "url": "https://azure.microsoft.com/en-us/blog/ship-agents-faster-with-expanded-model-choice-voice-agents-and-continuous-optimization/",
+    "source": "Azure Blog",
+    "date": "2026-09-24",
+    "tldr": "Azure AI Foundry adds broader model choice, voice-agent capabilities, and continuous optimization tooling so teams can ship production agents without rebuilding architecture every time the best model changes.",
+    "why": "The core promise — swap models and optimization settings without re-architecting — targets a real build-vs-buy pain: avoiding hard lock-in to one frontier model. Architects should still confirm that evaluation harnesses and governance controls survive a model swap before betting production pipelines on hot-swappable models.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "agents",
+      "mlops"
+    ]
+  },
+  {
+    "title": "Designing agent-first platforms: What changes when agents do the work",
+    "url": "https://azure.microsoft.com/en-us/blog/designing-agent-first-platforms-what-changes-when-agents-do-the-work/",
+    "source": "Azure Blog",
+    "date": "2026-09-23",
+    "tldr": "Microsoft argues the teams pulling ahead design platforms for agents as first-class actors — with new identity, orchestration, and observability primitives — rather than bolting AI onto existing application patterns.",
+    "why": "Agent-first design changes fundamental choices: how you scope identity and permissions, where orchestration lives, and what observability means when non-deterministic actors make decisions. Worth a dedicated design review before committing to a multi-year platform architecture.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "agents",
+      "governance"
+    ]
+  },
+  {
+    "title": "GPT-6 Astra, Sol, and Luna: For production agents in Microsoft Foundry",
+    "url": "https://azure.microsoft.com/en-us/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry/",
+    "source": "Azure Blog",
+    "date": "2026-09-22",
+    "tldr": "GPT-6 Astra, Sol, and Luna are available in Microsoft Foundry, offering tiered model options for production agents, complex workflows, and high-volume tasks.",
+    "why": "A tiered frontier / mid / volume model family inside Foundry gives architects a cost-versus-quality routing strategy instead of a one-size-fits-all model choice. Plan quota and model-routing policy up front and treat model tiering as a governed design decision, not a per-developer toggle.",
+    "importance": "High",
+    "tags": [
+      "foundation-models",
+      "ai-platform",
+      "azure"
+    ]
+  },
+  {
+    "title": "Claude Opus 5.5 comes to Microsoft Foundry for long-running coding and knowledge work",
+    "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/claude-opus-5-5-comes-to-microsoft-foundry-for-long-running-coding-and-knowledge/4558051",
+    "source": "Azure Blog",
+    "date": "2026-09-22",
+    "tldr": "Anthropic's Claude Opus 5.5 lands in Microsoft Foundry, positioned for long-running coding and knowledge-synthesis tasks that span a codebase or a multi-step business process.",
+    "why": "Multi-vendor model choice inside Foundry is the real signal: architects can now benchmark Anthropic and OpenAI models behind one governed endpoint, reducing single-vendor lock-in. That raises evaluation, data-residency, and cost-attribution questions that matter in regulated workloads.",
+    "importance": "High",
+    "tags": [
+      "foundation-models",
+      "ai-platform",
+      "agents",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "Your architecture diagram is not your resilience",
+    "url": "https://azure.microsoft.com/en-us/blog/your-architecture-diagram-is-not-your-resilience/",
+    "source": "Azure Blog",
+    "date": "2026-09-23",
+    "tldr": "Microsoft argues resilience is a continuously maintained property rather than a one-time diagram deliverable, and outlines operating practices that keep it true over time.",
+    "why": "Relevant to healthcare and finance shops where resilience claims underpin audit and business-continuity evidence. It reframes resilience as ongoing verification — a useful prompt to move architecture reviews from static DR diagrams to tested, measured recovery objectives.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "governance",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "FabCon and SQLCon 2026 in Barcelona: Building the data foundation for Microsoft Copilot and agents",
+    "url": "https://azure.microsoft.com/en-us/blog/fabcon-and-sqlcon-2026-in-barcelona-building-the-data-foundation-for-microsoft-copilot-and-agents/",
+    "source": "Azure Blog",
+    "date": "2026-09-29",
+    "tldr": "Microsoft Fabric and SQL innovations announced at FabCon and SQLCon 2026 focus on building trusted, governed data foundations that Copilot and agents can safely ground on.",
+    "why": "Grounding agents on governed data is the unglamorous prerequisite for production AI in regulated industries. Architects should watch the Fabric/OneLake governance and lineage features, since they determine whether 'trusted data foundation' claims hold up under audit.",
+    "importance": "Medium",
+    "tags": [
+      "data",
+      "copilot",
+      "ai-platform",
+      "azure"
+    ]
+  },
+  {
+    "title": "ReviewBench: An open benchmark for AI code review",
+    "url": "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/",
+    "source": "GitHub Blog",
+    "date": "2026-10-05",
+    "tldr": "GitHub launches ReviewBench, an open benchmark for code-review agents built on real GitHub pull requests, multi-source ground truth, and production-aligned metrics.",
+    "why": "A production-aligned, open benchmark gives architects an evidence-based way to evaluate AI code-review tooling instead of relying on vendor claims. It also signals that AI review is becoming a measurable pipeline stage — relevant to change-control and audit narratives in regulated environments.",
+    "importance": "High",
+    "tags": [
+      "copilot",
+      "dev-tools",
+      "open-source",
+      "ai-platform"
+    ]
+  },
+  {
+    "title": "How we found 24 Android vulnerabilities using our open source AI security agent",
+    "url": "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/",
+    "source": "GitHub Blog",
+    "date": "2026-09-28",
+    "tldr": "GitHub's open-source AI security agent taskflows uncovered 24 Android vulnerabilities, and the same agent can be run against your own applications.",
+    "why": "An open, inspectable agent for security testing lowers the barrier to continuous vulnerability discovery while remaining auditable. For regulated shops this is a governance-friendly model: self-hosted, reviewable security automation rather than a black box.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "agents",
+      "open-source",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "Enabling Consistent AI-Assisted Engineering with GitHub Copilot Plugins",
+    "url": "https://devblogs.microsoft.com/blog/enabling-consistent-ai-assisted-engineering-with-github-copilot-plugins/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-09-29",
+    "tldr": "GitHub Copilot Plugins let teams share and version agentic artifacts — instructions, skills, and MCP configurations — so consumers keep receiving fixes, updated guidance, and compatible tool configurations.",
+    "why": "Standardizing agentic artifacts as versioned, distributable plugins is how you keep AI-assisted engineering consistent across teams. Architects should treat this as a configuration-management and supply-chain concern, not merely a developer convenience.",
+    "importance": "Medium",
+    "tags": [
+      "copilot",
+      "dev-tools",
+      "governance"
+    ]
+  },
+  {
+    "title": "Build with Azure Canvases: a shared workspace for agents",
+    "url": "https://devblogs.microsoft.com/blog/azure-canvases/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-09-29",
+    "tldr": "Azure Canvases bring plans, code, previews, and deployment feedback together in a single collaborative workspace for agent-assisted development.",
+    "why": "Tightening the plan → code → preview → deploy loop in a shared canvas shows where agentic dev tooling is heading: fewer context switches and more shared state. Worth piloting to see how it fits existing CI/CD and change-management controls.",
+    "importance": "Medium",
+    "tags": [
+      "agents",
+      "copilot",
+      "dev-tools",
+      "azure"
+    ]
+  },
+  {
+    "title": "SQL Server on Azure Local is now generally available",
+    "url": "https://www.microsoft.com/en-us/sql-server/blog/2026/09/28/sql-server-on-azure-local-is-now-generally-available/",
+    "source": "Azure Blog",
+    "date": "2026-09-29",
+    "tldr": "SQL Server on Azure Local reaches general availability, letting customers modernize where their data resides while retaining control over infrastructure, connectivity, and data placement.",
+    "why": "For regulated-industry architects, GA here is a credible path to modernize on-prem and edge data estates without moving data into the public cloud — directly relevant to data-residency and sovereignty constraints.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "data",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "MCP for agent-to-agent comms may be the riskiest protocol you've never heard of",
+    "url": "https://arstechnica.com/security/2026/10/vulnerability-in-agents-from-google-and-others-exposes-structural-flaw-in-mcp/",
+    "source": "Ars Technica",
+    "date": "2026-10-05",
+    "tldr": "Researchers describe a structural flaw in MCP-based agent-to-agent communication, where trust gaps let malicious prompts spread from one agent to another.",
+    "why": "If you are wiring agents together over MCP, prompt-injection trust gaps are now a protocol-level risk rather than an application bug. Architects should require egress controls, agent identity, and prompt-provenance controls in any multi-agent design — especially where agents touch regulated data.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "agents",
+      "governance"
+    ]
+  },
+  {
+    "title": "Microsoft disrupts AI-assisted platform that compromised 12,000 accounts",
+    "url": "https://arstechnica.com/security/2026/09/microsoft-disrupts-ai-assisted-platform-that-compromised-12000/",
+    "source": "Ars Technica",
+    "date": "2026-09-22",
+    "tldr": "Microsoft disrupted 'EvilTokens', an end-to-end AI-assisted platform that made mass account compromise faster and easier to operate.",
+    "why": "Commoditized, AI-assisted attack platforms raise the baseline threat for every internet-facing service. The defensive lesson is twofold: tighten token and credential hygiene, and assume that attacker tooling now scales cheaply.",
+    "importance": "Medium",
+    "tags": [
+      "security",
+      "agents",
+      "azure"
+    ]
+  },
+  {
+    "title": "OpenAI will start watermarking ChatGPT's text in the EU",
+    "url": "https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu/",
+    "source": "TechCrunch AI",
+    "date": "2026-10-05",
+    "tldr": "OpenAI will watermark ChatGPT and Codex text in the EU to comply with the AI Act, while acknowledging that editing can make invisible marks harder to detect.",
+    "why": "Content-provenance and watermarking expectations are becoming a compliance consideration for any product surfacing AI-generated text in the EU. Architects building customer-facing AI features should track these signals, since provenance attestation may become an expected control — a consideration, not legal advice.",
+    "importance": "Medium",
+    "tags": [
+      "governance",
+      "regulated-industry",
+      "foundation-models"
+    ]
+  },
+  {
+    "title": "Disrupting a coordinated model-distillation campaign",
+    "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
+    "source": "OpenAI News",
+    "date": "2026-09-30",
+    "tldr": "OpenAI describes disrupting a campaign to extract protected model reasoning through adversarial distillation, and outlines the defenses it strengthened as a result.",
+    "why": "Model extraction is a vendor-side supply-chain risk that reaches enterprise customers indirectly: it shapes how providers gate access, rate-limit, and audit frontier-model usage. Architects should anticipate stricter API governance and usage attestation for frontier models.",
+    "importance": "Medium",
+    "tags": [
+      "security",
+      "foundation-models",
+      "governance",
+      "ai-platform"
+    ]
+  }
+]
