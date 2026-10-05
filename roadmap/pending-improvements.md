@@ -1,10 +1,10 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.11
+Version: 1.12
 
 Status: Open
 
-Date: 2026-10-02
+Date: 2026-10-05
 
 ---
 
@@ -186,7 +186,8 @@ Acceptance
 Status: In progress (2026-09-30) — **slice 1: `digest.focoit.com` on GitHub Pages — live.** Steps 1–6
 observed 2026-09-30 (domain verified, DNS, merge, HTTPS enforced, 200 + redirects, focoit.com nav
 link); **only the CNAME-survives-a-weekly-run check remains** —
-[evidence](prompts/FAD-008/responses/01-executor.md). Chosen over
+[evidence](prompts/FAD-008/responses/01-executor.md). **That check is waiting on [FAD-010](#fad-010):**
+no weekly run has succeeded since W37, so there has been no digest merge to observe. Chosen over
 serving it at `focoit.com/digest/`: that site's CSP (`script-src 'self'`, `style-src 'self'`) blocks
 this page's inline `<script>`/`<style>`, so it would load blank without either a per-route
 `'unsafe-inline'` or externalising the template's JS/CSS — deferred until curation is proven.
@@ -240,11 +241,42 @@ Acceptance
   succeeds**.
 - The next weekly page has no `innerHTML` on story fields (observed, not assumed).
 
-## FAD-010 — Upgrade gh-aw v0.85.4 → v0.89.21; retire the PR #5 hand patch
+## FAD-010 — Upgrade gh-aw v0.85.4 → v0.89.21, pin the model; retire the PR #5 hand patch
 
-Status: Open — **next item.** Specified 2026-09-30; [spec](prompts/FAD-010/plan.md).
+Status: Open — **next item; the digest is down.** Specified 2026-09-30, re-scoped 2026-10-05;
+[spec](prompts/FAD-010/plan.md).
 
-Priority: Medium — every workflow change is blocked until this lands (FAD-009 first).
+Priority: **High** (raised from Medium 2026-10-05) — **no digest has published since W37.** Every
+scheduled run since 2026-09-14 failed, so W38–W41 are missing, and every workflow change is blocked
+until this lands (FAD-009, and FAD-008's step 7, which needs a digest merge).
+
+### ⚠️ Four weekly runs failed in a row, and nothing flagged it
+
+| Run (UTC) | Copilot CLI | `/models` catalog | Result |
+|---|---|---|---|
+| 2026-09-07 | 1.0.80 | fetched 46 | ✅ `auto` resolved to `claude-sonnet-5`; W37 published |
+| 2026-09-14 | 1.0.83 | **403** | ❌ `400 Model "auto" has no AI credits pricing and no default pricing is configured` |
+| 2026-09-21 | — | — | ❌ same step (*Execute GitHub Copilot CLI*), same lock |
+| 2026-09-28 | 1.0.85 | **403** | ❌ same `400` |
+| 2026-10-05 | — | — | ❌ `activation` never got a runner (*"not acquired by Runner of type hosted"*), cancelled after 15 min, during a GitHub Actions incident (opened 19:11; run queued 19:34). Would have hit the `400` anyway |
+
+**Same lock (`9eaabf1`) for the success and the failures; nothing in this repo changed.** Two
+unpinned things combined:
+
+1. **The model.** `engine: copilot` sends `COPILOT_MODEL: auto`. That only works while the harness can
+   fetch the model catalog and resolve `auto` to a real model.
+2. **The Copilot CLI version.** The lock records 1.0.78, but the install step resolves "latest
+   in 1.0.21..1.0.87" from the **runner's toolcache**, so the version drifts with GitHub's runner
+   image (1.0.80 → 1.0.83 → 1.0.85). From 1.0.83 the catalog fetch returns **403**, `auto` reaches
+   the AWF API proxy unresolved, and the proxy rejects it because it cannot price `auto`.
+
+Every failed run also logs `pre-flight: command not found: copilot (F_OK check failed)` for PR #5's
+hand-patched bare `copilot`. That is **not** the failure (the CLI still ran and returned the `400`),
+but it is one more reason to retire the patch.
+
+**How it went unnoticed for four weeks:** a failed scheduled run opens no PR, and only an open PR
+gets looked at. The site kept serving W37. *A digest that silently stops is indistinguishable from a
+quiet week* (the same lesson as FAD-004 and as `focoitwebsite`'s report freshness check).
 
 Context
 
@@ -258,13 +290,25 @@ About 920 lock lines change. **The new path is unproven until a run uses it.**
 
 Acceptance
 
-- Lock compiled by v0.89.21, `gh aw compile` 0/0; `.md` (unchanged) + `.lock.yml` +
-  `actions-lock.json` committed together; gate PASS; no hand patch left in the lock.
-- A **`workflow_dispatch` run from the branch succeeds before merge**: the agent finds `copilot`, the
-  detection step passes, and a `[digest]` PR opens with the three expected files. Not on a Monday
-  (the scheduled run uses `main`'s lock). Record its AIC for FAD-007.
+- **Two commits, two dispatch runs, so each failure has one cause:**
+  1. **Upgrade only** (`.md` unchanged): lock compiled by v0.89.21, `gh aw compile` 0/0, `.md` +
+     `.lock.yml` + `actions-lock.json` committed together, no hand patch left. Dispatch from the
+     branch. The agent step must **find `copilot`** (no ENOENT, no pre-flight `command not found`).
+     It may still fail on the `auto` `400`, and that is acceptable here; a failure costs seconds, not
+     credits.
+  2. **Pin the model** in the frontmatter (`claude-sonnet-5`, which produced the last good digest;
+     confirm the `engine:` syntax against the v0.89.21 reference), recompile, and dispatch again. The
+     run must **succeed end to end**: no `Model "auto"` anywhere in the log, the detection step
+     passes, and a `[digest]` PR opens with the three expected files.
+- Consider pinning the **Copilot CLI version** too (`engine.version`), so a runner image can't
+  change it under the lock again. Decide while executing and record the choice.
+- Dispatch only when GitHub Actions is healthy, and not on a Monday (the scheduled run uses `main`'s
+  lock). Record the AIC for FAD-007.
 - After merge, the **next scheduled Monday run** succeeds (observed, not assumed).
-- Rollback is a revert: the old lock still has the patch.
+- Rollback is a revert: the old lock still has the patch (and still fails on `auto`, so a rollback
+  restores today's state, not a working one).
+- **Follow-up, separate item:** a failed scheduled run must reach a human (issue, notification, or a
+  site staleness check), so the next outage isn't found by accident four weeks later.
 
 ## FAD-011 — The secret patterns stood down wherever gitleaks was installed
 
@@ -311,3 +355,4 @@ gave an **empty** set: *"No files to validate"*, exit 0, and gitleaks never ran.
 | 1.9 | 2026-09-30 | **FAD-010 added (Medium, next): upgrade gh-aw to v0.89.21 and retire PR #5's hand patch.** A throwaway v0.89.21 compile emits `${RUNNER_TEMP}/gh-aw/bin/copilot`, with zero `/usr/local/bin/copilot`, so the W34 path bug looks fixed by the compiler, but that is **unproven until a dispatch run uses it**, which is the gating acceptance line. FAD-009's unblock path set to option B via FAD-010 |
 | 1.10 | 2026-10-02 | **FAD-011 added and done: the secret patterns now run alongside gitleaks**, not only in its absence, plus the `sk-<32>` shape. Observed blocking with gitleaks 8.30.1 present; before the fix the same plants passed. Propagated from playbook PI-104 |
 | 1.11 | 2026-10-02 | **FAD-012 added and done: the staged set now includes renames** (`ACM` → `ACMRT`). Before, a `git mv` carrying a planted key reported *"No files to validate"* and exited 0; after, it blocks. Playbook PI-088, propagated by PI-104 |
+| 1.12 | 2026-10-05 | **FAD-010 raised to High and re-scoped: the digest has been down since W37.** Every scheduled run since 2026-09-14 failed with `400 Model "auto" has no AI credits pricing`: the model is unpinned (`COPILOT_MODEL: auto`) and the Copilot CLI drifts with the runner toolcache (1.0.80 resolved `auto` through the `/models` catalog; from 1.0.83 that fetch returns 403). Same lock for the last success and all failures. The 2026-10-05 run never got a runner (GitHub Actions incident). FAD-010 now pins the model too, in two commits with a dispatch run each so every failure has one cause; a CLI version pin is to be decided while executing. Records that **a failed scheduled run reached nobody for four weeks**, as a follow-up. FAD-008 step 7 is noted as waiting on it |
