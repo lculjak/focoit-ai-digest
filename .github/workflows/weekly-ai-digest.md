@@ -8,7 +8,10 @@ permissions:
   pull-requests: read
   copilot-requests: write     # bills inference to the org; no PAT required (gh-aw >= June 2026)
 
-engine: copilot               # uses built-in GITHUB_TOKEN + copilot-requests: write
+engine:                       # uses built-in GITHUB_TOKEN + copilot-requests: write
+  id: copilot
+  model: claude-sonnet-5      # pinned, never `auto`: from 2026-09-14 `auto` could not be resolved
+                              # (the /models catalog returns 403), failing every run (FAD-010)
 
 # Cost controls (tune after first runs — FAD-007)
 # max-ai-credits default is 1000; 500 is a conservative first-run cap for a read-heavy digest workflow
