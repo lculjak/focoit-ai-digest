@@ -46,6 +46,7 @@ Out of scope: any change to `focoitwebsite` other than the link; `/digest/` on f
 
 ## Outcome
 
-Status: In progress — **steps 1–6 done 2026-09-30** (PR #16 merged 23:24 UTC after DNS; HTTPS
-enforced; `focoitwebsite#31` link live 23:32). **Step 7 pending:** CNAME survives the next weekly run.
+Status: ✅ Done — **steps 1–6 2026-09-30** (PR #16 merged 23:24 UTC after DNS; HTTPS enforced;
+`focoitwebsite#31` link live 23:32); **step 7 2026-10-05**: `docs/CNAME` survived the W41 digest
+merge (PR #25), five weeks late because the weekly run was down (FAD-010).
 Evidence: [responses/01-executor.md](responses/01-executor.md).

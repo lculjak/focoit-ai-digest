@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.13
+Version: 1.14
 
 Status: Open
 
@@ -187,11 +187,12 @@ Acceptance
 
 ## FAD-008 — Phase 2: surface on focoit.com (link first)
 
-Status: In progress (2026-09-30) — **slice 1: `digest.focoit.com` on GitHub Pages — live.** Steps 1–6
-observed 2026-09-30 (domain verified, DNS, merge, HTTPS enforced, 200 + redirects, focoit.com nav
-link); **only the CNAME-survives-a-weekly-run check remains** —
-[evidence](prompts/FAD-008/responses/01-executor.md). **That check is waiting on [FAD-010](#fad-010):**
-no weekly run has succeeded since W37, so there has been no digest merge to observe. Chosen over
+Status: ✅ Done (2026-10-05) — **slice 1: `digest.focoit.com` on GitHub Pages.** Steps 1–6 observed
+2026-09-30 (domain verified, DNS, merge, HTTPS enforced, 200 + redirects, focoit.com nav link);
+**step 7 observed 2026-10-05**: `docs/CNAME` survived the W41 digest merge (PR #25), and the domain
+serves W41 — [evidence](prompts/FAD-008/responses/01-executor.md). Step 7 came five weeks late
+because no weekly run succeeded between W37 and W41 ([FAD-010](#fad-010)). Serving it at
+`focoit.com/digest/` remains a possible later slice. Chosen over
 serving it at `focoit.com/digest/`: that site's CSP (`script-src 'self'`, `style-src 'self'`) blocks
 this page's inline `<script>`/`<style>`, so it would load blank without either a per-route
 `'unsafe-inline'` or externalising the template's JS/CSS — deferred until curation is proven.
@@ -393,3 +394,4 @@ Acceptance
 | 1.11 | 2026-10-02 | **FAD-012 added and done: the staged set now includes renames** (`ACM` → `ACMRT`). Before, a `git mv` carrying a planted key reported *"No files to validate"* and exited 0; after, it blocks. Playbook PI-088, propagated by PI-104 |
 | 1.12 | 2026-10-05 | **FAD-010 raised to High and re-scoped: the digest has been down since W37.** Every scheduled run since 2026-09-14 failed with `400 Model "auto" has no AI credits pricing`: the model is unpinned (`COPILOT_MODEL: auto`) and the Copilot CLI drifts with the runner toolcache (1.0.80 resolved `auto` through the `/models` catalog; from 1.0.83 that fetch returns 403). Same lock for the last success and all failures. The 2026-10-05 run never got a runner (GitHub Actions incident). FAD-010 now pins the model too, in two commits with a dispatch run each so every failure has one cause; a CLI version pin is to be decided while executing. Records that **a failed scheduled run reached nobody for four weeks**, as a follow-up. FAD-008 step 7 is noted as waiting on it |
 | 1.13 | 2026-10-05 | **FAD-010 fixed on the branch and proven by dispatch.** Three commits, one dispatch run each: A (gh-aw v0.89.21, hand patch retired) found `copilot`; B (model pinned) exposed the real cause, **HTTP 403 from GitHub Copilot inference** after Copilot Pro was stopped; C (**DeepSeek via Copilot BYOK**, policy 1.7) succeeded end to end and opened the W41 digest (PR #25). Stays in progress until merge and the next scheduled Monday run. **FAD-007:** `max-ai-credits` limits nothing on the DeepSeek route; cost comes from the DeepSeek export. **FAD-009:** unblocked once FAD-010 merges. **FAD-013 added (Medium):** a failed weekly run must reach a human |
+| 1.14 | 2026-10-05 | **FAD-008 done.** Step 7 observed: after the W41 digest merge (PR #25, `2150c6d`), `docs/CNAME` still reads `digest.focoit.com`, Pages built from the merge, `digest.focoit.com` serves W41 with a valid certificate, and the `github.io` URL still 301s to it. It came five weeks late because the weekly run was down until FAD-010 |
