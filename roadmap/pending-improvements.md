@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.12
+Version: 1.14
 
 Status: Open
 
@@ -172,7 +172,11 @@ Acceptance
 
 Status: Open — **one baseline recorded**: W33 used **125.7 AIC (+12.4 overhead)** against the 500 cap
 (~25%) ([FAD-005 review](prompts/FAD-005/responses/02-reviewer.md)). One run is not a trend — no
-tuning decision yet.
+tuning decision yet. **2026-10-05: the AIC baseline no longer applies.** Since FAD-010 inference is
+DeepSeek BYOK, and gh-aw reports `AI credits: (none)` for it: **`max-ai-credits: 500` limits
+nothing on this route.** Cost now comes from the DeepSeek per-request export (PI-109), and the spend
+limit has to live on the DeepSeek side (balance or per-key limit). First DeepSeek data point: run
+37388750793 (W41), cost to be read from the export.
 
 Priority: Low
 
@@ -183,11 +187,12 @@ Acceptance
 
 ## FAD-008 — Phase 2: surface on focoit.com (link first)
 
-Status: In progress (2026-09-30) — **slice 1: `digest.focoit.com` on GitHub Pages — live.** Steps 1–6
-observed 2026-09-30 (domain verified, DNS, merge, HTTPS enforced, 200 + redirects, focoit.com nav
-link); **only the CNAME-survives-a-weekly-run check remains** —
-[evidence](prompts/FAD-008/responses/01-executor.md). **That check is waiting on [FAD-010](#fad-010):**
-no weekly run has succeeded since W37, so there has been no digest merge to observe. Chosen over
+Status: ✅ Done (2026-10-05) — **slice 1: `digest.focoit.com` on GitHub Pages.** Steps 1–6 observed
+2026-09-30 (domain verified, DNS, merge, HTTPS enforced, 200 + redirects, focoit.com nav link);
+**step 7 observed 2026-10-05**: `docs/CNAME` survived the W41 digest merge (PR #25), and the domain
+serves W41 — [evidence](prompts/FAD-008/responses/01-executor.md). Step 7 came five weeks late
+because no weekly run succeeded between W37 and W41 ([FAD-010](#fad-010)). Serving it at
+`focoit.com/digest/` remains a possible later slice. Chosen over
 serving it at `focoit.com/digest/`: that site's CSP (`script-src 'self'`, `style-src 'self'`) blocks
 this page's inline `<script>`/`<style>`, so it would load blank without either a per-route
 `'unsafe-inline'` or externalising the template's JS/CSS — deferred until curation is proven.
@@ -213,7 +218,8 @@ Acceptance
 Status: Open — **fix written and tested 2026-09-30, blocked on the workflow recompile.** The
 [spec](prompts/FAD-009/plan.md) holds the exact diffs, the test, the blockers and the unblock options.
 **Unblock path chosen: option B, via [FAD-010](#fad-010).** Once the upgrade is proven, this becomes
-an ordinary prompt change.
+an ordinary prompt change. **2026-10-05: unblocked once FAD-010 merges.** v0.89.21 compiles without
+the hand patch, so the instruction change is a normal recompile.
 
 Priority: Low
 
@@ -243,8 +249,20 @@ Acceptance
 
 ## FAD-010 — Upgrade gh-aw v0.85.4 → v0.89.21, pin the model; retire the PR #5 hand patch
 
-Status: Open — **next item; the digest is down.** Specified 2026-09-30, re-scoped 2026-10-05;
-[spec](prompts/FAD-010/plan.md).
+Status: In progress (2026-10-05) — **fixed on the branch, proven by a dispatch run; awaiting merge and
+the next scheduled Monday run.** Three commits, one dispatch each
+([spec](prompts/FAD-010/plan.md) has the full record):
+
+| Commit | Change | Dispatch | Result |
+|---|---|---|---|
+| A | gh-aw v0.89.21; PR #5's hand patch retired | 37386702875 | ✅ `copilot` found (pre-flight *accessible and executable*); ❌ harness refused unresolved `auto` |
+| B | model pinned | 37387169301 | ❌ **`Authentication failed with provider (HTTP 403)`**, the real cause |
+| C | **DeepSeek via Copilot BYOK** (`deepseek-v4-flash`, secret `DEEPSEEK_API_KEY`); policy 1.7 | 37388750793 | ✅ **end to end**; W41 digest PR #25 |
+
+**The root cause was not the model.** After Copilot Pro was stopped (policy v1.2), every request to
+GitHub Copilot inference returned **HTTP 403**. The `/models` 403 and the `auto` error since
+2026-09-14 were where that refusal surfaced first. Inference now goes to DeepSeek; the Copilot CLI
+still runs the agent.
 
 Priority: **High** (raised from Medium 2026-10-05) — **no digest has published since W37.** Every
 scheduled run since 2026-09-14 failed, so W38–W41 are missing, and every workflow change is blocked
@@ -337,6 +355,25 @@ gave an **empty** set: *"No files to validate"*, exit 0, and gitleaks never ran.
 `README.md` renamed (`R098`) with a planted key appended → exit 0, gitleaks present. **After
 (`ACMRT`):** the same rename blocks as `SECRET` naming the pattern.
 
+## FAD-013 — A failed weekly run must reach a human
+
+Status: Open — raised 2026-10-05 by FAD-010.
+
+Priority: Medium
+
+Context
+
+Every scheduled run from 2026-09-14 to 2026-10-05 failed, and nobody noticed for four weeks. A failed
+run opens no PR, and the PR is the only thing anyone looks at; the site kept serving W37. The same
+lesson as FAD-004 and `focoitwebsite`'s report freshness check: **a digest that silently stops is
+indistinguishable from a quiet week.**
+
+Acceptance
+
+- A failed scheduled run produces something a human sees without going looking: an issue on failure,
+  a notification, or a staleness check on the site's last-updated date. Choose and record why.
+- Proven by a deliberately failed run (observed, not assumed).
+
 ---
 
 # Revision History
@@ -356,3 +393,5 @@ gave an **empty** set: *"No files to validate"*, exit 0, and gitleaks never ran.
 | 1.10 | 2026-10-02 | **FAD-011 added and done: the secret patterns now run alongside gitleaks**, not only in its absence, plus the `sk-<32>` shape. Observed blocking with gitleaks 8.30.1 present; before the fix the same plants passed. Propagated from playbook PI-104 |
 | 1.11 | 2026-10-02 | **FAD-012 added and done: the staged set now includes renames** (`ACM` → `ACMRT`). Before, a `git mv` carrying a planted key reported *"No files to validate"* and exited 0; after, it blocks. Playbook PI-088, propagated by PI-104 |
 | 1.12 | 2026-10-05 | **FAD-010 raised to High and re-scoped: the digest has been down since W37.** Every scheduled run since 2026-09-14 failed with `400 Model "auto" has no AI credits pricing`: the model is unpinned (`COPILOT_MODEL: auto`) and the Copilot CLI drifts with the runner toolcache (1.0.80 resolved `auto` through the `/models` catalog; from 1.0.83 that fetch returns 403). Same lock for the last success and all failures. The 2026-10-05 run never got a runner (GitHub Actions incident). FAD-010 now pins the model too, in two commits with a dispatch run each so every failure has one cause; a CLI version pin is to be decided while executing. Records that **a failed scheduled run reached nobody for four weeks**, as a follow-up. FAD-008 step 7 is noted as waiting on it |
+| 1.13 | 2026-10-05 | **FAD-010 fixed on the branch and proven by dispatch.** Three commits, one dispatch run each: A (gh-aw v0.89.21, hand patch retired) found `copilot`; B (model pinned) exposed the real cause, **HTTP 403 from GitHub Copilot inference** after Copilot Pro was stopped; C (**DeepSeek via Copilot BYOK**, policy 1.7) succeeded end to end and opened the W41 digest (PR #25). Stays in progress until merge and the next scheduled Monday run. **FAD-007:** `max-ai-credits` limits nothing on the DeepSeek route; cost comes from the DeepSeek export. **FAD-009:** unblocked once FAD-010 merges. **FAD-013 added (Medium):** a failed weekly run must reach a human |
+| 1.14 | 2026-10-05 | **FAD-008 done.** Step 7 observed: after the W41 digest merge (PR #25, `2150c6d`), `docs/CNAME` still reads `digest.focoit.com`, Pages built from the merge, `digest.focoit.com` serves W41 with a valid certificate, and the `github.io` URL still 301s to it. It came five weeks late because the weekly run was down until FAD-010 |

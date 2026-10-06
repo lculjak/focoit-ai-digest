@@ -143,5 +143,31 @@ Out of scope:
 
 ## Outcome
 
-Status: Open — specified 2026-09-30; re-scoped to High with the model pin 2026-10-05; not started.
-Commit: —
+Status: In progress — fixed and proven by dispatch on 2026-10-05; awaiting merge + the next Monday run.
+Commits (branch `chore/gh-aw-v0.89.21`): A `b762502`, B `f079eff`, C `d54b305`.
+
+**It deviated from the plan, and the deviation is the finding.** The plan assumed the model was the
+problem. Dispatch A (37386702875) confirmed the upgrade: `copilot` found, *"pre-flight: command is
+accessible and executable"*, CLI **1.0.90** (still floating), and the harness now **refuses** an
+unresolved `auto` instead of sending it. Dispatch B (37387169301), with the model pinned to
+`claude-sonnet-5`, removed `auto` entirely and exposed the real failure: **`Authentication failed
+with provider … (HTTP 403)`**, `failureClass=authentication_failed`. Every request to GitHub
+Copilot inference was being refused. The `/models` 403 was the same refusal. That fits Copilot Pro
+being stopped (policy v1.2, 2026-09-02): last success 09-07, first 403 09-14.
+
+**Commit C (not in the original plan): DeepSeek via Copilot BYOK.** Chosen by the owner over
+re-subscribing or switching engines. `engine.model: deepseek-v4-flash`, `engine.env`
+`COPILOT_PROVIDER_BASE_URL=https://api.deepseek.com/anthropic`, `COPILOT_PROVIDER_TYPE=anthropic`,
+`COPILOT_PROVIDER_API_KEY=${{ secrets.DEEPSEEK_API_KEY }}` (a dedicated key, added by the owner),
+`api.deepseek.com` allowlisted. `gh aw compile` flagged the new secret in safe-update mode; reviewed
+(used only as the provider key in the agent and detection jobs, sent only to the allowlisted host,
+otherwise only in the log-redaction list) and approved with `--approve`. Dispatch C (37388750793)
+**succeeded end to end** in ~8 min: agent 3m42s exit 0, detection passed, W41 digest PR #25 (15
+stories, 11 MS/GitHub, three expected files).
+
+**CLI version pin: not pinned, deliberately.** The CLI only runs the harness now; inference is
+DeepSeek's, so a CLI drift no longer changes which model or account is billed. Revisit if a
+runner-image change (Ubuntu 26 from 2026-10-19) breaks the harness.
+
+**Found along the way:** `max-ai-credits` does not apply to BYOK (`AI credits: (none)`), recorded
+under FAD-007; failure alerting raised as FAD-013.

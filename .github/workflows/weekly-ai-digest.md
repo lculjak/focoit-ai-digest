@@ -8,7 +8,13 @@ permissions:
   pull-requests: read
   copilot-requests: write     # bills inference to the org; no PAT required (gh-aw >= June 2026)
 
-engine: copilot               # uses built-in GITHUB_TOKEN + copilot-requests: write
+engine:                       # Copilot CLI harness, BYOK to DeepSeek (FAD-010). GitHub Copilot inference
+  id: copilot                 # stopped authenticating (HTTP 403) after Copilot Pro was stopped (2026-09)
+  model: deepseek-v4-flash    # pinned, never `auto`; the DeepSeek export is the model of record (PI-109)
+  env:
+    COPILOT_PROVIDER_BASE_URL: "https://api.deepseek.com/anthropic"
+    COPILOT_PROVIDER_TYPE: anthropic
+    COPILOT_PROVIDER_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}   # repo secret; never in a file
 
 # Cost controls (tune after first runs — FAD-007)
 # max-ai-credits default is 1000; 500 is a conservative first-run cap for a read-heavy digest workflow
@@ -19,6 +25,8 @@ max-ai-credits: 500
 network:
   allowed:
     - defaults
+    # Model provider (BYOK, FAD-010)
+    - "api.deepseek.com"
     # Azure / Microsoft
     - "azure.microsoft.com"
     - "azurecomcdn.azureedge.net"

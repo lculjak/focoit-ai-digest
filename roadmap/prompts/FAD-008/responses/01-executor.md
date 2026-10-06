@@ -1,7 +1,7 @@
 # FAD-008 — Owner response (slice 1: `digest.focoit.com`)
 
-Date: 2026-09-30 (steps 1–6)
-Status: IN PROGRESS — step 7 pending the next weekly digest merge
+Date: 2026-09-30 (steps 1–6), 2026-10-05 (step 7)
+Status: COMPLETE
 
 ## Checklist
 
@@ -11,7 +11,7 @@ Status: IN PROGRESS — step 7 pending the next weekly digest merge
 - [x] 4. Enforce HTTPS on
 - [x] 5. `https://digest.focoit.com/` 200 + old URL 301
 - [x] 6. Link live on focoit.com
-- [ ] 7. `docs/CNAME` survived the next digest merge (week: ____)
+- [x] 7. `docs/CNAME` survived the next digest merge (week: **2026-W41**)
 
 ## Notes
 
@@ -39,7 +39,16 @@ All times UTC, 2026-09-30. Each line is what was **observed**, not what was done
    one-line nav at 1280 px; at 375 px the item is visible in the toggled menu with no horizontal
    scroll. `/reports/` deliberately has no link.
 
-## Step 7 — pending
+## Step 7 — observed 2026-10-05
 
-Next weekly run: after its `[digest]` PR merges, confirm `docs/CNAME` still reads
-`digest.focoit.com` and the custom domain serves the new week.
+Delayed five weeks: no weekly run succeeded between W37 and W41 (Copilot inference returned HTTP
+403 after Copilot Pro was stopped, fixed in FAD-010). The first digest after the custom domain went
+live was **W41**, from FAD-010's dispatch run 37388750793 (DeepSeek), PR #25.
+
+- PR #25 merged **23:53:39 UTC** (`2150c6d`); it changed only `docs/index.html`,
+  `docs/data/digest-2026-W41.json` and `docs/data/post-ideas.json`.
+- `docs/CNAME` on `main` after the merge still reads `digest.focoit.com`.
+- Pages build **built** from `2150c6d` at 23:53:40.
+- `https://digest.focoit.com/` → **200**, TLS verifies, serving W41 (`last-updated` 2026-10-05T23:31:10Z);
+  `/data/digest-2026-W41.json` → 200.
+- `https://lculjak.github.io/focoit-ai-digest/` → **301** → `https://digest.focoit.com/`.
