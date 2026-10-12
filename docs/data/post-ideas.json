@@ -1,35 +1,35 @@
 [
   {
-    "hook": "Your platform isn't 'Azure with AI bolted on.' If agents are first-class actors, your identity, orchestration, and observability models have to change with them.",
-    "angle": "Use Microsoft's 'designing agent-first platforms' argument, plus the Foundry model-choice and agent-shipping announcements, to frame the platform decisions that actually matter once agents do the work — and why 'we'll swap the model later' is an architecture promise, not a strategy.",
+    "hook": "You can't bolt agents onto your platform and call it AI strategy. If agents choose your SDKs and patterns, your docs and MCP surfaces are now architecture.",
+    "angle": "Use Microsoft's AX Practitioner Playbook plus the enterprise extension of GitHub Spec Kit to argue that the knowledge sources agents consume — docs, samples, templates, MCP configs — are governed platform assets. Frame it as a quality-and-change-control problem, not a docs chore, and explain how governed catalogs keep agentic delivery consistent across many teams.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/designing-agent-first-platforms-what-changes-when-agents-do-the-work/",
-      "https://azure.microsoft.com/en-us/blog/ship-agents-faster-with-expanded-model-choice-voice-agents-and-continuous-optimization/",
-      "https://azure.microsoft.com/en-us/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry/"
+      "https://devblogs.microsoft.com/blog/introducing-the-agent-experience-ax-practitioner-playbook/",
+      "https://devblogs.microsoft.com/blog/from-spec-first-to-enterprise-ready-extending-github-spec-kit/"
     ],
-    "suggested_track": "azure"
+    "suggested_track": "copilot"
   },
   {
     "hook": "MCP is quietly becoming the connective tissue between agents — and its trust model is a structural risk, not a bug.",
-    "angle": "Take the Ars Technica MCP vulnerability report and turn it into an architect's checklist: agent identity, egress control, prompt provenance, and blast-radius limits for any multi-agent system touching regulated data. Pair it with GitHub's open-source security agent as the 'inspectable automation' counterexample.",
+    "angle": "Turn the Ars Technica MCP report and Nadella's 'assume the model is compromised' framing into an architect's checklist: agent identity, egress control, prompt provenance, and blast-radius limits for any multi-agent system touching regulated data. Pair it with GitHub's open-source security agent as the inspectable-automation counterexample.",
     "which_story_urls": [
       "https://arstechnica.com/security/2026/10/vulnerability-in-agents-from-google-and-others-exposes-structural-flaw-in-mcp/",
+      "https://www.theverge.com/ai-artificial-intelligence/1009337/satya-nadella-says-we-should-assume-all-ai-models-are-compromised",
       "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "You can't benchmark AI code review on vibes. Now there's a production-aligned, open benchmark.",
-    "angle": "ReviewBench plus Copilot Plugins show AI review and standardized agentic artifacts are becoming measurable, governable pipeline stages. Connect that to why regulated change-control needs evidence and version control, not vendor promises.",
+    "hook": "As agents write more code, secret sprawl scales with it. Push protection isn't a courtesy check anymore — it's a pipeline control.",
+    "angle": "Use GitHub's 'secret protection must scale with software' argument plus ReviewBench to make the case that AI-accelerated delivery needs centrally enforced security controls and measurable AI review. Connect it to why regulated change-control wants evidence and version control, not vendor promises.",
     "which_story_urls": [
-      "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/",
-      "https://devblogs.microsoft.com/blog/enabling-consistent-ai-assisted-engineering-with-github-copilot-plugins/"
+      "https://github.blog/ai-and-ml/github-copilot/secret-protection-must-scale-with-software/",
+      "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/"
     ],
     "suggested_track": "copilot"
   },
   {
     "hook": "Data residency isn't a cloud-exit story. GA of SQL Server on Azure Local means you can modernize where the data already lives.",
-    "angle": "For healthcare and finance clients, frame SQL Server on Azure Local plus FabCon's governed-data messaging as a modernization path that respects residency and sovereignty constraints without a forced lift-and-shift. Compliance impact is a consideration, not a recommendation.",
+    "angle": "For healthcare and finance clients, frame SQL Server on Azure Local plus FabCon's governed-data messaging as a modernization path that respects residency and sovereignty constraints without a forced lift-and-shift. Be explicit that residency support is a consideration to validate, not a compliance guarantee.",
     "which_story_urls": [
       "https://www.microsoft.com/en-us/sql-server/blog/2026/09/28/sql-server-on-azure-local-is-now-generally-available/",
       "https://azure.microsoft.com/en-us/blog/fabcon-and-sqlcon-2026-in-barcelona-building-the-data-foundation-for-microsoft-copilot-and-agents/"
@@ -37,11 +37,12 @@
     "suggested_track": "healthcare-ai"
   },
   {
-    "hook": "Resilience isn't the diagram you approved last year. It's a property you maintain — and auditors increasingly ask you to prove it.",
-    "angle": "Use 'Your architecture diagram is not your resilience' to shift the conversation from static DR artifacts to measured, continuously verified recovery objectives, with an eye on audit and business-continuity evidence in regulated environments.",
+    "hook": "A universal bank deploying frontier models at scale is a better governance case study than any vendor whitepaper.",
+    "angle": "Use Barclays' expanded Anthropic collaboration to discuss what makes regulated AI adoption defensible: evaluation harnesses, access governance, and human oversight. Anchor it in architecture decisions an Azure solution architect actually owns, and keep compliance claims framed as considerations.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/your-architecture-diagram-is-not-your-resilience/"
+      "https://www.anthropic.com/news/barclays-scales-claude",
+      "https://openai.com/index/eu-text-provenance"
     ],
-    "suggested_track": "azure"
+    "suggested_track": "healthcare-ai"
   }
 ]
