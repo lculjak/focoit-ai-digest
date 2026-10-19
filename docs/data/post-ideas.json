@@ -1,46 +1,46 @@
 [
   {
-    "hook": "Your platform isn't 'Azure with AI bolted on.' If agents are first-class actors, your identity, orchestration, and observability models have to change with them.",
-    "angle": "Use Microsoft's 'designing agent-first platforms' argument, plus the Foundry model-choice and agent-shipping announcements, to frame the platform decisions that actually matter once agents do the work — and why 'we'll swap the model later' is an architecture promise, not a strategy.",
+    "hook": "Your agent didn't 'go rogue.' It used the credentials and permissions you left for it.",
+    "angle": "CERT-In and OpenAI both describe agents reaching live systems through exposed credentials, public repositories, and overly permissive roles — not exotic exploits. Turn that into an architecture checklist: scoped workload identity, egress allowlists, human approval for destructive actions, and audit logs that capture agent-initiated changes. The GitHub secret-detection work is the preventive counterpart.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/designing-agent-first-platforms-what-changes-when-agents-do-the-work/",
-      "https://azure.microsoft.com/en-us/blog/ship-agents-faster-with-expanded-model-choice-voice-agents-and-continuous-optimization/",
-      "https://azure.microsoft.com/en-us/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry/"
+      "https://techcrunch.com/2026/10/16/india-becomes-the-latest-country-to-report-rogue-ai-agent-activity/",
+      "https://arstechnica.com/security/2026/10/openai-models-hacked-a-crypto-wallet-and-breached-more-websites/",
+      "https://github.blog/ai-and-ml/githubs-model-for-secret-detection-finding-more-secrets-with-less-noise/"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "MCP is quietly becoming the connective tissue between agents — and its trust model is a structural risk, not a bug.",
-    "angle": "Take the Ars Technica MCP vulnerability report and turn it into an architect's checklist: agent identity, egress control, prompt provenance, and blast-radius limits for any multi-agent system touching regulated data. Pair it with GitHub's open-source security agent as the 'inspectable automation' counterexample.",
+    "hook": "Your documentation has a second reader now — and it doesn't ask clarifying questions.",
+    "angle": "The AX Practitioner Playbook and enterprise Spec Kit point at the same shift: docs, samples, and specs are consumed by coding agents and then judged by what those agents produce. Treat them as a governed product surface — pin versions, measure agent success on golden paths, and fix the source material when the agent picks a deprecated pattern instead of blaming the model.",
     "which_story_urls": [
-      "https://arstechnica.com/security/2026/10/vulnerability-in-agents-from-google-and-others-exposes-structural-flaw-in-mcp/",
-      "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/"
-    ],
-    "suggested_track": "azure"
-  },
-  {
-    "hook": "You can't benchmark AI code review on vibes. Now there's a production-aligned, open benchmark.",
-    "angle": "ReviewBench plus Copilot Plugins show AI review and standardized agentic artifacts are becoming measurable, governable pipeline stages. Connect that to why regulated change-control needs evidence and version control, not vendor promises.",
-    "which_story_urls": [
-      "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/",
-      "https://devblogs.microsoft.com/blog/enabling-consistent-ai-assisted-engineering-with-github-copilot-plugins/"
+      "https://devblogs.microsoft.com/blog/introducing-the-agent-experience-ax-practitioner-playbook/",
+      "https://devblogs.microsoft.com/blog/from-spec-first-to-enterprise-ready-extending-github-spec-kit/"
     ],
     "suggested_track": "copilot"
   },
   {
-    "hook": "Data residency isn't a cloud-exit story. GA of SQL Server on Azure Local means you can modernize where the data already lives.",
-    "angle": "For healthcare and finance clients, frame SQL Server on Azure Local plus FabCon's governed-data messaging as a modernization path that respects residency and sovereignty constraints without a forced lift-and-shift. Compliance impact is a consideration, not a recommendation.",
+    "hook": "The governance gap isn't the model. It's the second engine reading your data.",
+    "angle": "Unity Catalog policies used to assume the query came from inside Azure Databricks. Cross-engine ABAC routes external Spark reads through a managed enforcement layer, which is exactly the kind of control architects need when Fabric, Synapse, and Databricks share a lakehouse. Make the conversation about where policy is enforced and what audit evidence follows the data path.",
     "which_story_urls": [
-      "https://www.microsoft.com/en-us/sql-server/blog/2026/09/28/sql-server-on-azure-local-is-now-generally-available/",
-      "https://azure.microsoft.com/en-us/blog/fabcon-and-sqlcon-2026-in-barcelona-building-the-data-foundation-for-microsoft-copilot-and-agents/"
+      "https://techcommunity.microsoft.com/t5/azure/cross-engine-abac-on-azure-databricks-governing-external-spark/m-p/4565409"
     ],
     "suggested_track": "healthcare-ai"
   },
   {
-    "hook": "Resilience isn't the diagram you approved last year. It's a property you maintain — and auditors increasingly ask you to prove it.",
-    "angle": "Use 'Your architecture diagram is not your resilience' to shift the conversation from static DR artifacts to measured, continuously verified recovery objectives, with an eye on audit and business-continuity evidence in regulated environments.",
+    "hook": "Data residency is no longer an argument against AI. It's a capacity-planning question.",
+    "angle": "Open-weight Nemotron models for enterprise and edge, plus open HSM specifications, make self-hosted and on-device options more credible for regulated workloads. Frame the build-vs-buy honestly: the model licence is the easy part; GPU capacity, evaluation, patching, and safety operations are the real cost centres.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/your-architecture-diagram-is-not-your-resilience/"
+      "https://techcrunch.com/2026/10/19/nvidia-launches-new-open-models-to-run-agents-in-the-enterprise-and-on-pcs/",
+      "https://azure.microsoft.com/en-us/blog/advancing-hardware-security-with-open-source-integrated-hsm-technology/"
+    ],
+    "suggested_track": "healthcare-ai"
+  },
+  {
+    "hook": "Ask your model vendor who has employee-level access to the risk assessment.",
+    "angle": "Anthropic giving METR staff employee-like access is a stronger assurance model than a published model card. For regulated buyers it reframes procurement questions — who evaluates, with what access, and are findings published — and connects to the EU's agentic-adoption and transparency conversation. Treat it as evidence to weigh, not a certification.",
+    "which_story_urls": [
+      "https://www.anthropic.com/news/an-update-on-independent-evaluators",
+      "https://openai.com/index/the-eus-next-chapter-in-ai-is-agentic"
     ],
     "suggested_track": "azure"
   }
