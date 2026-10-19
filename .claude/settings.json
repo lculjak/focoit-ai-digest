@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(*.env)",
+      "Read(~/.local/share/opencode/auth.json)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Bash(git commit *--no-verify*)",
+      "Bash(git push *--no-verify*)"
+    ]
+  }
+}
