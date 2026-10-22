@@ -1,6 +1,6 @@
 # AI Routing Policy — focoit-ai-digest
 
-Version: 1.3
+Version: 1.4
 
 Status: Active
 
@@ -17,7 +17,7 @@ Which AI engine to use for each task type in this repo. Goals: prefer local/host
 routine work; reserve Claude for high-value reasoning; keep quality high.
 
 > **Scope note (playbook v1.2, PI-042):** routing decides *which model*, which measurement puts at
-> about **16%** *(~14% counted per request; playbook PI-128)* of actual cost. The larger share — **~84%** *(~86%; measured on the transcripts that survive unchanged, playbook PI-128)* — is cache mechanics driven by **context
+> about **16%** *(~14% counted per request, estimated; playbook PI-128)* of actual cost. The larger share — **~84%** *(~86%, estimated on the transcripts that survive unchanged; [playbook record](https://github.com/lculjak/ai-engineering-playbook/blob/main/roadmap/prompts/PI-128/responses/2026-10-21-t31-earlier-figures.md))* — is cache mechanics driven by **context
 > size**. This is the **smaller lever**; the playbook's `cost-discipline-policy.md` holds the larger
 > one. That doc is deliberately **not mirrored here** (this repo has no measured session data), so
 > the pointer is to the playbook, not to a local file.
@@ -69,3 +69,4 @@ routine work; reserve Claude for high-value reasoning; keep quality high.
 | 1.1 | 2026-09-02 | Propagated playbook routing-policy **v1.2** (PI-042) and the **Tier-2 restructure** (`model-execution-policy.md` v1.13–v1.14, PI-069). Adds the **scope note**: routing is ~**16%** of measured cost and context size is the rest, so this is the *smaller* lever — pointed at the playbook's `cost-discipline-policy.md`, which the registry deliberately does **not** mirror here. Matrix column **`Local / Copilot / Cline` → `Local / DeepSeek / Cline`**: **Copilot Pro is stopped**. Task rows, the local-first bias and this repo's quality checklist are **unchanged**. **Draft propagated by `/propagate-policy`; left uncommitted for the repo owner.** |
 | 1.2 | 2026-09-11 | **The escalation ladder named three products and all three were stale (playbook PI-083/PI-085).** *"Try the cheap tier (Copilot Pro / Cline FREE / local Aider)"* — **Copilot Pro stopped**, **Cline is metered and unfunded**, **Aider too slow to reach for**. Restated **by property**: the fastest route this repo's `model-execution-policy.md` permits for non-sensitive work, **currently the DeepSeek API in Claude Code**. **A roster written as product names goes stale silently; a property does not.** No routing decision changes. |
 | 1.3 | 2026-10-22 | **Annotation only (playbook PI-128).** The scope note's ~84% / 16% came from the playbook's per-line count; counted per request it is ~86% / ~14% (estimated on the transcripts that survive unchanged). **No rule changed** |
+| 1.4 | 2026-10-22 | **Annotation fix (playbook PI-127 ②r review).** The 1.3 notes now say the corrected ~86% / ~14% are **estimates** and link the playbook's record. **No rule changed** |
