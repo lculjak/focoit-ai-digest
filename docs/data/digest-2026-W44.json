@@ -1,0 +1,224 @@
+[
+  {
+    "title": "Advancing digital sovereignty with greater control and choice",
+    "url": "https://blogs.microsoft.com/blog/2026/10/20/advancing-digital-sovereignty-with-greater-control-and-choice/",
+    "source": "Azure Blog",
+    "date": "2026-10-20",
+    "tldr": "Microsoft detailed the next stage of Microsoft Sovereign Cloud: a workload-based continuum spanning Sovereign Public Cloud, Sovereign Private Cloud with connected and disconnected operations, and a partner-operated sovereign ecosystem.",
+    "why": "Sovereignty is now an architecture decision per workload, not a single cloud choice. Map each workload's data, operational access, dependency, and continuity requirements before committing to a deployment model, then confirm that identity, key management, and support-access controls match the evidence your auditors will ask for.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "governance",
+      "regulated-industry",
+      "security"
+    ]
+  },
+  {
+    "title": "Designing for sovereign AI: A shared foundation from edge to cloud",
+    "url": "https://azure.microsoft.com/en-us/blog/designing-for-sovereign-ai-a-shared-foundation-from-edge-to-cloud/",
+    "source": "Azure Blog",
+    "date": "2026-10-19",
+    "tldr": "Microsoft and Intel outlined a layered sovereign-AI architecture, from silicon and Azure Local on Xeon 6 through cloud, data, and AI services, so workloads can run in public cloud, customer-controlled environments, or trusted partner solutions.",
+    "why": "Edge and on-premises AI options keep widening, but a sovereign design only holds if it is consistent across layers. Decide deliberately which data and inference stay local, which controls produce verifiable evidence, and how you will run the same model lifecycle in both environments without forking your operations.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "governance",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Managing open-weight model risk in enterprise deployments",
+    "url": "https://azure.microsoft.com/en-us/blog/managing-open-weight-model-risk-in-enterprise-deployments/",
+    "source": "Azure Blog",
+    "date": "2026-10-16",
+    "tldr": "Microsoft and NVIDIA published a joint risk-management guide for open-weight models, with a shared taxonomy grounded in ISO and NIST frameworks and an emphasis on deployment context rather than model weights alone.",
+    "why": "Open weights shift responsibility for safeguards onto you. Use the taxonomy to document intended use, provenance, and where controls sit across the inference environment and surrounding processes, and treat openness as neither automatically safer nor automatically riskier.",
+    "importance": "High",
+    "tags": [
+      "foundation-models",
+      "governance",
+      "open-source",
+      "security",
+      "ai-platform"
+    ]
+  },
+  {
+    "title": "Donating Agent Skills to the Agentic AI Foundation",
+    "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+    "source": "Anthropic News",
+    "date": "2026-10-22",
+    "tldr": "Anthropic donated Agent Skills, the folder-plus-SKILL.md standard now integrated by more than 70 agent platforms including ChatGPT, Cursor, GitHub Copilot, and VS Code, to the Linux Foundation's Agentic AI Foundation.",
+    "why": "A vendor-neutral skill format reduces lock-in and gives you a portable unit for packaging domain procedures. Treat skills as governed artifacts: version them, review them like code, and restrict the scripts they are allowed to execute, because a skill is executable content distributed through your toolchain.",
+    "importance": "High",
+    "tags": [
+      "agents",
+      "open-source",
+      "dev-tools",
+      "copilot"
+    ]
+  },
+  {
+    "title": "Securing our frontier model training environment",
+    "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+    "source": "OpenAI News",
+    "date": "2026-10-23",
+    "tldr": "OpenAI described strengthened containment for frontier model training and evaluation, including offline environments and high-compute red-teaming aimed at stopping models from reaching external systems.",
+    "why": "This is the vendor-side version of a control you also need internally: assume an agent will attempt network access and design containment around that assumption. Compare their described controls with your own egress allowlists, credential scoping, and detection coverage for model-initiated actions.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "ai-platform",
+      "governance"
+    ]
+  },
+  {
+    "title": "Patch the Planet: global response coordination as agents uncover critical vulnerabilities",
+    "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities",
+    "source": "OpenAI News",
+    "date": "2026-10-21",
+    "tldr": "OpenAI introduced Patch the Planet, a coordination effort linking security researchers, open-source maintainers, and incident responders when AI agents uncover critical vulnerabilities.",
+    "why": "Agent-assisted vulnerability discovery compresses the gap between finding and exploiting a flaw, which changes patch SLAs. Agree disclosure paths and emergency-change procedures with vendors and critical open-source dependencies before the volume rises, not during the first incident.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "agents",
+      "open-source",
+      "governance"
+    ]
+  },
+  {
+    "title": "The bridge to agent-scale Git infrastructure",
+    "url": "https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/",
+    "source": "GitHub Blog",
+    "date": "2026-10-21",
+    "tldr": "GitHub describes moving a copy of 99.99999% of its repositories to Azure and using per-reference quorums plus object storage so read capacity scales independently of Git writes.",
+    "why": "Agent-driven development changes repository load from bursty human activity to sustained machine concurrency. Revisit CI concurrency limits, branch strategy, and self-hosted capacity assumptions, and treat Git as shared infrastructure with an explicit SLO rather than a free utility.",
+    "importance": "Medium",
+    "tags": [
+      "dev-tools",
+      "agents",
+      "ai-platform",
+      "azure"
+    ]
+  },
+  {
+    "title": "Bringing AI-Powered SRE to Your On-Premise Server Estate For Unifying Ops",
+    "url": "https://techcommunity.microsoft.com/blog/appsonazureblog/bringing-ai-powered-sre-to-your-on-premise-server-estate-for-unifying-ops/4566884",
+    "source": "Microsoft Tech Community",
+    "date": "2026-10-26",
+    "tldr": "Azure SRE Agent can now operate Arc-enabled on-premises Windows and Linux servers, covering monitoring, investigation, root-cause analysis, and guided or automated remediation across hybrid estates.",
+    "why": "Extending an operations agent to on-prem servers matters most where regulated workloads actually live, but the permission boundary is the design decision. Scope the Arc identity, define which remediation actions require human approval, and verify agent actions land in the same audit trail as human changes.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "agents",
+      "mlops",
+      "governance"
+    ]
+  },
+  {
+    "title": "Making Azure Container Registry Activity Visible at Scale",
+    "url": "https://techcommunity.microsoft.com/blog/appsonazureblog/making-azure-container-registry-activity-visible-at-scale/4567301",
+    "source": "Microsoft Tech Community",
+    "date": "2026-10-23",
+    "tldr": "Azure Container Registry added Transactions and Data Transfer metrics that show which operations a registry serves, in which region, and how much egress they generate per registry and geo-replica.",
+    "why": "Pull counts tell you that something changed; these metrics tell you why. Use them to separate deployment spikes from retry loops, throttling, or regional shifts, and to attribute egress cost and supply-chain pull behaviour to the right platform team.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "data",
+      "security",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "AI's hidden storage bill: What inference leaves behind",
+    "url": "https://www.technologyreview.com/2026/10/22/1146948/ais-hidden-storage-bill-what-inference-leaves-behind/",
+    "source": "MIT Technology Review",
+    "date": "2026-10-22",
+    "tldr": "MIT Technology Review argues that AI cost models over-index on GPUs and under-count the storage and retention footprint created by prompts, outputs, images, and video generated at scale.",
+    "why": "Inference telemetry, prompt logs, embeddings, and generated media accumulate quietly and often carry regulated data. Put retention limits and tiering into the design before the bill arrives, and check that observability logging does not become an uncontrolled copy of sensitive records.",
+    "importance": "Medium",
+    "tags": [
+      "data",
+      "ai-platform",
+      "mlops",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Can AI help solve the COBOL code crisis?",
+    "url": "https://www.theverge.com/ai-artificial-intelligence/1018434/cobol-migration-legacy-code-openai-anthropic",
+    "source": "The Verge AI",
+    "date": "2026-10-26",
+    "tldr": "The Verge examines whether newer models can migrate legacy COBOL systems at the IRS, banks, and airlines, after OpenAI claimed substantial improvements in modernizing older code.",
+    "why": "Legacy modernization is where AI meets the highest-risk systems in finance and government. Pilot on a bounded module with full regression evidence and human sign-off, and keep the model away from production change paths until migrated code clears the same gates as hand-written code.",
+    "importance": "Medium",
+    "tags": [
+      "dev-tools",
+      "regulated-industry",
+      "foundation-models",
+      "governance"
+    ]
+  },
+  {
+    "title": "Can a local git remote replace GitHub in your agent eval?",
+    "url": "https://devblogs.microsoft.com/blog/can-a-local-git-remote-replace-github-in-your-agent-eval/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-10-20",
+    "tldr": "Microsoft swapped GitHub for a local git remote in agent evaluations and found most operations unaffected, but agents pushed on their own 11 points less often, changing the behaviour being measured.",
+    "why": "Agent evaluations are only valid if the harness preserves the environment the agent will meet in production. A local remote is a cheap shortcut for isolation and speed, but if it changes tool affordances, your pass rates stop predicting production behaviour.",
+    "importance": "Medium",
+    "tags": [
+      "agents",
+      "dev-tools",
+      "mlops"
+    ]
+  },
+  {
+    "title": "Staying Evergreen: How we automated secure access and repo hygiene in a shared org",
+    "url": "https://github.blog/engineering/platform-security/staying-evergreen-how-we-automated-secure-access-and-repo-hygiene-in-a-shared-org/",
+    "source": "GitHub Blog",
+    "date": "2026-10-15",
+    "tldr": "GitHub documented an automated approach to reviewing outside collaborator access and archiving stale repositories with native GitHub features in a large shared organization.",
+    "why": "Stale repositories and lingering outside collaborators are quiet paths into a supply chain, and both are easy to measure. Turn periodic access review and archive policy into scheduled automation with a named owner, especially as agent service accounts accumulate alongside human ones.",
+    "importance": "Medium",
+    "tags": [
+      "security",
+      "governance",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "How 3 Java Champions are using GitHub Copilot for increased productivity",
+    "url": "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/",
+    "source": "GitHub Blog",
+    "date": "2026-10-20",
+    "tldr": "Three Java Champions described how they use GitHub Copilot for problem solving and development while keeping humans accountable for the result, with concrete workflow patterns rather than benchmark claims.",
+    "why": "Adoption stories are only useful if they change your operating model. Extract the review and verification habits these practitioners describe and encode them into team guidance; productivity gains that skip review discipline do not survive a regulated audit.",
+    "importance": "Medium",
+    "tags": [
+      "copilot",
+      "dev-tools",
+      "governance"
+    ]
+  },
+  {
+    "title": "Microsoft's Mustafa Suleyman says its AI outperforms doctors on hard cases as he chases 'medical superintelligence'",
+    "url": "https://techcrunch.com/2026/10/22/microsofts-mustafa-suleyman-says-its-ai-outperforms-doctors-on-hard-cases-as-he-chases-medical-superintelligence/",
+    "source": "TechCrunch AI",
+    "date": "2026-10-22",
+    "tldr": "Microsoft's new AI diagnostic system beat generalist doctors on hard cases in a Science study, though TechCrunch notes that most of the improvement appears to come from the underlying models rather than Microsoft's orchestration.",
+    "why": "For healthcare architects this is a prompt to separate model capability from system design. Ask what the evaluation measured, in which population, with what clinician oversight, and whether the workflow or only the model is what you would deploy; a benchmark result is not clinical validation.",
+    "importance": "Medium",
+    "tags": [
+      "regulated-industry",
+      "ai-platform",
+      "foundation-models",
+      "governance"
+    ]
+  }
+]
