@@ -9,7 +9,9 @@
       "Read(~/.aws/**)",
       "Read(~/.azure/**)",
       "Bash(git commit *--no-verify*)",
-      "Bash(git push *--no-verify*)"
+      "Bash(git push *--no-verify*)",
+      "PowerShell(git commit *--no-verify*)",
+      "PowerShell(git push *--no-verify*)"
     ]
   }
 }
