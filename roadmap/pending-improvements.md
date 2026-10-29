@@ -1,6 +1,6 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.15
+Version: 1.16
 
 Status: Open
 
@@ -376,7 +376,7 @@ Acceptance
 
 ## FAD-014 — Adopt the playbook's `AGENTS.md` layout
 
-Status: **In progress** (2026-10-29) — PR open; mark Done when it merges.
+Status: **✅ Done** (2026-10-29) — PR [#34](https://github.com/lculjak/focoit-ai-digest/pull/34) merged (`a187ec7`), read back from GitHub. ~~In progress — PR open; mark Done when it merges.~~
 
 Priority: Low
 
@@ -421,3 +421,4 @@ opencode review seats load `AGENTS.md` even with `OPENCODE_DISABLE_CLAUDE_CODE=1
 | 1.13 | 2026-10-05 | **FAD-010 fixed on the branch and proven by dispatch.** Three commits, one dispatch run each: A (gh-aw v0.89.21, hand patch retired) found `copilot`; B (model pinned) exposed the real cause, **HTTP 403 from GitHub Copilot inference** after Copilot Pro was stopped; C (**DeepSeek via Copilot BYOK**, policy 1.7) succeeded end to end and opened the W41 digest (PR #25). Stays in progress until merge and the next scheduled Monday run. **FAD-007:** `max-ai-credits` limits nothing on the DeepSeek route; cost comes from the DeepSeek export. **FAD-009:** unblocked once FAD-010 merges. **FAD-013 added (Medium):** a failed weekly run must reach a human |
 | 1.14 | 2026-10-05 | **FAD-008 done.** Step 7 observed: after the W41 digest merge (PR #25, `2150c6d`), `docs/CNAME` still reads `digest.focoit.com`, Pages built from the merge, `digest.focoit.com` serves W41 with a valid certificate, and the `github.io` URL still 301s to it. It came five weeks late because the weekly run was down until FAD-010 |
 | 1.15 | 2026-10-29 | FAD-014 filed: adopt the playbook's `AGENTS.md` layout (PI-136); `CLAUDE.md` now imports it. |
+| 1.16 | 2026-10-29 | FAD-014 ✅ Done: PR [#34](https://github.com/lculjak/focoit-ai-digest/pull/34) merged; `AGENTS.md` holds the instructions and `CLAUDE.md` imports it. |
