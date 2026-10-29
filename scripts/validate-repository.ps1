@@ -46,7 +46,7 @@ $AllowedRoots = @(
 )
 $ReservedRootFiles = @(
     'README.md','LICENSE','LICENSE.md','CONTRIBUTING.md','SECURITY.md',
-    'CLAUDE.md','CNAME','.gitignore','.gitattributes'
+    'AGENTS.md','CLAUDE.md','CNAME','.gitignore','.gitattributes'
 )
 $ForbiddenExt = @('.exe','.dll','.iso','.gguf','.bin')
 # Text extensions eligible for the structured secret scan (includes the static-site types).
