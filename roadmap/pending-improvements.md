@@ -1,10 +1,10 @@
 # Pending Improvements — focoit-ai-digest
 
-Version: 1.14
+Version: 1.15
 
 Status: Open
 
-Date: 2026-10-05
+Date: 2026-10-29
 
 ---
 
@@ -374,6 +374,31 @@ Acceptance
   a notification, or a staleness check on the site's last-updated date. Choose and record why.
 - Proven by a deliberately failed run (observed, not assumed).
 
+## FAD-014 — Adopt the playbook's `AGENTS.md` layout
+
+Status: **In progress** (2026-10-29) — PR open; mark Done when it merges.
+
+Priority: Low
+
+Kind: repo/process. Propagated from the AI Engineering Playbook's **PI-136** (spec in its `roadmap/prompts/PI-136/`), drafted by `/propagate-policy layout:agents-md`.
+
+### What changes
+
+- **`AGENTS.md`** (new) holds this repo's instructions — the former `CLAUDE.md`, section for section — so every coding agent that follows the convention reads them.
+- **`CLAUDE.md`** becomes `@AGENTS.md` plus a short *Claude Code only* section: nothing names a Claude Code mechanism, so it holds only a pointer line.
+- `scripts/validate-repository.ps1`: the root-file list allows `AGENTS.md`.
+
+No policy or project wording changed in the move.
+
+### Verified (2026-10-29)
+
+- Every line of the old `CLAUDE.md` is in `AGENTS.md` or the new `CLAUDE.md` (scripted check), apart from the renamed title and the moved lines named above.
+- `scripts/validate-repository.ps1 -All`: PASS, 0 warnings.
+
+### Note
+
+opencode review seats load `AGENTS.md` even with `OPENCODE_DISABLE_CLAUDE_CODE=1`, so they will now read these instructions; what a review fixture should keep out of it is the playbook's PI-119 question.
+
 ---
 
 # Revision History
@@ -395,3 +420,4 @@ Acceptance
 | 1.12 | 2026-10-05 | **FAD-010 raised to High and re-scoped: the digest has been down since W37.** Every scheduled run since 2026-09-14 failed with `400 Model "auto" has no AI credits pricing`: the model is unpinned (`COPILOT_MODEL: auto`) and the Copilot CLI drifts with the runner toolcache (1.0.80 resolved `auto` through the `/models` catalog; from 1.0.83 that fetch returns 403). Same lock for the last success and all failures. The 2026-10-05 run never got a runner (GitHub Actions incident). FAD-010 now pins the model too, in two commits with a dispatch run each so every failure has one cause; a CLI version pin is to be decided while executing. Records that **a failed scheduled run reached nobody for four weeks**, as a follow-up. FAD-008 step 7 is noted as waiting on it |
 | 1.13 | 2026-10-05 | **FAD-010 fixed on the branch and proven by dispatch.** Three commits, one dispatch run each: A (gh-aw v0.89.21, hand patch retired) found `copilot`; B (model pinned) exposed the real cause, **HTTP 403 from GitHub Copilot inference** after Copilot Pro was stopped; C (**DeepSeek via Copilot BYOK**, policy 1.7) succeeded end to end and opened the W41 digest (PR #25). Stays in progress until merge and the next scheduled Monday run. **FAD-007:** `max-ai-credits` limits nothing on the DeepSeek route; cost comes from the DeepSeek export. **FAD-009:** unblocked once FAD-010 merges. **FAD-013 added (Medium):** a failed weekly run must reach a human |
 | 1.14 | 2026-10-05 | **FAD-008 done.** Step 7 observed: after the W41 digest merge (PR #25, `2150c6d`), `docs/CNAME` still reads `digest.focoit.com`, Pages built from the merge, `digest.focoit.com` serves W41 with a valid certificate, and the `github.io` URL still 301s to it. It came five weeks late because the weekly run was down until FAD-010 |
+| 1.15 | 2026-10-29 | FAD-014 filed: adopt the playbook's `AGENTS.md` layout (PI-136); `CLAUDE.md` now imports it. |
