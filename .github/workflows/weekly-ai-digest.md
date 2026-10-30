@@ -114,6 +114,15 @@ One self-contained HTML5 file. No framework, no CDN, no build step. Include:
 - Live "Showing X of 15 stories" counter; responsive cards (desktop + phone).
 - Accessible labels; each card links out to the original source.
 - A footer noting: generated weekly by an agentic workflow; last-updated timestamp.
+- **Contact block (fixed — reproduce every week, do not rephrase or omit).** In the header,
+  a small "Focoit" link to `https://focoit.com/`. In the footer, above the generated-by note:
+  "Curated by Leonardo Culjak · Focoit — Azure & AI Solutions Architecture", followed by
+  these links, using **exactly** these URLs (never invent, shorten, or alter them):
+  - "Book a strategy call" → `https://calendly.com/leonardo-culjak/30min` (primary button style)
+  - "focoit.com" → `https://focoit.com/`
+  - "LinkedIn" → `https://linkedin.com/in/leonardo-ccc`
+  - "info@focoit.com" → `mailto:info@focoit.com`
+  External links open in a new tab with `rel="noopener"`.
 
 ## 4. Also write data + content ideas
 - Write the machine-readable digest to `docs/data/digest-YYYY-Www.json`
@@ -125,7 +134,8 @@ One self-contained HTML5 file. No framework, no CDN, no build step. Include:
 
 ## 5. Preflight (self-check before output)
 Verify: exactly 15 stories; all URLs unique and reachable-looking; allocation rules met;
-highlights block uses only allowed sources; every card has all required fields. If a rule
+highlights block uses only allowed sources; every card has all required fields; the
+contact block is present with all four links and their exact URLs. If a rule
 cannot be met (e.g. too few Azure/MS entries this week, or a feed was unreachable),
 relax the >=8 floor to the max available, **document which feeds failed and why**, and
 note it in the PR body.

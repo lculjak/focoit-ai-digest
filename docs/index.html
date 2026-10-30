@@ -87,6 +87,15 @@
     max-width: 1100px; margin: 2rem auto 0; padding: 1.25rem; font-size: .82rem; color: var(--muted);
     border-top: 1px solid var(--border);
   }
+  .contact { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-bottom: .9rem; color: var(--fg); }
+  .contact a.cta {
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
+    padding: .45rem .9rem; border-radius: 8px;
+  }
+  [data-theme="dark"] .contact a.cta { color: #0b1b2b; }
+  .header-actions { display: flex; align-items: center; gap: .75rem; }
+  .brand-link { color: #fff; font-weight: 600; text-decoration: none; }
+  .brand-link:hover { text-decoration: underline; }
   .visually-hidden {
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
   }
@@ -99,7 +108,10 @@
       <strong>Focoit Weekly AI &amp; Cloud Digest</strong>
       <span>Azure &amp; AI architecture, curated for regulated-industry solution architects</span>
     </div>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">Theme: System</button>
+    <div class="header-actions">
+      <a class="brand-link" href="https://focoit.com/" target="_blank" rel="noopener">Focoit</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">Theme: System</button>
+    </div>
   </div>
 </header>
 <main>
@@ -123,6 +135,13 @@
   <p class="empty-state" id="empty-state" hidden>No stories match your filters. Try clearing a filter or search term.</p>
 </main>
 <footer class="site">
+  <div class="contact">
+    <span>Curated by Leonardo Culjak · Focoit — Azure &amp; AI Solutions Architecture</span>
+    <a class="cta" href="https://calendly.com/leonardo-culjak/30min" target="_blank" rel="noopener">Book a strategy call</a>
+    <a href="https://focoit.com/" target="_blank" rel="noopener">focoit.com</a>
+    <a href="https://linkedin.com/in/leonardo-ccc" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:info@focoit.com">info@focoit.com</a>
+  </div>
   Generated weekly by an agentic <code>gh-aw</code> workflow (<code>engine: copilot</code>) and published via a
   human-gated pull request. Last updated: <time id="last-updated" datetime="2026-10-19T17:29:42Z">2026-10-19T17:29:42Z</time>.
 </footer>
