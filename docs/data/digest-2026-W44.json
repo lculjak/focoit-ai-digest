@@ -1,0 +1,215 @@
+[
+  {
+    "title": "Introducing the Microsoft Copilot harness in Foundry Agent Service",
+    "url": "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/",
+    "source": "Azure Blog",
+    "date": "2026-10-28",
+    "tldr": "Microsoft announced public preview of a Copilot harness inside Foundry Agent Service, letting teams run Copilot-style agent reasoning on the managed Azure agent runtime rather than wiring their own orchestration host.",
+    "why": "Build-vs-buy decision point for agent platforms: a managed harness keeps orchestration inside your Azure control plane, RBAC boundary, and network perimeter instead of a bespoke container you operate yourself. Before committing, confirm which tools the harness can reach, how tool permissions are scoped per agent, and where evaluation traces are stored, since those three choices decide your audit story later.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "agents",
+      "copilot"
+    ]
+  },
+  {
+    "title": "Designing for sovereign AI: A shared foundation from edge to cloud",
+    "url": "https://azure.microsoft.com/en-us/blog/designing-for-sovereign-ai-a-shared-foundation-from-edge-to-cloud/",
+    "source": "Azure Blog",
+    "date": "2026-10-19",
+    "tldr": "Microsoft lays out a sovereign-AI reference approach that places each workload in the environment matching its control requirements, from edge to cloud, while keeping operational tooling consistent.",
+    "why": "For healthcare and finance workloads, sovereignty is an architecture property, not a checkbox: data residency, key custody, operator-access guarantees, and control-plane location all have to line up per workload. This framing is useful when you need to split a single platform into differently-controlled tiers instead of forcing one uniform pattern on all of it.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "governance",
+      "regulated-industry",
+      "ai-platform"
+    ]
+  },
+  {
+    "title": "Advancing digital sovereignty with greater control and choice",
+    "url": "https://blogs.microsoft.com/blog/2026/10/20/advancing-digital-sovereignty-with-greater-control-and-choice/",
+    "source": "Azure Blog",
+    "date": "2026-10-20",
+    "tldr": "Microsoft's policy-level position on digital sovereignty, framed around giving governments, critical infrastructure, and regulated industries more control over where and how their systems run.",
+    "why": "Useful as a citable vendor position in due-diligence packs, but map every commitment to the contractual and technical control that actually enforces it (boundary scope, key custody, support-access terms). Treat published commitments as considerations to verify in your own contract, not as evidence of compliance.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "governance",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Managing open-weight model risk in enterprise deployments",
+    "url": "https://azure.microsoft.com/en-us/blog/managing-open-weight-model-risk-in-enterprise-deployments/",
+    "source": "Azure Blog",
+    "date": "2026-10-16",
+    "tldr": "Microsoft outlines the risk categories that come with deploying open-weight models in enterprises, from provenance and licensing through patching and behavioural drift.",
+    "why": "The open-weight option changes your risk register rather than removing risk: you take on supply-chain provenance, licence review, vulnerability patching, and re-evaluation when weights change. If your governance model was written for hosted APIs only, this is the article that shows which controls you are now missing.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "foundation-models",
+      "governance",
+      "open-source"
+    ]
+  },
+  {
+    "title": "GitHub Universe 2026: Evolving every layer of the stack",
+    "url": "https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/",
+    "source": "GitHub Blog",
+    "date": "2026-10-28",
+    "tldr": "GitHub used Universe 2026 to present its ambition to be an end-to-end software delivery system, spanning agent-driven authoring, review, and the infrastructure underneath.",
+    "why": "Platform direction of travel tells you where toolchain standards should land. If agents become first-class contributors, your control points shift to policy-as-code, audit trails on agent actions, and review capacity planning rather than individual developer habits. Worth reading before you re-let your developer-platform contract.",
+    "importance": "High",
+    "tags": [
+      "copilot",
+      "dev-tools",
+      "agents",
+      "ai-platform"
+    ]
+  },
+  {
+    "title": "The bridge to agent-scale Git infrastructure",
+    "url": "https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/",
+    "source": "GitHub Blog",
+    "date": "2026-10-21",
+    "tldr": "GitHub describes moving a copy of 99.99999% of its repositories onto Azure, then using per-reference quorums and object storage so reads scale independently of writes.",
+    "why": "Concrete architecture pattern for anyone hosting or mirroring repositories: decoupling read paths from write quorums is how you absorb machine-generated load that looks nothing like human commit patterns. Relevant if you size self-managed GitHub Enterprise or DevOps capacity on today's human-driven assumptions.",
+    "importance": "Medium",
+    "tags": [
+      "dev-tools",
+      "azure",
+      "agents"
+    ]
+  },
+  {
+    "title": "Publish Visual Studio Marketplace extensions securely with Trusted Publishing",
+    "url": "https://devblogs.microsoft.com/blog/trusted-publishing-visual-studio-marketplace/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-10-28",
+    "tldr": "Trusted Publishing lets you ship VS Code and Visual Studio extensions from GitHub Actions or Azure Pipelines using short-lived federated credentials instead of a long-lived personal access token.",
+    "why": "The pattern matters more than the feature: OIDC federation removes static publish secrets from CI, which is exactly the control you want on every pipeline that can push artifacts. If you still hold PATs in pipeline variables, this is a low-risk place to prove the migration before applying it to production deploys.",
+    "importance": "Medium",
+    "tags": [
+      "dev-tools",
+      "security",
+      "governance"
+    ]
+  },
+  {
+    "title": "Octoverse: Commits, pushes, reach new highs in 2026 as developers build with agents",
+    "url": "https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/",
+    "source": "GitHub Blog",
+    "date": "2026-10-28",
+    "tldr": "GitHub's 2026 Octoverse report records record commit and push volume, with agent-assisted development cited as a main driver of the growth.",
+    "why": "Adoption data is the cheapest evidence you can bring to a funding or standardisation conversation. It also reframes a planning problem: if machine-authored changes rise, review throughput and CI cost become the binding constraints, not authoring speed.",
+    "importance": "Medium",
+    "tags": [
+      "dev-tools",
+      "copilot",
+      "agents"
+    ]
+  },
+  {
+    "title": "How to continue a GitHub Copilot app session in VS Code",
+    "url": "https://github.blog/ai-and-ml/github-copilot/how-to-continue-a-github-copilot-app-session-in-vs-code/",
+    "source": "GitHub Blog",
+    "date": "2026-10-19",
+    "tldr": "A short walkthrough for moving an active Copilot agent session from the GitHub Copilot app into VS Code without losing the conversation, the pending edits, or the working context.",
+    "why": "Practical workflow detail, but it hints at the real question for platform teams: where does agent context live, and what leaves your tenant when a session moves between surfaces. Worth testing before you standardise on either surface for regulated repositories.",
+    "importance": "Low",
+    "tags": [
+      "copilot",
+      "dev-tools"
+    ]
+  },
+  {
+    "title": "Can a local git remote replace GitHub in your agent eval?",
+    "url": "https://devblogs.microsoft.com/blog/can-a-local-git-remote-replace-github-in-your-agent-eval/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-10-20",
+    "tldr": "Microsoft swapped GitHub for a local git remote in its agent evaluations: rebasing and pushing on request were unaffected, but the agent pushed on its own 11 percentage points less often.",
+    "why": "A measured warning about eval fidelity: changing the environment under test changes the behaviour you are measuring. If you cut infrastructure cost by simplifying your eval harness, re-baseline your scores, because a cheaper harness can silently turn a passing eval into a meaningless one.",
+    "importance": "Low",
+    "tags": [
+      "agents",
+      "dev-tools",
+      "mlops"
+    ]
+  },
+  {
+    "title": "Code-execution flaw in UEFI firmware affects most servers on planet Earth",
+    "url": "https://arstechnica.com/security/2026/10/code-execution-flaw-in-uefi-firmware-threatens-most-servers-on-planet-earth/",
+    "source": "Ars Technica",
+    "date": "2026-10-27",
+    "tldr": "Ars Technica reports a critical code-execution vulnerability in EDK2, the reference UEFI implementation, allowing attackers to run code early in the boot process on a very broad set of servers.",
+    "why": "Pre-boot code execution sits below the OS and hypervisor, so guest-level controls, EDR, and container isolation cannot see it. For regulated workloads this is a firmware lifecycle problem: patch cadence for host fleets, measured boot and attestation assumptions, and what your provider's remediation actually covers versus what you own.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "governance",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Azure's Weakest Link – Five Full Cross-Tenant Compromises",
+    "url": "https://www.binarysecurity.no/posts/2026/10/one-root-case",
+    "source": "Hacker News",
+    "date": "2026-10-30",
+    "tldr": "An independent security researcher published a write-up (surfaced on Hacker News) describing five cross-tenant compromise chains in Azure and arguing they share a single root cause.",
+    "why": "Treat this as a trigger for review rather than a confirmed incident: it is a single researcher's account with no independent corroboration in this week's feeds. Still, it is worth re-checking whether your threat model assumes provider-managed tenant isolation is sufficient for your data classification, and where customer-side key custody or dedicated hardware would change the blast radius.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "security",
+      "governance"
+    ]
+  },
+  {
+    "title": "An updated Model Spec for more capable and beneficial AI",
+    "url": "https://openai.com/index/updated-model-spec",
+    "source": "OpenAI News",
+    "date": "2026-10-29",
+    "tldr": "OpenAI revised its Model Spec around five core values intended to steer more capable models toward sound judgment, human agency, and faithfulness to user intent.",
+    "why": "When you buy model behaviour as a service, the vendor's spec is an input to your own acceptable-use and model-selection documentation. Read it for the parts that shift default behaviour, then check whether your prompts, guardrails, and human-oversight design still match what the model is now optimised to do.",
+    "importance": "Medium",
+    "tags": [
+      "foundation-models",
+      "governance",
+      "ai-platform"
+    ]
+  },
+  {
+    "title": "We urgently need to monitor AI agents’ actions in real time",
+    "url": "https://www.technologyreview.com/2026/10/29/1147824/monitor-ai-agents-actions-real-time/",
+    "source": "MIT Technology Review",
+    "date": "2026-10-29",
+    "tldr": "MIT Technology Review argues for real-time monitoring of agent actions, citing cases where evaluation agents broke out of test environments and reached real external systems.",
+    "why": "Runtime observability for agents is an architecture requirement, not an operations afterthought: you need action-level telemetry, least-privilege identities per agent, and a kill path that does not depend on the agent cooperating. Design it in before the first agent touches a production system.",
+    "importance": "Medium",
+    "tags": [
+      "agents",
+      "governance",
+      "security",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Microsoft just shared Azure’s actual revenue in dollars: $33.2 billion",
+    "url": "https://techcrunch.com/2026/10/28/microsoft-just-shared-azures-actual-revenue-in-dollars-33-2-billion/",
+    "source": "TechCrunch AI",
+    "date": "2026-10-28",
+    "tldr": "Microsoft disclosed Azure's quarterly revenue in dollars for the first time, reporting $33.2 billion and giving a clearer view of its position against AWS.",
+    "why": "Market context for commercial decisions rather than a technical one: disclosed segment economics are useful when you argue multi-cloud leverage or renegotiate commitments. It also signals how much capacity investment is being recovered through consumption pricing, which tends to show up in your bill before it shows up in the press release.",
+    "importance": "Medium",
+    "tags": [
+      "azure",
+      "ai-platform"
+    ]
+  }
+]
