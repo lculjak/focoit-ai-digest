@@ -1,47 +1,47 @@
 [
   {
-    "hook": "Your agent didn't 'go rogue.' It used the credentials and permissions you left for it.",
-    "angle": "CERT-In and OpenAI both describe agents reaching live systems through exposed credentials, public repositories, and overly permissive roles — not exotic exploits. Turn that into an architecture checklist: scoped workload identity, egress allowlists, human approval for destructive actions, and audit logs that capture agent-initiated changes. The GitHub secret-detection work is the preventive counterpart.",
+    "hook": "Your sovereign AI design is a diagram until you can name where the keys live.",
+    "angle": "Sovereignty gets discussed as a data-residency checkbox. In practice it decomposes into four independently-decidable controls: where data sits, who holds the keys, who can operate the platform without you watching, and which control plane acts on the workload. Walk through how a healthcare or finance platform can split into differently-controlled tiers instead of forcing one uniform pattern, and why the key-custody decision is the one that survives an audit.",
     "which_story_urls": [
-      "https://techcrunch.com/2026/10/16/india-becomes-the-latest-country-to-report-rogue-ai-agent-activity/",
-      "https://arstechnica.com/security/2026/10/openai-models-hacked-a-crypto-wallet-and-breached-more-websites/",
-      "https://github.blog/ai-and-ml/githubs-model-for-secret-detection-finding-more-secrets-with-less-noise/"
+      "https://azure.microsoft.com/en-us/blog/designing-for-sovereign-ai-a-shared-foundation-from-edge-to-cloud/",
+      "https://blogs.microsoft.com/blog/2026/10/20/advancing-digital-sovereignty-with-greater-control-and-choice/"
+    ],
+    "suggested_track": "healthcare-ai"
+  },
+  {
+    "hook": "Open weights don't remove model risk. They move it onto your on-call rota.",
+    "angle": "Hosted APIs let you outsource provenance, patching, and behavioural drift. The moment you deploy open weights, those become your controls: supply-chain provenance, licence review, CVE response for the serving stack, and re-evaluation whenever weights change. Frame the build-vs-buy conversation around which risk register you are actually staffed to operate, not which model scores higher on a leaderboard.",
+    "which_story_urls": [
+      "https://azure.microsoft.com/en-us/blog/managing-open-weight-model-risk-in-enterprise-deployments/",
+      "https://techcrunch.com/2026/10/28/microsoft-just-shared-azures-actual-revenue-in-dollars-33-2-billion/"
     ],
     "suggested_track": "azure"
   },
   {
-    "hook": "Your documentation has a second reader now — and it doesn't ask clarifying questions.",
-    "angle": "The AX Practitioner Playbook and enterprise Spec Kit point at the same shift: docs, samples, and specs are consumed by coding agents and then judged by what those agents produce. Treat them as a governed product surface — pin versions, measure agent success on golden paths, and fix the source material when the agent picks a deprecated pattern instead of blaming the model.",
+    "hook": "A managed agent harness is a build-vs-buy decision you make three times, not once.",
+    "angle": "When a cloud provider ships a managed harness for agent reasoning, the temptation is to treat it as a hosting choice. It is really three decisions: who owns orchestration, how tool permissions get scoped per agent, and where evaluation traces live. The third one is the one that decides whether you can answer an auditor eighteen months later. Give readers the three questions to ask before they port an agent onto a managed runtime.",
     "which_story_urls": [
-      "https://devblogs.microsoft.com/blog/introducing-the-agent-experience-ax-practitioner-playbook/",
-      "https://devblogs.microsoft.com/blog/from-spec-first-to-enterprise-ready-extending-github-spec-kit/"
+      "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/",
+      "https://www.technologyreview.com/2026/10/29/1147824/monitor-ai-agents-actions-real-time/"
+    ],
+    "suggested_track": "azure"
+  },
+  {
+    "hook": "You migrated your pipelines off long-lived secrets. Your extension publishing still uses a PAT.",
+    "angle": "Trusted Publishing for the VS Code and Visual Studio marketplaces is a small feature with a disproportionate lesson: OIDC federation has quietly become the default correct answer for any pipeline that can push an artifact. Use it as a low-blast-radius migration that proves workload identity federation in your org before you apply the same pattern to production deploys. Practical, concrete, and easy to action this week.",
+    "which_story_urls": [
+      "https://devblogs.microsoft.com/blog/trusted-publishing-visual-studio-marketplace/",
+      "https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/"
     ],
     "suggested_track": "copilot"
   },
   {
-    "hook": "The governance gap isn't the model. It's the second engine reading your data.",
-    "angle": "Unity Catalog policies used to assume the query came from inside Azure Databricks. Cross-engine ABAC routes external Spark reads through a managed enforcement layer, which is exactly the kind of control architects need when Fabric, Synapse, and Databricks share a lakehouse. Make the conversation about where policy is enforced and what audit evidence follows the data path.",
+    "hook": "A cheaper eval harness changed the agent's behaviour by 11 points. Your eval is now measuring your infrastructure.",
+    "angle": "Microsoft's experiment is the most useful thing published this week for anyone running agent evaluations: swapping GitHub for a local git remote left rebasing and on-request pushes intact, but the agent pushed on its own 11 percentage points less often. The lesson generalises. Any cost optimisation inside the harness — mocked services, local remotes, trimmed tool surfaces — silently redefines what you are scoring. Make re-baselining a mandatory step, not an optional one.",
     "which_story_urls": [
-      "https://techcommunity.microsoft.com/t5/azure/cross-engine-abac-on-azure-databricks-governing-external-spark/m-p/4565409"
+      "https://devblogs.microsoft.com/blog/can-a-local-git-remote-replace-github-in-your-agent-eval/",
+      "https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/"
     ],
-    "suggested_track": "healthcare-ai"
-  },
-  {
-    "hook": "Data residency is no longer an argument against AI. It's a capacity-planning question.",
-    "angle": "Open-weight Nemotron models for enterprise and edge, plus open HSM specifications, make self-hosted and on-device options more credible for regulated workloads. Frame the build-vs-buy honestly: the model licence is the easy part; GPU capacity, evaluation, patching, and safety operations are the real cost centres.",
-    "which_story_urls": [
-      "https://techcrunch.com/2026/10/19/nvidia-launches-new-open-models-to-run-agents-in-the-enterprise-and-on-pcs/",
-      "https://azure.microsoft.com/en-us/blog/advancing-hardware-security-with-open-source-integrated-hsm-technology/"
-    ],
-    "suggested_track": "healthcare-ai"
-  },
-  {
-    "hook": "Ask your model vendor who has employee-level access to the risk assessment.",
-    "angle": "Anthropic giving METR staff employee-like access is a stronger assurance model than a published model card. For regulated buyers it reframes procurement questions — who evaluates, with what access, and are findings published — and connects to the EU's agentic-adoption and transparency conversation. Treat it as evidence to weigh, not a certification.",
-    "which_story_urls": [
-      "https://www.anthropic.com/news/an-update-on-independent-evaluators",
-      "https://openai.com/index/the-eus-next-chapter-in-ai-is-agentic"
-    ],
-    "suggested_track": "azure"
+    "suggested_track": "copilot"
   }
 ]
