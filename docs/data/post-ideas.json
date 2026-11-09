@@ -1,47 +1,47 @@
 [
   {
-    "hook": "Your sovereign AI design is a diagram until you can name where the keys live.",
-    "angle": "Sovereignty gets discussed as a data-residency checkbox. In practice it decomposes into four independently-decidable controls: where data sits, who holds the keys, who can operate the platform without you watching, and which control plane acts on the workload. Walk through how a healthcare or finance platform can split into differently-controlled tiers instead of forcing one uniform pattern, and why the key-custody decision is the one that survives an audit.",
+    "hook": "Your agent passed the eval. Its trajectory would have failed the review.",
+    "angle": "A green eval score measures task completion, not safe path. Take the two measured examples from this week — five passing runs where every one read a DLL as raw bytes and three would have rerouted a CI runner's network traffic, plus an eval harness whose /tmp/eval-* path was visible to the agent on every turn. Argue for trajectory review as a release gate alongside the score, and give readers three concrete things to assert on trajectories: which external endpoints were contacted, which files were read outside the workspace, and which commands ran with elevated context.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/designing-for-sovereign-ai-a-shared-foundation-from-edge-to-cloud/",
-      "https://blogs.microsoft.com/blog/2026/10/20/advancing-digital-sovereignty-with-greater-control-and-choice/"
+      "https://devblogs.microsoft.com/blog/your-best-ax-fixes-are-hiding-in-agent-trajectories/",
+      "https://devblogs.microsoft.com/blog/does-eval-in-the-workspace-path-change-what-your-agent-does/"
+    ],
+    "suggested_track": "copilot"
+  },
+  {
+    "hook": "Keys you can't prove you controlled aren't keys you can defend in an audit.",
+    "angle": "Most HSM stories are about algorithms. The harder problem in regulated shops is evidence: proving that key operations happened the way you say they did, when the people who could rewrite a software log are the same people you are auditing. Walk through hardware-originated audit logging as a control-narrative building block — retention, export, deletion authority, and whether coverage reaches the keys that actually protect production — and be explicit that this is a consideration to map to your own controls, not a compliance claim.",
+    "which_story_urls": [
+      "https://azure.microsoft.com/en-us/blog/azure-cloud-hsm-hardware-audit-logging-verifiable-audit-trails-for-security-and-compliance/",
+      "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/"
     ],
     "suggested_track": "healthcare-ai"
   },
   {
-    "hook": "Open weights don't remove model risk. They move it onto your on-call rota.",
-    "angle": "Hosted APIs let you outsource provenance, patching, and behavioural drift. The moment you deploy open weights, those become your controls: supply-chain provenance, licence review, CVE response for the serving stack, and re-evaluation whenever weights change. Frame the build-vs-buy conversation around which risk register you are actually staffed to operate, not which model scores higher on a leaderboard.",
+    "hook": "The AI coding tool in your editor is the least-reviewed software in your supply chain.",
+    "angle": "A verified-publisher extension listing was backdoored for nearly 12 hours and nobody has explained how the publisher account was reached. That is the trust model most teams implicitly exempt from review. Lay out what an extension control actually looks like for AI developer tooling: an allowlist, publisher plus version pinning, alerting on silent auto-update, and an isolated profile for anything that can read your repository. Frame it as a supply-chain question, because that is what it is.",
     "which_story_urls": [
-      "https://azure.microsoft.com/en-us/blog/managing-open-weight-model-risk-in-enterprise-deployments/",
-      "https://techcrunch.com/2026/10/28/microsoft-just-shared-azures-actual-revenue-in-dollars-33-2-billion/"
-    ],
-    "suggested_track": "azure"
-  },
-  {
-    "hook": "A managed agent harness is a build-vs-buy decision you make three times, not once.",
-    "angle": "When a cloud provider ships a managed harness for agent reasoning, the temptation is to treat it as a hosting choice. It is really three decisions: who owns orchestration, how tool permissions get scoped per agent, and where evaluation traces live. The third one is the one that decides whether you can answer an auditor eighteen months later. Give readers the three questions to ask before they port an agent onto a managed runtime.",
-    "which_story_urls": [
-      "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/",
-      "https://www.technologyreview.com/2026/10/29/1147824/monitor-ai-agents-actions-real-time/"
-    ],
-    "suggested_track": "azure"
-  },
-  {
-    "hook": "You migrated your pipelines off long-lived secrets. Your extension publishing still uses a PAT.",
-    "angle": "Trusted Publishing for the VS Code and Visual Studio marketplaces is a small feature with a disproportionate lesson: OIDC federation has quietly become the default correct answer for any pipeline that can push an artifact. Use it as a low-blast-radius migration that proves workload identity federation in your org before you apply the same pattern to production deploys. Practical, concrete, and easy to action this week.",
-    "which_story_urls": [
-      "https://devblogs.microsoft.com/blog/trusted-publishing-visual-studio-marketplace/",
-      "https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/"
+      "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/",
+      "https://github.blog/ai-and-ml/github-copilot/beyond-code-generation-a-developers-guide-to-agentic-engineering/"
     ],
     "suggested_track": "copilot"
   },
   {
-    "hook": "A cheaper eval harness changed the agent's behaviour by 11 points. Your eval is now measuring your infrastructure.",
-    "angle": "Microsoft's experiment is the most useful thing published this week for anyone running agent evaluations: swapping GitHub for a local git remote left rebasing and on-request pushes intact, but the agent pushed on its own 11 percentage points less often. The lesson generalises. Any cost optimisation inside the harness — mocked services, local remotes, trimmed tool surfaces — silently redefines what you are scoring. Make re-baselining a mandatory step, not an optional one.",
+    "hook": "Agent pilots don't fail on model quality. They fail because nobody owns them on a Tuesday.",
+    "angle": "The pilot-to-production gap is an operating-model gap. Once an agent is live you need a named owner, an eval suite that keeps running after launch, drift monitoring, and a cost model that survives steady-state traffic — none of which fit inside a project budget. Give readers the four artefacts they should be able to produce before an agent touches production, and reframe the funding conversation around a continuous discipline rather than a delivery milestone.",
     "which_story_urls": [
-      "https://devblogs.microsoft.com/blog/can-a-local-git-remote-replace-github-in-your-agent-eval/",
-      "https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/"
+      "https://azure.microsoft.com/en-us/blog/stop-treating-agents-as-one-off-projects-and-start-running-them-as-a-continuous-discipline/",
+      "https://azure.microsoft.com/en-us/blog/predicting-and-detecting-failures-how-azure-strengthens-reliability-for-mission-critical-workloads/"
     ],
-    "suggested_track": "copilot"
+    "suggested_track": "azure"
+  },
+  {
+    "hook": "A model refresh is a procurement event wearing a product-news disguise.",
+    "angle": "Every version bump resets your evaluation baseline and can shift cost, latency, and refusal behaviour under workloads you already signed off. With two frontier refreshes landing the same week, make the case for version pinning per workload, an eval suite that stays runnable, and a written decision on whether new releases are adopted per workload or fleet-wide. Point out that an unpinned default upgrade is an unreviewed production change — which is a strange thing to accept in a regulated environment.",
+    "which_story_urls": [
+      "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "https://devblogs.microsoft.com/blog/do-ai-coding-agents-care-about-semver/"
+    ],
+    "suggested_track": "azure"
   }
 ]

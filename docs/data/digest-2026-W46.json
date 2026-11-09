@@ -1,0 +1,210 @@
+[
+  {
+    "title": "Building the next generation of multimodal AI experiences with fal in Microsoft Foundry",
+    "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/building-the-next-generation-of-multimodal-ai-experiences-with-fal-in-microsoft-/4570032",
+    "source": "Azure Blog",
+    "date": "2026-11-06",
+    "tldr": "Microsoft and fal partnered to bring video generation and other multimodal models into Microsoft Foundry, so teams can call third-party generative media models from the same enterprise endpoint they already use for text models.",
+    "why": "A build-vs-buy shortcut for generative media, but every third-party model onboarded to Foundry adds a data-handling and model-provenance line to your register. Confirm what the model provider can retain, whether prompts and generated assets leave your region, and how you version-pin a model that changes underneath you — re-evaluation obligations follow the model, not the platform.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "foundation-models"
+    ]
+  },
+  {
+    "title": "Stop treating agents as one-off projects and start running them as a continuous discipline",
+    "url": "https://azure.microsoft.com/en-us/blog/stop-treating-agents-as-one-off-projects-and-start-running-them-as-a-continuous-discipline/",
+    "source": "Azure Blog",
+    "date": "2026-11-05",
+    "tldr": "Microsoft argues agents should be selected, architected, and operated as an ongoing discipline with continuous evaluation and named ownership, rather than as a series of one-off pilots that stop at the demo.",
+    "why": "The pilot-to-production gap for agents is usually an operating-model gap, not a model-quality gap. Treating agents as a discipline implies named owners, evaluation harnesses that keep running after launch, drift monitoring, and a cost model that survives steady-state traffic. Useful framing when you need to justify platform budget for something with no obvious project end date.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "agents",
+      "mlops",
+      "governance"
+    ]
+  },
+  {
+    "title": "Predicting and detecting failures: How Azure strengthens reliability for mission-critical workloads",
+    "url": "https://azure.microsoft.com/en-us/blog/predicting-and-detecting-failures-how-azure-strengthens-reliability-for-mission-critical-workloads/",
+    "source": "Azure Blog",
+    "date": "2026-11-04",
+    "tldr": "Azure Failure Prediction and Detection predicts hardware failures, live-migrates eligible workloads, and notifies customers when they need to act, with SAP on Azure used as the mission-critical reference case.",
+    "why": "The architecturally interesting part is the split of responsibility: prediction and migration are provider-side, but the notification path and your own failover runbook remain yours. Add 'what happens when AFPD tells us to act' to your DR tests, and check whether your SLA and audit evidence actually capture provider-initiated remediation.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "ai-platform",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Azure Cloud HSM Hardware Audit Logging: Verifiable audit trails for security and compliance",
+    "url": "https://azure.microsoft.com/en-us/blog/azure-cloud-hsm-hardware-audit-logging-verifiable-audit-trails-for-security-and-compliance/",
+    "source": "Azure Blog",
+    "date": "2026-10-29",
+    "tldr": "Azure Cloud HSM now emits hardware-originated audit logs covering key operations, giving security and audit teams tamper-evident evidence for monitoring, compliance reporting, and forensic investigations.",
+    "why": "Key-custody evidence is one of the hardest artefacts to produce in a regulated audit, because software logs can be altered by the same administrators you are auditing. Hardware-originated logs change what you can claim. Check retention, export path, and who can delete them before citing this in a control narrative — and confirm it covers the keys that matter, not just the ones that were convenient.",
+    "importance": "High",
+    "tags": [
+      "azure",
+      "security",
+      "governance",
+      "regulated-industry"
+    ]
+  },
+  {
+    "title": "Beyond code generation: A developer's guide to agentic engineering",
+    "url": "https://github.blog/ai-and-ml/github-copilot/beyond-code-generation-a-developers-guide-to-agentic-engineering/",
+    "source": "GitHub Blog",
+    "date": "2026-11-06",
+    "tldr": "GitHub walks through using Copilot across the whole delivery loop — planning, writing code, reviewing changes, and investigating production issues — and is explicit that writing code got faster while the work around it did not.",
+    "why": "This is the honest version of agentic engineering: the bottleneck moves to specification, review capacity, and incident investigation. If you are budgeting an AI-assisted delivery programme, put the savings and the new costs in the same model, and define which steps still require a human decision rather than a human click.",
+    "importance": "High",
+    "tags": [
+      "copilot",
+      "dev-tools",
+      "agents"
+    ]
+  },
+  {
+    "title": "Inside GitHub's new Git storage architecture",
+    "url": "https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/",
+    "source": "GitHub Blog",
+    "date": "2026-11-05",
+    "tldr": "GitHub describes the storage architecture it rebuilt so that thousands of agents can push to a single repository concurrently, without the read path collapsing under write contention.",
+    "why": "Relevant if you run self-hosted or mirrored Git at scale: agent traffic is bursty, parallel, and hostile to designs tuned for human commit cadence. Separating read serving from write quorums and sharding by reference is the shape your capacity model needs before agent-authored commits become the majority rather than the exception.",
+    "importance": "Medium",
+    "tags": [
+      "dev-tools",
+      "agents",
+      "azure"
+    ]
+  },
+  {
+    "title": "Do AI coding agents care about SemVer?",
+    "url": "https://devblogs.microsoft.com/blog/do-ai-coding-agents-care-about-semver/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-11-09",
+    "tldr": "In nearly 1,000 runs, Microsoft gave coding agents the same breaking dependency upgrade labelled two ways: as 2.0.0 agents caught it every time, as 1.4.3 they checked it in and often left the app broken.",
+    "why": "Your dependency policy is an input to agent behaviour, not just to humans. If agents reliably trust a major-version bump but ignore a patch bump, then patch-level breaking changes are an unpriced risk in your upgrade automation. A cheap control: gate agent-driven upgrades on a test suite rather than on the version number.",
+    "importance": "Medium",
+    "tags": [
+      "agents",
+      "dev-tools",
+      "mlops"
+    ]
+  },
+  {
+    "title": "Your best AX fixes are hiding in agent trajectories",
+    "url": "https://devblogs.microsoft.com/blog/your-best-ax-fixes-are-hiding-in-agent-trajectories/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-11-05",
+    "tldr": "All five agent runs passed the eval, but the trajectories showed every run reading a DLL as raw bytes to find plugin names, and three scripts that would have quietly rerouted a CI runner's network traffic.",
+    "why": "A green eval score is not evidence of safe behaviour. If you only measure task success you will ship agents that reach the goal through paths you would never approve. Reading trajectories — not just scores — is the cheapest way to surface behaviour your tests did not think to assert, and it belongs in the release checklist alongside the score.",
+    "importance": "Medium",
+    "tags": [
+      "agents",
+      "dev-tools",
+      "mlops"
+    ]
+  },
+  {
+    "title": "Does 'eval' in the workspace path change what your agent does?",
+    "url": "https://devblogs.microsoft.com/blog/does-eval-in-the-workspace-path-change-what-your-agent-does/",
+    "source": "Microsoft DevBlogs",
+    "date": "2026-10-30",
+    "tldr": "If your eval harness runs each attempt in a temp path like /tmp/eval-7f3a2c, the agent sees the word 'eval' on every turn and may behave differently than it would in production.",
+    "why": "A small but concrete eval-fidelity trap: the environment under test is part of the prompt. Anything that leaks into agent context — paths, folder names, environment variables — is a difference between your measurement and your deployment. Worth a one-line audit of the harness before you trust a passing score as a release signal.",
+    "importance": "Low",
+    "tags": [
+      "agents",
+      "mlops"
+    ]
+  },
+  {
+    "title": "Introducing Claude Fable 5.2 and Claude Mythos 5.2",
+    "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+    "source": "Anthropic News",
+    "date": "2026-11-09",
+    "tldr": "Anthropic released Claude Fable 5.2 and Claude Mythos 5.2, a paired refresh of its workhorse and frontier models, with coverage framing the launch around rapid capability gains.",
+    "why": "Model refreshes are procurement events disguised as product news: every version bump resets your evaluation baseline and can shift cost, latency, and refusal behaviour. Pin model versions per workload, keep the eval suite runnable at all times, and decide in advance whether a new release is adopted per workload or fleet-wide — otherwise a silent default upgrade becomes an unreviewed change.",
+    "importance": "High",
+    "tags": [
+      "foundation-models",
+      "ai-platform"
+    ]
+  },
+  {
+    "title": "Anthropic files S-1 with the SEC for proposed initial public offering",
+    "url": "https://www.anthropic.com/news/s1-sec",
+    "source": "Anthropic News",
+    "date": "2026-10-26",
+    "tldr": "Anthropic filed an S-1 with the SEC for a proposed IPO, opening its financials, compute dependencies, and risk factors to public scrutiny ahead of a listing.",
+    "why": "Vendor-risk review gets easier and harder at once: a public prospectus is the most detailed disclosure you will get about a model provider's concentration, supply dependencies, and litigation exposure — and it also signals commercial pressure on terms. Read the risk factors as a checklist against your own exit and portability plan, especially for multi-year commitments.",
+    "importance": "Medium",
+    "tags": [
+      "ai-platform",
+      "governance"
+    ]
+  },
+  {
+    "title": "A thousand fewer paths to root",
+    "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+    "source": "OpenAI News",
+    "date": "2026-11-04",
+    "tldr": "OpenAI built an autonomous pipeline that found, validated, and generated patches for 948 local privilege-escalation vulnerabilities in the Linux kernel.",
+    "why": "The shift that matters is not the finding count but the pipeline: machine-scale vulnerability discovery plus automated validation changes how fast the patch window closes, and who is on the other side of it. Assume fewer unknowns in your base images over time and a higher patch volume — which makes change-management and regression-testing throughput your binding constraint.",
+    "importance": "Medium",
+    "tags": [
+      "security",
+      "agents",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Making it easier for websites to express AI training preferences",
+    "url": "https://openai.com/index/helping-websites-express-ai-training-preferences",
+    "source": "OpenAI News",
+    "date": "2026-10-30",
+    "tldr": "OpenAI will honour a shared robots.txt-style signal that lets website operators state their AI training preferences to participating providers.",
+    "why": "If you publish content — patient education, research, public-facing documentation — this is a machine-readable way to express intent, but it is a declaration, not an enforcement control. Treat it as one layer in a content-governance posture alongside licensing terms, and do not assume it binds providers that have not opted in.",
+    "importance": "Low",
+    "tags": [
+      "governance",
+      "ai-platform",
+      "data"
+    ]
+  },
+  {
+    "title": "Anthropic VS Code extension on Cursor backdoored for nearly 12 hours",
+    "url": "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/",
+    "source": "Ars Technica",
+    "date": "2026-10-30",
+    "tldr": "Anthropic's verified VS Code extension listing on Cursor was backdoored for nearly 12 hours, and it is still unclear how attackers gained access to the verified publisher account.",
+    "why": "This is the extension-marketplace trust model failing at exactly the layer most teams exempt from review: the AI coding tool inside the developer's editor. A verified-publisher badge is not a control you can rely on. If your developers install AI extensions, you need an allowlist, publisher and version pinning, and telemetry that would actually notice a silent update.",
+    "importance": "High",
+    "tags": [
+      "security",
+      "dev-tools",
+      "open-source"
+    ]
+  },
+  {
+    "title": "The backlash about data centers might really just be about electricity",
+    "url": "https://www.technologyreview.com/2026/11/09/1148194/the-backlash-about-data-centers-might-really-just-be-about-electricity/",
+    "source": "MIT Technology Review",
+    "date": "2026-11-09",
+    "tldr": "Reporting from Data Center Alley argues the public backlash over AI data centres is less about the buildings themselves and more about electricity costs, grid capacity, and who absorbs them.",
+    "why": "Capacity and energy politics eventually reach your bill and your region choice. For workloads with locality or sovereignty constraints, 'where can I get power and a permit' becomes a real siting question rather than a procurement detail. Worth tracking if you are planning multi-year capacity commitments in constrained markets.",
+    "importance": "Low",
+    "tags": [
+      "ai-platform",
+      "governance"
+    ]
+  }
+]
